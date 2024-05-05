@@ -17,15 +17,15 @@ class Tempus_Progrma(customtkinter.CTk):
         self.geometry("800x600")
         self.title("Tempus Software")
         # Cargar y establecer el logo de la ventana
-        self.tempus_logo = PhotoImage(file="imagenes/tempus.png")
-        self.after(100, lambda: self.iconphoto(False, self.tempus_logo))
+        self.ruta_icono = "imagenes/tempus.ico"
+        self.iconbitmap(self.ruta_icono)
 
 
         # Aquí puedes agregar más widgets a tu aplicación
         # ...
         
         
-        
+
 # Crear y ejecutar la aplicación
 app = Tempus_Progrma()
 app.mainloop()
