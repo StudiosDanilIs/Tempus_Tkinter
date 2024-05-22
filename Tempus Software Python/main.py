@@ -4,6 +4,8 @@ import tkinter
 from customtkinter import CTk,CTkEntry
 from tkinter import PhotoImage
 
+ruta_icono = 'imagenes\logotipo.ico'
+
 
 # Configurar la ventana
 customtkinter.set_appearance_mode("system")
@@ -19,8 +21,7 @@ class Tempus_Progrma(customtkinter.CTk):
         self.geometry(f"{1100}x{580}")
         self.title("Tempus Software")
         # Cargar y establecer el logo de la ventana
-        self.ruta_icono = "imagenes/logotipo.ico"
-        self.iconbitmap(self.ruta_icono)
+        self.iconbitmap(ruta_icono)
 
 
         # Aquí puedes agregar más widgets a tu aplicación
