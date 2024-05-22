@@ -1,7 +1,7 @@
-# Incorporacion de Librerias y Demas
+# Incorporación de Librerias y Demas
 import customtkinter
-import tkinter
-from customtkinter import CTk,CTkEntry
+from customtkinter import CTk
+import tkinter as tk
 from tkinter import PhotoImage
 
 
@@ -16,18 +16,20 @@ class Tempus_Progrma(customtkinter.CTk):
     def __init__(self):
         super().__init__()
         # Configurar la ventana
-        self.geometry(f"{1100}x{580}")
+        self.geometry("1100x580")
         self.title("Tempus Software")
         # Cargar y establecer el logo de la ventana
         self.ruta_icono = "imagenes/logotipo.ico"
-        self.iconbitmap(self.ruta_icono)
-
+    # Integre esta seccion luego de ver que no se ejecutaba correctamente, me dio muchos errores y con esto se solucionan
+        try:
+            self.icon = PhotoImage(file=self.ruta_icono)
+            self.tk.call('wm', 'iconphoto', self._w, self.icon)
+        except tk.TclError:
+            print("Error: No se pudo cargar el icono")
 
         # Aquí puedes agregar más widgets a tu aplicación
         # ...
         
-        
-
 # Crear y ejecutar la aplicación
 app = Tempus_Progrma()
 app.mainloop()
