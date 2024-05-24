@@ -19,7 +19,7 @@ class Tempus_Progrma(customtkinter.CTk):
         self.title("Tempus Software")
 
         # Cargar y establecer el logo de la ventana
-        self.ruta_icono = "imagenes/logotipo.ico"
+        self.ruta_icono = "imagenes\logotipo.ico"
         try:
             self.icon = PhotoImage(file=self.ruta_icono)
             self.tk.call('wm', 'iconphoto', self._w, self.icon)
