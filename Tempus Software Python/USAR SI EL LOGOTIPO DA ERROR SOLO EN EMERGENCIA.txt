@@ -5,3 +5,7 @@ self.ruta_icono = "imagenes/logotipo.ico"
             self.tk.call('wm', 'iconphoto', self._w, self.icon)
         except tk.TclError:
             print("Error: No se pudo cargar el icono")
+
+
+para la otra ventana
+self.geometry(f"{1100}x{580}")
