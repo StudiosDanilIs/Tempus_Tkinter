@@ -1,4 +1,9 @@
 from Login import CreateLogin
 
+def Imprimir():
+    CreateLogin()
+    CreateLogin.mainloop()
 
-CreateLogin()
+
+if __name__ == '__main__':
+    Imprimir()

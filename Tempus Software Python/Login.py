@@ -1,24 +1,104 @@
 import tkinter as tk
 import sqlite3
-from tkinter import ttk, PhotoImage, messagebox
+from tkinter import *
+from tkinter import messagebox
+from PIL import ImageTk, Image
 from tkinter.font import BOLD
 from prueba.gato import VentanaPrincipal
 
 base_datos = "SQLite\Registro.db"
 
-
 class CreateLogin:
+    def __init__(self, root):
+        self.root = root
+        self.root.geometry('480x670')
+        self.root.resizable(0, 0)
+        self.root.title("Login - Tempus Software")
+        
+
+        # ====== Login Frame =========================
+        self.lgn_frame = Frame(self.root, bg='#222222')
+        self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
+
+
+        # ========================================================================
+        # ============ Sign In Image =============================================
+        # ========================================================================
+        self.sign_in_image = Image.open('images\\logotipo.png')
+        photo = ImageTk.PhotoImage(self.sign_in_image)
+        self.sign_in_image_label = Label(self.lgn_frame, image=photo, bg='#222222')
+        self.sign_in_image_label.image = photo
+        self.sign_in_image_label.pack(side="top", fill=tk.X, pady=30)
+
+        # ========================================================================
+        # ============================username====================================
+        # ========================================================================
+        self.username_label = Label(self.lgn_frame, text="Username", anchor="w", bg="#222222", fg="#F8F8FF",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.username_label.pack(fill=tk.X, padx=25, pady=8)
+
+        self.username_entry = Entry(self.lgn_frame, highlightthickness=0, relief=FLAT, bg="#222222", fg="#F8F8FF",
+                                    font=("yu gothic ui ", 12, "bold"), insertbackground = '#6b6a69')
+        self.username_entry.pack(fill=tk.X, padx=30, pady=0)
+
+        self.username_line = Canvas(self.lgn_frame, width=300, height=2.0, bg="#4169E1", highlightthickness=0)
+        self.username_line.pack(fill=tk.X, padx=30, pady=1)
+
+        # ========================================================================
+        # ============================password====================================
+        # ========================================================================
+        self.password_label = Label(self.lgn_frame, text="Password", anchor="w", bg="#222222", fg="#F8F8FF",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.password_label.pack(fill=tk.X, padx=25, pady=8)
+
+        self.password_entry = Entry(self.lgn_frame, highlightthickness=0, relief=FLAT, bg="#222222", fg="#F8F8FF",
+                                    font=("yu gothic ui", 12, "bold"), show="*", insertbackground = '#6b6a69')
+        self.password_entry.pack(fill=tk.X, padx=30, pady=0)
+
+        self.password_line = Canvas(self.lgn_frame, width=300, height=2.0, bg="#4169E1", highlightthickness=0)
+        self.password_line.pack(fill=tk.X, padx=30, pady=1)
+        
+        # ========================================================================
+        # ============================login button================================
+        # ========================================================================
+        lgn_button = Image.open('images\\btn1.png')
+        photo = ImageTk.PhotoImage(lgn_button)
+        self.lgn_button_label = Label(self.lgn_frame, image=photo, bg='#222222')
+        self.lgn_button_label.image = photo
+        self.lgn_button_label.pack(side="top", fill=tk.X, pady=40)
+        self.login = Button(self.lgn_button_label, text='Iniciar Sesion', font=("yu gothic ui", 13, "bold"), width=10, bd=0,
+                            bg='#3047ff', cursor='hand2', activebackground='#3047ff', fg='white',command=lambda: self.verificar(root))
+        self.login.pack(pady=5)
+        self.login.bind("<Return>", (lambda event: self.verificar()))
+        # ========================================================================
+        # ============================Forgot password=============================
+        # ========================================================================
+        self.forgot_button = Button(self.lgn_frame, text="Recuperar Acceso",
+                                    font=("yu gothic ui", 13, "bold underline"), fg="white", relief=FLAT,
+                                    activebackground="#4169E1"
+                                    , borderwidth=0, background="#222222", cursor="hand2",command=lambda: self.ventana_modificar())
+        self.forgot_button.place(x=170, y=515)
+
+        # ========================================================================
+        # ============================Info Tempus=================================
+        # ========================================================================
+        self.forgot_button = Button(self.lgn_frame, text="Tempus Software -Beta-",
+                                    font=("yu gothic ui", 13, "bold underline"), fg="white", relief=FLAT,
+                                    activebackground="#4169E1"
+                                    , borderwidth=0, background="#222222", cursor="hand2")
+        self.forgot_button.place(x=265, y=620)
+
 
     def verificar(self, root):
         self.root = root
         connection = sqlite3.connect(base_datos)
         cursor = connection.cursor()
 
-        usu = self.usuario.get()
-        password = self.password.get()
+        usuario = self.username_entry.get()
+        password = self.password_entry.get()
 
         cursor.execute(
-            "SELECT * FROM Usuarios WHERE Usuario = ? AND Clave = ?", (usu, password)
+            "SELECT * FROM Usuarios WHERE Usuario = ? AND Clave = ?", (usuario, password)
         )
         resultado = cursor.fetchone()
 
@@ -31,107 +111,12 @@ class CreateLogin:
             )
 
             connection.close()
+            
+            
 
-    def __init__(self, root):
-        self.root = root
-        ruta_icono = "imagenes\logotipo.ico"
-        self.root.geometry("470x570")
-        self.root.title("Login - Tempus Software")
-        self.root.iconbitmap(ruta_icono)
-        self.root.protocol("WM_DELETE_WINDOW", self.Close_Windows)
-
-        # Crear un Contendor para la Imagen del Login
-        self.logo_image = PhotoImage(file="imagenes\logotipo.png")
-
-        frame_form = tk.Frame(
-            self.root, bd=0, relief=tk.SOLID, bg="#F0F8FF", background="#F0F8FF"
-        )
-        frame_form.pack(side="right", expand=tk.YES, fill=tk.BOTH)
-        # frame_form
-
-        # frame_form_top
-        frame_form_top = tk.Frame(
-            frame_form, height=50, bd=0, relief=tk.SOLID, bg="#CBD5E8"
-        )
-        frame_form_top.pack(side="top", fill=tk.X)
-        title = tk.Label(
-            frame_form_top,
-            image=self.logo_image,
-            background="#CBD5E8",
-        )
-        title.pack(pady=7, expand=tk.YES, fill=tk.BOTH)
-
-        frame_form_fill = tk.Frame(
-            frame_form,
-            height=50,
-            bd=0,
-            relief=tk.SOLID,
-            bg="#CBD5E8",
-        )
-        frame_form_fill.pack(side="bottom", expand=tk.YES, fill=tk.BOTH)
-
-        etiqueta_usuario = tk.Label(
-            frame_form_fill,
-            text="Usuario",
-            font=("Comic Sans MS", 14),
-            fg="#4E4E4E",
-            bg="#fcfcfc",
-            anchor="w",
-            background="#CBD5E8",
-            pady=10,
-        )
-        etiqueta_usuario.pack(fill=tk.X, padx=20, pady=0)
-        self.usuario = ttk.Entry(frame_form_fill, font=("arial", 14))
-        self.usuario.pack(fill=tk.X, padx=50, pady=10)
-
-        etiqueta_password = tk.Label(
-            frame_form_fill,
-            text="Contraseña",
-            font=("Comic Sans MS", 14),
-            fg="#4E4E4E",
-            bg="#4E4E4E",
-            anchor="w",
-            background="#CBD5E8",
-        )
-        etiqueta_password.pack(fill=tk.X, padx=20, pady=5)
-        self.password = ttk.Entry(frame_form_fill, font=("Times", 14))
-        self.password.pack(fill=tk.X, padx=50, pady=10)
-        self.password.config(show="*")
-
-        recuperar = tk.Button(
-            frame_form_fill,
-            text="Recuperar Acceso",
-            cursor="plus",
-            font=("Comic Sans MS", 15),
-            bg="#3F8BBA",
-            bd=0,
-            fg="#F5F5F5",
-            command=lambda: self.ventana_modificar(),
-        )
-        recuperar.place(x=220, y=200)
-
-        inicio = tk.Button(
-            frame_form_fill,
-            text="Iniciar Sesión",
-            cursor="plus",
-            font=("Comic Sans MS", 15),
-            bg="#3F8BBA",
-            bd=0,
-            fg="#F5F5F5",
-            command=lambda: self.verificar(root),
-        )
-        inicio.place(x=65, y=200)
-        inicio.bind("<Return>", (lambda event: self.verificar()))
-        # end frame_form_fill
-        self.root.mainloop()
-
-    # Para saber si se cerrará la ventana o no
-    def Close_Windows(self):
-        if messagebox.askokcancel("Close", "¿Desea cerrar la aplicación?"):
-            self.root.destroy()
 
     def ventana_modificar(self):
-        self.subventana = tk.Toplevel(root)
+        self.subventana = tk.Toplevel()
         self.subventana.title("Subventana")
         self.subventana.geometry("300x200")
 
@@ -140,8 +125,13 @@ class CreateLogin:
         etiqueta.pack()
 
 
-# Crear y ejecutar la aplicación
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = CreateLogin(root)
+def Mostrar():
+    root = Tk()
+    logo = PhotoImage(file='images\\logotipo.png')
+    root.iconphoto(True, logo)
+    CreateLogin(root)
     root.mainloop()
+
+
+if __name__ == '__main__':
+    Mostrar()
