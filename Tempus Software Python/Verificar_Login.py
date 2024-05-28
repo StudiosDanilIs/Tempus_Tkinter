@@ -11,15 +11,21 @@ try:
 
     # Crea la conexión
     conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor() 
+    
+    usuario = input("Ingresa el Usuario: ")
+    password = input("Ingresa la Clave: ")
 
-    if conn.is_connected():
-        print("Conexión exitosa a la base de datos")
+    cursor.execute("SELECT * FROM usuario WHERE Cuenta = %s AND Clave = %s", (usuario, password))
+    resultado = cursor.fetchone()
+    if resultado:
+        print("EXCELENTE ERES TODO UN CRAK")
         # Aquí puedes ejecutar consultas o realizar otras operaciones
 
         # Cierra la conexión
         conn.close()
     else:
-        print("No se pudo conectar a la base de datos")
+        print("NO SON DATOS VALIDOS AMIGO")
 
 except mysql.connector.Error as e:
     print(f"Error de conexión: {e}")
