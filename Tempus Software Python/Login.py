@@ -103,6 +103,9 @@ class CreateLogin:
         resultado = cursor.fetchone()
 
         if resultado:
+            messagebox.showinfo(
+                message="Bienvenido a Tempus Software", title="Mensaje"
+            )
             self.root.destroy()
             VentanaPrincipal()
         else:
@@ -140,38 +143,108 @@ class CreateLogin:
         
         
         self.buscar_datos = Button(self.subventana, text="Buscar Datos",
-                                    font=("yu gothic ui", 13, "bold underline"), relief=FLAT,
-                                    activebackground="#4169E1"
-                                    , borderwidth=0, cursor="hand2",command=lambda: self.Buscar(subventana))
-        self.buscar_datos.pack(fill=tk.X, padx=30, pady=20)
-        self.login.bind("<Return>", (lambda event: self.Buscar()))
+                                font=("yu gothic ui", 13, "bold underline"), relief=FLAT,
+                                activebackground="#4169E1", borderwidth=0, cursor="hand2",
+                                command=self.Buscar)
         
+        self.buscar_datos.pack(fill=tk.X, padx=30, pady=20)
         
 
-    def Buscar(self, subventana):
-        subventana = self.subventana
+    def Buscar(self):
         connection = sqlite3.connect(base_datos)
         cursor = connection.cursor()
 
         cedula = self.cedula_entry.get()
 
         cursor.execute(
-            "SELECT Cedula FROM Usuarios WHERE Cedula = ?", (cedula)
+            "SELECT Cedula FROM Usuarios WHERE Cedula = ?", (cedula,)
         )
         resultado_busqueda = cursor.fetchone()
 
         if resultado_busqueda:
-            messagebox.showerror(
-                message="Los Datos son Correctos", title="Mensaje"
+            messagebox.showinfo(
+                message="Datos Identificados Correctamente", title="Mensaje"
             )
+            self.subventana.destroy()
+            self.abrir_subventana_nuevos_datos(cedula)  # Pasamos la cédula como argumento
         else:
             messagebox.showerror(
-                message="Los Datos son Invalidos", title="Mensaje"
+                message="Datos No Encontrados. Verifique Nuevamente", title="Mensaje"
             )
 
-            connection.close()
-            
-            
+        connection.close()
+
+    def abrir_subventana_nuevos_datos(self, cedula):
+        nueva_subventana = tk.Toplevel()
+        nueva_subventana.title("Ingresar Nuevos Datos")
+        nueva_subventana.geometry("400x300")
+        nueva_subventana.resizable(0, 0)
+
+        self.nuevo_usuario_label = Label(nueva_subventana, text="Nuevo Usuario", anchor="w", fg="#222222",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.nuevo_usuario_label.pack(fill=tk.X, padx=25, pady=8)
+
+        self.nuevo_usuario_entry = Entry(nueva_subventana, highlightthickness=0, relief=FLAT, fg="#222222",
+                                    font=("yu gothic ui ", 12, "bold"), insertbackground = '#6b6a69')
+        self.nuevo_usuario_entry.pack(fill=tk.X, padx=30, pady=0)
+
+        self.nuevo_usuario_line = Canvas(nueva_subventana, width=300, height=2.0, bg="#4169E1", highlightthickness=0)
+        self.nuevo_usuario_line.pack(fill=tk.X, padx=30, pady=1)
+        
+        
+        
+        self.nueva_clave_label = Label(nueva_subventana, text="Nueva Calve", anchor="w", fg="#222222",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.nueva_clave_label.pack(fill=tk.X, padx=25, pady=8)
+
+        self.nueva_clave_entry = Entry(nueva_subventana, highlightthickness=0, relief=FLAT, fg="#222222",
+                                    font=("yu gothic ui ", 12, "bold"), insertbackground = '#6b6a69')
+        self.nueva_clave_entry.pack(fill=tk.X, padx=30, pady=0)
+
+        self.nueva_clave_line = Canvas(nueva_subventana, width=300, height=2.0, bg="#4169E1", highlightthickness=0)
+        self.nueva_clave_line.pack(fill=tk.X, padx=30, pady=1)
+        
+        
+        
+        guardar_button = Button(nueva_subventana, text="Guardar",
+                            command=lambda: self.actualizar_datos(cedula))
+        guardar_button.pack()
+
+    def actualizar_datos(self, cedula):
+        nuevo_usuario = self.nuevo_usuario_entry.get()
+        nueva_clave = self.nueva_clave_entry.get()
+        
+        # Validación de longitud mínima (por ejemplo, al menos 6 caracteres)
+        if len(nuevo_usuario) < 6 or len(nueva_clave) < 6:
+            messagebox.showerror("Error", "Los datos deben tener al menos 6 caracteres")
+            return
+        
+        # Validación de datos en blanco
+        if not nuevo_usuario or not nueva_clave:
+            messagebox.showerror("Error", "No se permiten campos en blanco")
+            return
+
+        # Realiza la actualización en la base de datos
+        connection = sqlite3.connect(base_datos)
+        cursor = connection.cursor()
+
+        try:
+            cursor.execute("UPDATE Usuarios SET Usuario = ?, Clave = ? WHERE Cedula = ?",
+                        (nuevo_usuario, nueva_clave, cedula))
+            connection.commit()
+            messagebox.showinfo("Mensaje", "Datos actualizados correctamente")
+            nueva_subventana.destroy()
+        except sqlite3.Error as e:
+            print(f"Error al actualizar los datos: {e}")
+            messagebox.showerror("Error", "No se pudieron actualizar los datos")
+
+        connection.close()
+
+
+
+
+
+
 
 
 def Mostrar():
