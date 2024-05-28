@@ -1,0 +1,70 @@
+*Usuario:
+id_Usuario (Primaria)
+id_RolUsuario (Foranea a RolUsuario)
+Cedula
+Usuario
+Clave
+
+
+*RolUsuario
+id_RolUsuario (Primaria)
+NombreRolSGG
+PermisosRol
+
+
+*CambioTasa:
+id_CambioTasa (Primaria)
+TasaUsd_Bol
+TasaUsd_Cop
+FechaTasa
+
+
+*DatosCliente:
+id_Cliente (Primaria)
+Nombre
+Apellido
+Cedula
+Teléfono
+
+
+*DetallesProducto
+id_Producto
+Nombre
+Descripción
+PrecioProducto
+
+
+*Pedido
+id_Pedido (Primaria)
+id_Cliente (Foranea a Cliente)
+Fecha
+Orservacion
+
+
+*DetallePedido
+id_DetallePedido (Primaria)
+id_Pedido (Foranea a Pedido)
+id_Producto (Foranea a DetallesProducto)
+Cantidad
+Precio
+Stauts (PagoCompeltado / PagoAbonado)
+
+
+
+*Pago
+id_Pago (Primaria)
+id_DetallePedido (Foranea a DetallePedido)
+MontoPagado
+FechaPago
+
+
+*HistorialPedido
+id_HistorialPedido (Primaria)
+id_Pedido (Foranea a Pedido)
+id_DetallePedido (Foranea a DetallePedido)
+Status (Completado / Cancelado / En Espera de Pago)
+
+
+*Factura
+id_Factura (Primaria)
+id_Pedido (Foranea a Pedido)

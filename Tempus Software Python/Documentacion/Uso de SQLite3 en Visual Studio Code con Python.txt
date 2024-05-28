@@ -1,0 +1,82 @@
+pasos o cosas para usar SQLIte3 en Visual Studios Code con Python
+
+
+tipos de datos mas usados 
+
+--INTEGER es de Tipo Entero usado en LLAVES PRIMARIAS Y SEGUNDARIAS
+--REAL es de tipo NUMEROS REALES
+--TEXT es de tipo TEXTO
+--NUMERIC es de tipo NUMERICO
+--NULL se refiere a Datos VACIOS o NULOS
+
+las FECHAS se pueden Almacenar con tipo TEXT / REAL // INTEGER "YO PREFIERO TEXT"
+
+
+--PARA USARLO EN VISUAL STUDIO CODE
+
+1. PRIMERO DEBEMOS IMPORTAR LA LIBRERIA DE SQLITE PARA PODER USARLO 
+  -- import sqlite3 --
+
+2. PARA CONECTAR LA BASE DE DATOS QUE TENEMOS ASI SEA QUE LA TENGAMOS O NO ESCRIBIMOS 
+  -- connection = sqlite3.connect("Escribimos NuestraBaseDeDatos.db") --
+
+3.  PARA COMPROBAR SI SE HA CREADO LA BASE DE DATOS CORRECTAMENTE 
+  -- print(connection.total_changes) --
+
+4. PARA CREAR LA ESTRUCTURA BASICA DE TU BASE DE DATOS  "es decir para poder almacenar la información y demás debemos crear esto para poderlo hacer esto permitirá enviar comandos SQL a la base de datos en Pocas Palabras -CREAR/LEER/ACTUALIZAR/BORRAR Informacion"
+  -- cursor = connection.cursor() --
+
+5. PARA CREAR LAS TABLAS DEBEMOS PONER LO SIGUIENTE "cursor es por asi decirlo el SELF en POO debemos ponerlo para asi poder almacenar la información o borrar ect en la base de datos y EXECUTE se usa para el CRUD es decir CREAR/LEER/ACTUALIZAR/BORRAR Informacion"
+ 
+// NOTA EN LAS COMILLAS ESTO '' " es para una sola Fila y ESTO """ """ es para muchas filas //
+  // el  *IF NOT EXISTS* sirve para decir que crearemos una tabla pero si esa tabla no existe la crea pero si existe pues no la crea en resumen es un IF y un ELSE que dice si existe la tabla no la crea pero si no existe pues la crea //
+
+  -- cursor.execute(" CREATE TABLE IF NOT EXISTS example ( id_example INTEGER PRIMARY KEY, nombre TEXT, Cantidad INTEGER )")
+
+6. PARA AÑADIR DATOS  
+  -- cursor.execute("INSERT INTO example VALUES (1, 'alice', 20)")
+       cursor.execute("INSERT INTO example VALUES (2, 'bob', 30)")
+       cursor.execute("INSERT INTO example VALUES (3, 'eve', 40)") --
+
+  // AHORA PARA PODERLOS ALMACENARLOS EN LA BASE DE DATOS PONEMOS  ESTO SE ENCARGAR DE GUARDAR LLOS CAMBIOS EFECTUADOS A LA BASE DE DATOS //
+  -- connection.commit() --
+
+
+-- PARA HACER LAS DEMAS SENTENCIAS CRUD --
+
+1. PARA LEER DATOS PONES VARIAS COSAS 
+  // PONEMOS UN FOR PARA QUE RECORRA EN LA TABLA DE FORMA ORDENA YA QUE SI NO SE COLOCA SI SALDRA LOS ATRIBUTOS Y INFORMACION PERO DE FORMA DIRECTA y el fetchall permite mostrar una lista con las filas de la tabla y el for pues aparecen todas las líneas como dije de forma ordenada"quítenle el for completo y donde dice el print solo coloquen mostrar para que vean"
+  -- cursor.execute("SELECT * FROM example")
+       mostrar = cursor.fetchall()
+       for contador in mostrar:
+             print(contador) --
+
+2. PARA BORRAR DATOS USAMOS
+  // EL WHERE SIRVE PARA BORRAR SOLO EN ESE LADO YA QUE SI NO LO PONEMOS BORRARA TODA LA TABLA //
+  -- cursor.execute("DELETE FROM example WHERE id = 1") --
+
+
+3. PARA MODIFICAR DATOS USAMOS 
+
+  -- cursor.execute("UPDATE example SET cantidad = 31 WHERE id = 2") --
+
+
+
+--NOTACIONES Y AYUDAS--
+
+1. USAR MARCADORES DE POSICION ESTO PERMITE QUE SEA MENOS ROBABLE LOS DATOS POR PARTE DE LOS INFORMATICOS SI ME ENTIENDEN 
+
+--  FORMA ERRONEA 
+      # Consulta SQL directa
+       cursor.execute("UPDATE example SET cantidad = 31 WHERE id = 2")
+      
+      FORMA CORRECTA
+       # Consulta SQL con marcadores de posición
+       cantidad_var = 31
+       id_var = 2
+       cursor.execute("UPDATE example SET cantidad = ? WHERE id = ?", (cantidad_var, id_var)) --
+
+
+2. Y POR ULTIMO PARA FINALIZAR Y CERRAR LA BASE DE DATOS DEBEMOS COLOCAR AL FINAL DEL CODIGO 
+
+  -- connection.close() --

@@ -76,7 +76,7 @@ class CreateLogin:
         self.forgot_button = Button(self.lgn_frame, text="Recuperar Acceso",
                                     font=("yu gothic ui", 13, "bold underline"), fg="white", relief=FLAT,
                                     activebackground="#4169E1"
-                                    , borderwidth=0, background="#222222", cursor="hand2",command=lambda: self.ventana_modificar())
+                                    , borderwidth=0, background="#222222", cursor="hand2", command=self.ventana_modificar)
         self.forgot_button.place(x=170, y=515)
 
         # ========================================================================
@@ -107,7 +107,7 @@ class CreateLogin:
             VentanaPrincipal()
         else:
             messagebox.showerror(
-                message="La contraseña no es correcta", title="Mensaje"
+                message="Los Datos son Invalidos", title="Mensaje"
             )
 
             connection.close()
@@ -118,11 +118,60 @@ class CreateLogin:
     def ventana_modificar(self):
         self.subventana = tk.Toplevel()
         self.subventana.title("Subventana")
-        self.subventana.geometry("300x200")
+        self.subventana.geometry("400x400")
+        self.subventana.resizable(0, 0)
 
-        # Agrega opciones o contenido a la subventana
-        etiqueta = tk.Label(self.subventana, text="¡Bienvenido a la subventana!")
-        etiqueta.pack()
+        self.titel_label = Label(self.subventana, text="Recuperar Acceso", anchor="s", fg="#4169E1",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.titel_label.pack(fill=tk.X, padx=50, pady=8)
+        
+        
+        self.cedula_label = Label(self.subventana, text="Ingresa Cedula", anchor="w", fg="#222222",
+                                    font=("yu gothic ui", 13, "bold"))
+        self.cedula_label.pack(fill=tk.X, padx=25, pady=8)
+
+        self.cedula_entry = Entry(self.subventana, highlightthickness=0, relief=FLAT, fg="#222222",
+                                    font=("yu gothic ui ", 12, "bold"), insertbackground = '#6b6a69')
+        self.cedula_entry.pack(fill=tk.X, padx=30, pady=0)
+
+        self.cedula_line = Canvas(self.subventana, width=300, height=2.0, bg="#4169E1", highlightthickness=0)
+        self.cedula_line.pack(fill=tk.X, padx=30, pady=1)
+        
+        
+        
+        self.buscar_datos = Button(self.subventana, text="Buscar Datos",
+                                    font=("yu gothic ui", 13, "bold underline"), relief=FLAT,
+                                    activebackground="#4169E1"
+                                    , borderwidth=0, cursor="hand2",command=lambda: self.Buscar(subventana))
+        self.buscar_datos.pack(fill=tk.X, padx=30, pady=20)
+        self.login.bind("<Return>", (lambda event: self.Buscar()))
+        
+        
+
+    def Buscar(self, subventana):
+        subventana = self.subventana
+        connection = sqlite3.connect(base_datos)
+        cursor = connection.cursor()
+
+        cedula = self.cedula_entry.get()
+
+        cursor.execute(
+            "SELECT Cedula FROM Usuarios WHERE Cedula = ?", (cedula)
+        )
+        resultado_busqueda = cursor.fetchone()
+
+        if resultado_busqueda:
+            messagebox.showerror(
+                message="Los Datos son Correctos", title="Mensaje"
+            )
+        else:
+            messagebox.showerror(
+                message="Los Datos son Invalidos", title="Mensaje"
+            )
+
+            connection.close()
+            
+            
 
 
 def Mostrar():

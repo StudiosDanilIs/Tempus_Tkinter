@@ -125,9 +125,11 @@ class Tempus_Progrma(customtkinter.CTk):
             
             # Este mensaje me dio "un error en la linea 3958" aunque no me acuerdo si ese era el numero
             messagebox.showinfo("Solicitud de Venta", "Solicitud de Venta guardada con éxito")
+            ventana_solicitud_venta.destroy()
 
         boton_guardar = tk.Button(ventana_solicitud_venta, text="Guardar", command=guardar_solicitud_venta)
         boton_guardar.grid(row=7, column=0, columnspan=2, padx=10, pady=10)
+        
 
     def ver_clientes(self):
         def mostrar_informacion_cliente():
