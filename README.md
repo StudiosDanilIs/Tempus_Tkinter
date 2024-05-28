@@ -6,7 +6,7 @@ con el objetivo de Ayudar y Mejorar el Rendimiento y Funcionamiento de la Propia
     Python
     MySQL
   --Librerias--
-    CustomTkinter
+    Tkinter
   --Herramientas--
     GitHub
 
