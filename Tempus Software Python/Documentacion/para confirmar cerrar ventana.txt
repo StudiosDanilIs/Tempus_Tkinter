@@ -1,6 +1,0 @@
-self.root.protocol("WM_DELETE_WINDOW", self.Close_Windows)
-
-
-def Close_Windows(self):
-        if messagebox.askokcancel("Close", "¿Desea cerrar la aplicación?"):
-            self.root.destroy()
