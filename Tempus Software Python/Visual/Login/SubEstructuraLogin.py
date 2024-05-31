@@ -26,7 +26,7 @@ def SubventanaLogin(self):
 
     self.cedula_label = Label(
         self.lgn_frame,
-        text="Ingresa tu Cedula",
+        text="Ingresa tu Cédula",
         anchor="w",
         fg="#1E90FF",
         bg="#FFFFFF",

@@ -5,6 +5,7 @@ from tkinter import messagebox
 from tkinter.font import BOLD
 from RelacionMariaDB.VerificarCuenta import verificar_sesion as Verificar
 from Visual.Login.SubEstructuraLogin import SubventanaLogin as Subventana
+from Visual.Login.InfoSubventana import InformacionTempus as Info
 
 
 def VentanaLogin(self, root):
@@ -27,7 +28,7 @@ def VentanaLogin(self, root):
 
     self.username_label = Label(
         self.lgn_frame,
-        text="Uusario",
+        text="Usuario",
         anchor="w",
         bg="#FFFFFF",
         fg="#1E90FF",
@@ -119,7 +120,7 @@ def VentanaLogin(self, root):
     # ========================================================================
     self.forgot_button = Button(
         self.lgn_frame,
-        text="Version Beta 0.1",
+        text="Version Beta 1",
         font=("yu gothic ui", 13, "bold"),
         fg="#1E90FF",
         relief=FLAT,
@@ -127,5 +128,6 @@ def VentanaLogin(self, root):
         borderwidth=0,
         background="#FFFFFF",
         cursor="hand2",
+        command=lambda: Info(self=self),
     )
     self.forgot_button.pack(pady=2)
