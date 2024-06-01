@@ -11,7 +11,7 @@ def SubventanaLogin(self):
     subventana.geometry("380x420")
     subventana.resizable(0, 0)
     
-    self.lgn_frame = Frame(subventana, bg="#FFFFFF")
+    self.lgn_frame = Frame(subventana, bg="#E6F0F3")
     self.lgn_frame.pack(fill=tk.BOTH)
 
     titel_label = Label(
@@ -19,7 +19,7 @@ def SubventanaLogin(self):
         text="Restaurar Cuenta",
         anchor="s",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         font=("yu gothic ui", 15, "bold"),
     )
     titel_label.pack(fill=tk.X, padx=50, pady=23)
@@ -29,7 +29,7 @@ def SubventanaLogin(self):
         text="Ingresa tu Cédula",
         anchor="w",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         font=("yu gothic ui", 13, "bold"),
     )
     self.cedula_label.pack(fill=tk.X, padx=25, pady=8)
@@ -38,7 +38,7 @@ def SubventanaLogin(self):
         self.lgn_frame,
         highlightthickness=0,
         relief=FLAT,
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
@@ -55,7 +55,7 @@ def SubventanaLogin(self):
         text="Nuevo Usuario",
         anchor="w",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         font=("yu gothic ui", 13, "bold"),
     )
     self.nuevo_usuario_label.pack(fill=tk.X, padx=25, pady=8)
@@ -64,7 +64,7 @@ def SubventanaLogin(self):
         self.lgn_frame,
         highlightthickness=0,
         relief=FLAT,
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
@@ -81,7 +81,7 @@ def SubventanaLogin(self):
         text="Nueva Calve",
         anchor="w",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         font=("yu gothic ui", 13, "bold"),
     )
     self.nueva_clave_label.pack(fill=tk.X, padx=25, pady=8)
@@ -90,7 +90,7 @@ def SubventanaLogin(self):
         self.lgn_frame,
         highlightthickness=0,
         relief=FLAT,
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
@@ -125,7 +125,7 @@ def SubventanaLogin(self):
         relief=FLAT,
         activebackground="#4169E1",
         borderwidth=0,
-        background="#FFFFFF",
+        background="#E6F0F3",
         cursor="hand2",
     )
     self.forgot_button.pack(pady=7)

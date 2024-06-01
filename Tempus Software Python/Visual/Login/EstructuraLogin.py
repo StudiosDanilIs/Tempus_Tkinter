@@ -10,7 +10,7 @@ from Visual.Login.InfoSubventana import InformacionTempus as Info
 
 def VentanaLogin(self, root):
     # ====== Login Frame =========================
-    self.lgn_frame = Frame(self.root, bg="#FFFFFF")
+    self.lgn_frame = Frame(self.root, bg="#E6F0F3")
     self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
     # ========================================================================
@@ -18,7 +18,7 @@ def VentanaLogin(self, root):
     # ========================================================================
     self.sign_in_image = imim.open("images\\logotipo.png")
     photo = ImageTk.PhotoImage(self.sign_in_image)
-    self.sign_in_image_label = Label(self.lgn_frame, image=photo, bg="#FFFFFF")
+    self.sign_in_image_label = Label(self.lgn_frame, image=photo, bg="#E6F0F3")
     self.sign_in_image_label.image = photo
     self.sign_in_image_label.pack(side="top", fill=tk.X, pady=30)
 
@@ -30,7 +30,7 @@ def VentanaLogin(self, root):
         self.lgn_frame,
         text="Usuario",
         anchor="w",
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         fg="#1E90FF",
         font=("yu gothic ui", 13, "bold"),
     )
@@ -39,7 +39,7 @@ def VentanaLogin(self, root):
     self.username_entry = Entry(
         self.lgn_frame,
         relief=FLAT,
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
@@ -58,7 +58,7 @@ def VentanaLogin(self, root):
         self.lgn_frame,
         text="Contraseña",
         anchor="w",
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         fg="#1E90FF",
         font=("yu gothic ui", 13, "bold"),
     )
@@ -67,7 +67,7 @@ def VentanaLogin(self, root):
     self.password_entry = Entry(
         self.lgn_frame,
         relief=FLAT,
-        bg="#FFFFFF",
+        bg="#E6F0F3",
         fg="#000000",
         font=("yu gothic ui", 12, "bold"),
         show="*",
@@ -108,7 +108,7 @@ def VentanaLogin(self, root):
         relief=FLAT,
         activebackground="#4169E1",
         borderwidth=0,
-        background="#FFFFFF",
+        background="#E6F0F3",
         cursor="hand2",
         command=lambda: Subventana(self=self),
     )
@@ -126,7 +126,7 @@ def VentanaLogin(self, root):
         relief=FLAT,
         activebackground="#4169E1",
         borderwidth=0,
-        background="#FFFFFF",
+        background="#E6F0F3",
         cursor="hand2",
         command=lambda: Info(self=self),
     )
