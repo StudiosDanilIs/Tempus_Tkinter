@@ -4,9 +4,11 @@
         "cedula",
         "imim",
         "Informacion",
+        "opcion",
         "sesion",
         "subventana",
         "Subventana",
+        "tearoff",
         "titel"
     ]
 }

@@ -11,7 +11,6 @@ import tkinter as tk
 from tkinter import PhotoImage
 
 
-
 # Configurar la ventana
 
 customtkinter.set_appearance_mode("system")
@@ -19,7 +18,6 @@ customtkinter.set_appearance_mode("system")
 customtkinter.deactivate_automatic_dpi_awareness()
 
 customtkinter.set_default_color_theme("blue")
-
 
 
 class Tempus_Programa(customtkinter.CTk):
@@ -31,7 +29,6 @@ class Tempus_Programa(customtkinter.CTk):
 
         self.title("Tempus Software")
 
-
         # Cargar y establecer el logo de la ventana
 
         self.ruta_icono = "imagenes\logotipo.ico"
@@ -40,12 +37,11 @@ class Tempus_Programa(customtkinter.CTk):
 
             self.icon = PhotoImage(file=self.ruta_icono)
 
-            self.tk.call('wm', 'iconphoto', self._w, self.icon)
+            self.tk.call("wm", "iconphoto", self._w, self.icon)
 
         except tk.TclError:
 
             print("Error: No se pudo cargar el icono")
-
 
         # el menu es esto
 
@@ -53,15 +49,17 @@ class Tempus_Programa(customtkinter.CTk):
 
         self.config(menu=self.menu_vertical)
 
-
         # Opción de pedido "tecnicamente"
 
         self.opcion_solicitud = tk.Menu(self.menu_vertical, tearoff=0)
 
-        self.menu_vertical.add_cascade(label="Crear Solicitud", menu=self.opcion_solicitud)
+        self.menu_vertical.add_cascade(
+            label="Crear Solicitud", menu=self.opcion_solicitud
+        )
 
-        self.opcion_solicitud.add_command(label="Solicitud de Venta", command=self.crear_solicitud_venta)
-
+        self.opcion_solicitud.add_command(
+            label="Solicitud de Venta", command=self.crear_solicitud_venta
+        )
 
         # Opción de Clientes del menu chafo
 
@@ -69,10 +67,11 @@ class Tempus_Programa(customtkinter.CTk):
 
         self.menu_vertical.add_cascade(label="Clientes", menu=self.opcion_clientes)
 
-        self.opcion_clientes.add_command(label="Ver Clientes", command=self.ver_clientes)
+        self.opcion_clientes.add_command(
+            label="Ver Clientes", command=self.ver_clientes
+        )
 
         self.clientes = []  # Lista Que me dio solo a mi errores XD
-
 
     def crear_solicitud_venta(self):
 
@@ -98,13 +97,11 @@ class Tempus_Programa(customtkinter.CTk):
 
                 label_precio.config(text="Precio de la Venta de Equipo:")
 
-
         # no es tan complejo jejeh
 
         ventana_solicitud_venta = tk.Toplevel(self)
 
         ventana_solicitud_venta.title("Solicitud de Venta")
-
 
         # todos estos son los cuadros de texto y la funcion de cada uno No tiene ciencia
 
@@ -116,15 +113,15 @@ class Tempus_Programa(customtkinter.CTk):
 
         entry_nombre.grid(row=0, column=1, padx=10, pady=10)
 
-
-        label_identificacion = tk.Label(ventana_solicitud_venta, text="Número de Cedula:")
+        label_identificacion = tk.Label(
+            ventana_solicitud_venta, text="Número de Cedula:"
+        )
 
         label_identificacion.grid(row=1, column=0, padx=10, pady=10)
 
         entry_identificacion = tk.Entry(ventana_solicitud_venta)
 
         entry_identificacion.grid(row=1, column=1, padx=10, pady=10)
-
 
         label_telefono = tk.Label(ventana_solicitud_venta, text="Número Telefónico:")
 
@@ -134,7 +131,6 @@ class Tempus_Programa(customtkinter.CTk):
 
         entry_telefono.grid(row=2, column=1, padx=10, pady=10)
 
-
         label_fecha = tk.Label(ventana_solicitud_venta, text="Fecha de la Solicitud:")
 
         label_fecha.grid(row=3, column=0, padx=10, pady=10)
@@ -142,7 +138,6 @@ class Tempus_Programa(customtkinter.CTk):
         entry_fecha = tk.Entry(ventana_solicitud_venta)
 
         entry_fecha.grid(row=3, column=1, padx=10, pady=10)
-
 
         # estas son las opciones
 
@@ -154,13 +149,13 @@ class Tempus_Programa(customtkinter.CTk):
 
         opciones_tipo_venta = ["Revision de equipo", "Pedido", "Venta de Equipo"]
 
-        combo_tipo_venta = ttk.Combobox(ventana_solicitud_venta, textvariable=tipo_venta, values=opciones_tipo_venta)
+        combo_tipo_venta = ttk.Combobox(
+            ventana_solicitud_venta, textvariable=tipo_venta, values=opciones_tipo_venta
+        )
 
         combo_tipo_venta.grid(row=4, column=1, padx=10, pady=10)
-        
 
         combo_tipo_venta.bind("<<ComboboxSelected>>", mostrar_descripcion_precio)
-
 
         # descripciónes y precios son inventados por el usuario en este caso
 
@@ -172,7 +167,6 @@ class Tempus_Programa(customtkinter.CTk):
 
         entry_descripcion.grid(row=5, column=1, padx=10, pady=10)
 
-
         label_precio = tk.Label(ventana_solicitud_venta, text="Precio:")
 
         label_precio.grid(row=6, column=0, padx=10, pady=10)
@@ -180,7 +174,6 @@ class Tempus_Programa(customtkinter.CTk):
         entry_precio = tk.Entry(ventana_solicitud_venta)
 
         entry_precio.grid(row=6, column=1, padx=10, pady=10)
-
 
         def guardar_solicitud_venta():
 
@@ -197,45 +190,35 @@ class Tempus_Programa(customtkinter.CTk):
             telefono = entry_telefono.get()
 
             fecha = entry_fecha.get()
-            
 
             # me concentre en tratar de darle esa funcion de "registrar un dato" Pero este es el ejemplo
 
             cliente = {
-
                 "nombre": nombre,
-
                 "identificacion": identificacion,
-
                 "telefono": telefono,
-
                 "fecha": fecha,
-
                 "tipo_venta": tipo_seleccionado,
-
                 "descripcion": descripcion,
-
-                "precio": precio
-
+                "precio": precio,
             }
-            
 
             # Agrega al cliente... solo hace eso
             self.clientes.append(cliente)
-            
 
             # Este mensaje me dio "un error en la linea 3958" aunque no me acuerdo si ese era el numero
 
-            messagebox.showinfo("Solicitud de Venta", "Solicitud de Venta guardada con éxito")
+            messagebox.showinfo(
+                "Solicitud de Venta", "Solicitud de Venta guardada con éxito"
+            )
 
             ventana_solicitud_venta.destroy()
 
-
-        boton_guardar = tk.Button(ventana_solicitud_venta, text="Guardar", command=guardar_solicitud_venta)
+        boton_guardar = tk.Button(
+            ventana_solicitud_venta, text="Guardar", command=guardar_solicitud_venta
+        )
 
         boton_guardar.grid(row=7, column=0, columnspan=2, padx=10, pady=10)
-        
-
 
     def ver_clientes(self):
 
@@ -259,54 +242,52 @@ class Tempus_Programa(customtkinter.CTk):
                 descripcion = client_data[5]
 
                 precio = client_data[6]
-                
 
                 # esta parte es de la opcion del menu del cliente
 
                 ventana_cliente = tk.Toplevel(self)
 
                 ventana_cliente.title(f"Información de {nombre}")
-                
 
                 label_nombre = tk.Label(ventana_cliente, text=f"Nombre: {nombre}")
 
                 label_nombre.grid(row=0, column=0, padx=10, pady=10)
-                
 
-                label_identificacion = tk.Label(ventana_cliente, text=f"Número de Identificación: {identificacion}")
+                label_identificacion = tk.Label(
+                    ventana_cliente, text=f"Número de Identificación: {identificacion}"
+                )
 
                 label_identificacion.grid(row=1, column=0, padx=10, pady=10)
-                
 
-                label_telefono = tk.Label(ventana_cliente, text=f"Número Telefónico: {telefono}")
+                label_telefono = tk.Label(
+                    ventana_cliente, text=f"Número Telefónico: {telefono}"
+                )
 
                 label_telefono.grid(row=2, column=0, padx=10, pady=10)
-                
 
                 label_fecha = tk.Label(ventana_cliente, text=f"Fecha: {fecha}")
 
                 label_fecha.grid(row=3, column=0, padx=10, pady=10)
-                
 
-                label_tipo_venta = tk.Label(ventana_cliente, text=f"Tipo de Venta: {tipo_venta}")
+                label_tipo_venta = tk.Label(
+                    ventana_cliente, text=f"Tipo de Venta: {tipo_venta}"
+                )
 
                 label_tipo_venta.grid(row=4, column=0, padx=10, pady=10)
-                
 
-                label_descripcion = tk.Label(ventana_cliente, text=f"Descripción: {descripcion}")
+                label_descripcion = tk.Label(
+                    ventana_cliente, text=f"Descripción: {descripcion}"
+                )
 
                 label_descripcion.grid(row=5, column=0, padx=10, pady=10)
-                
 
                 label_precio = tk.Label(ventana_cliente, text=f"Precio: {precio}")
 
                 label_precio.grid(row=6, column=0, padx=10, pady=10)
 
-
         ventana_clientes = tk.Toplevel(self)
 
         ventana_clientes.title("Lista de Clientes")
-        
 
         # estas son las que almacenan los datos de los clientes "lo tome prestado"
 
@@ -347,29 +328,25 @@ class Tempus_Programa(customtkinter.CTk):
         tree.heading("7", text="Precio")
 
         tree.pack(fill="both", expand=True)
-        
 
         # Agrega los datos "guardados" a las filas
 
         for i, cliente in enumerate(self.clientes):
 
-            tree.insert("", "end", text=str(i+1), values=(
-
-                cliente["nombre"],
-
-                cliente["identificacion"],
-
-                cliente["telefono"],
-
-                cliente["fecha"],
-
-                cliente["tipo_venta"],
-
-                cliente["descripcion"],
-
-                cliente["precio"]
-            ))
-        
+            tree.insert(
+                "",
+                "end",
+                text=str(i + 1),
+                values=(
+                    cliente["nombre"],
+                    cliente["identificacion"],
+                    cliente["telefono"],
+                    cliente["fecha"],
+                    cliente["tipo_venta"],
+                    cliente["descripcion"],
+                    cliente["precio"],
+                ),
+            )
 
         # este es un evento para mostrar la información del cliente al hacer doble clic "robado jeje"
 

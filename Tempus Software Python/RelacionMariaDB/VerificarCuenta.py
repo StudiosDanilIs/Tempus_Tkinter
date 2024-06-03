@@ -41,8 +41,8 @@ def verificar_sesion(self, root):
 
         if resultado:
             messagebox.showinfo(message="Bienvenido a Tempus Software", title="Mensaje")
-            self.root.destroy()
             VentanaPrincipal()
+            self.root.destroy()
         else:
             messagebox.showerror(message="Los Datos son Inválidos", title="Mensaje")
     except mysql.connector.Error as err:

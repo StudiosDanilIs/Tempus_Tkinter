@@ -40,7 +40,6 @@ def VentanaLogin(self, root):
         self.lgn_frame,
         relief=FLAT,
         bg="#E6F0F3",
-        fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
     )
@@ -68,7 +67,6 @@ def VentanaLogin(self, root):
         self.lgn_frame,
         relief=FLAT,
         bg="#E6F0F3",
-        fg="#000000",
         font=("yu gothic ui", 12, "bold"),
         show="*",
         insertbackground="#1E90FF",
