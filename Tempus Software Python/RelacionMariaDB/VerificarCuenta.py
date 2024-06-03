@@ -34,7 +34,7 @@ def verificar_sesion(self, root):
 
     try:
         cursor.execute(
-            "SELECT * FROM usuarios WHERE usuario = %s AND Clave = %s",
+            "SELECT * FROM usuarios WHERE Cuenta = %s AND Clave = %s",
             (usuario, password),
         )
         resultado = cursor.fetchone()

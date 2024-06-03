@@ -34,7 +34,7 @@ def RecuperarSesion(self, subventana):
         )
         try:
             cursor.execute(
-                "UPDATE usuarios SET Usuario = ?, Clave = ? WHERE Cedula = ?",
+                "UPDATE usuarios SET Cuenta = %s, Clave = %s WHERE Cedula = %s",
                 (nuevo_usuario, nueva_clave, cedula),
             )
             connection.commit()
@@ -42,7 +42,7 @@ def RecuperarSesion(self, subventana):
                 "Mensaje", "Excelente, datos actualizados correctamente"
             )
             self.subventana.destroy()
-        except sqlite3.Error as e:
+        except mysql.connector.Error as e:
             messagebox.showerror("Error", "No se pudieron actualizar los datos")
             print(f"Error al actualizar los datos: {e}")
     else:

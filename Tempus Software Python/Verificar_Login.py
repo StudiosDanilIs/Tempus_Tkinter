@@ -16,7 +16,7 @@ try:
     usuario = input("Ingresa el Usuario: ")
     password = input("Ingresa la Clave: ")
 
-    cursor.execute("SELECT * FROM usuarios WHERE Usuario = %s AND Clave = %s", (usuario, password))
+    cursor.execute("SELECT * FROM usuarios WHERE Cuenta = %s AND Clave = %s", (usuario, password))
     resultado = cursor.fetchone()
     if resultado:
         print("EXCELENTE, ERES TODO UN CRACK")

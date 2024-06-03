@@ -15,11 +15,28 @@ class VentanaPrincipal:
 
         self.opcion_solicitud = tk.Menu(self.menu_tempus, tearoff=0)
         self.menu_tempus.add_cascade(label="Crear Solicitud", menu=self.opcion_solicitud)
-        self.opcion_solicitud.add_command(label="Solicitud de Venta", command=self.crear_solicitud_venta)
+        self.opcion_solicitud.add_command(label="Solicitud de Pedido", command=self.crear_solicitud_venta)
 
         self.opcion_clientes = tk.Menu(self.menu_tempus, tearoff=0)
         self.menu_tempus.add_cascade(label="Clientes", menu=self.opcion_clientes)
+        self.opcion_clientes.add_command(label="Agregar Clientes", command=self.ver_clientes)
         self.opcion_clientes.add_command(label="Ver Clientes", command=self.ver_clientes)
+        
+        
+        self.opcion_solicitud = tk.Menu(self.menu_tempus, tearoff=0)
+        self.menu_tempus.add_cascade(label="Historial", menu=self.opcion_solicitud)
+        self.opcion_solicitud.add_command(label="Pedidos", command=self.crear_solicitud_venta)
+        self.opcion_solicitud.add_command(label="Ventas", command=self.crear_solicitud_venta)
+        self.opcion_solicitud.add_command(label="Tasa Cambio", command=self.crear_solicitud_venta)
+
+        self.opcion_clientes = tk.Menu(self.menu_tempus, tearoff=0)
+        self.menu_tempus.add_cascade(label="Herramientas", menu=self.opcion_clientes)
+        self.opcion_clientes.add_command(label="Actualizar Tasa", command=self.ver_clientes)
+        
+        self.opcion_clientes.add_command(label="Salir Sistema", command=self.ver_clientes)
+
+
+
 
 
 
