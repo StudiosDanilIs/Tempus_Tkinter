@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 from tkinter import *
 from tkinter import messagebox
 
@@ -13,7 +13,7 @@ def RecuperarSesion(self, subventana):
         "database": "registro",
     }
 
-    connection = mysql.connector.connect(**db_config)
+    connection = mariadb.connect(**db_config)
     cursor = connection.cursor()
 
     cedula = self.cedula_entry.get()
@@ -42,7 +42,7 @@ def RecuperarSesion(self, subventana):
                 "Mensaje", "Excelente, datos actualizados correctamente"
             )
             self.subventana.destroy()
-        except mysql.connector.Error as e:
+        except mariadb.Error as e:
             messagebox.showerror("Error", "No se pudieron actualizar los datos")
             print(f"Error al actualizar los datos: {e}")
     else:

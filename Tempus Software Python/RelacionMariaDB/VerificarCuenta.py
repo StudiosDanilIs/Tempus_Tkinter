@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb  # Reemplazado mysql.connector por mariadb
 from tkinter import *
 from tkinter import messagebox
 from Visual.Inicio.InicioTempus import VentanaPrincipal
@@ -13,9 +13,9 @@ def conectar_base_de_datos():
     }
 
     try:
-        connection = mysql.connector.connect(**db_config)
+        connection = mariadb.connect(**db_config)
         return connection
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         messagebox.showerror(message=f"Error de conexión: {err}", title="Mensaje")
         return None
 
@@ -45,10 +45,7 @@ def verificar_sesion(self, root):
             self.root.destroy()
         else:
             messagebox.showerror(message="Los Datos son Inválidos", title="Mensaje")
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         messagebox.showerror(message=f"Error en la consulta: {err}", title="Mensaje")
     finally:
         connection.close()
-
-
-# Llama a verificar_sesion desde donde sea necesario
