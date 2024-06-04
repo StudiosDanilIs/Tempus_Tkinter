@@ -1,5 +1,5 @@
 import tkinter as tk
-from Visual.Login.Login import CreateLogin
+from Visual.Login.EstructuraLogin import CreateLogin
 
 if __name__ == "__main__":
     root = tk.Tk()

@@ -3,9 +3,9 @@ import mysql.connector
 try:
     # Configura los detalles de conexión
     db_config = {
-        "host": "127.0.0.1",  # Cambia esto al host correcto
+        "host": "localhost",  # Cambia esto al host correcto
         "user": "root",
-        "password": "210605",
+        "password": "",
         "database": "registro",
     }
 
