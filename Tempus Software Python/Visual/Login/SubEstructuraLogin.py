@@ -78,7 +78,7 @@ def SubventanaLogin(self):
 
     self.nueva_clave_label = Label(
         self.lgn_frame,
-        text="Nueva Calve",
+        text="Nueva Clave",
         anchor="w",
         fg="#1E90FF",
         bg="#E6F0F3",
