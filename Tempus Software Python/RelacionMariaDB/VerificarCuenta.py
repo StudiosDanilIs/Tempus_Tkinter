@@ -3,31 +3,18 @@ from tkinter import *
 from tkinter import messagebox
 from Visual.Inicio.InicioTempus import VentanaPrincipal
 
-# Define db_config si aún no lo has hecho
-db_config = {
-    "host": "localhost",
-    "user": "root",
-    "passwd": "",
-    "db": "registro",
-    "port": 3306,
-}
-
-def conectar_base_de_datos():
-    try:
-        connection = mysql.connector.connect(**db_config)
-        return connection
-    except mysql.Error as err:
-        messagebox.showerror(message=f"Error de conexión: {err}", title="Mensaje")
-        return None
 
 def verificar_sesion(self, root):
     self.root = root
-    connection = conectar_base_de_datos()
+    
+    try:
+        connection = mysql.connector.connect(
+            host="127.0.0.1", user="Tempus09", passwd="/Du1s8wFpIqSwsKh", db="registro", port=3306
+        )
+        cursor = connection.cursor()
+    except mysql.connector.Error as err:
+        return messagebox.showerror(message=f"Error de conexión: {err}", title="Mensaje")
 
-    if not connection:
-        return
-
-    cursor = connection.cursor()
 
     usuario = self.username_entry.get()
     password = self.password_entry.get()
