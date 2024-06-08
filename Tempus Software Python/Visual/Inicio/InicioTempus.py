@@ -15,7 +15,7 @@ class VentanaPrincipal:
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
 
-        self.sign_in_image = imim.open("images\\logotipo.png")
+        self.sign_in_image = imim.open("images\\1.png")
         photo = ImageTk.PhotoImage(self.sign_in_image)
         self.sign_in_image_label = Label(self.lgn_frame, image=photo, bg="#E6F0F3", anchor="center")
         self.sign_in_image_label.image = photo
@@ -60,6 +60,10 @@ class VentanaPrincipal:
         opciones_herramienta = ["Ver Perfil", "Salir Sistema"]
         for opcion_herramienta in opciones_herramienta:
             self.opcion_herramienta.add_command(label=opcion_herramienta)
+            
+            
+        self.usuario = tk.Menu(self.menu_tempus, tearoff=0)
+        self.menu_tempus.add_cascade(label="", menu=self.usuario)
             
 
 if __name__ == "__main__":
