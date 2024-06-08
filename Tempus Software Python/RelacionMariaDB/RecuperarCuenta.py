@@ -1,6 +1,7 @@
 import mysql.connector
 from tkinter import *
 from tkinter import messagebox
+import re
 
 def RecuperarSesion(self, subventana):
     self.subventana = subventana
@@ -14,7 +15,6 @@ def RecuperarSesion(self, subventana):
         return messagebox.showerror(message=f"Error de conexión: {err}", title="Mensaje")
 
 
-
     cedula = self.cedula_entry.get()
     nuevo_usuario = self.nuevo_usuario_entry.get()
     nueva_clave = self.nueva_clave_entry.get()
@@ -23,10 +23,14 @@ def RecuperarSesion(self, subventana):
     if len(nuevo_usuario) < 6 or len(nueva_clave) < 6:
         messagebox.showerror("Error", "Debes ingresar valores mayores a 6 dígitos")
         return
+
     
-    if not nuevo_usuario or not nueva_clave:
-        messagebox.showerror("Error", "Los campos no pueden estar en blanco")
-        return
+    if not cedula.isdigit():
+        messagebox.showerror("Error", "Debes ingresar solo números para la cédula.")
+    elif len(cedula) != 8:
+        messagebox.showerror("Error", "La cédula debe tener 8 dígitos.")
+
+
 
     cursor.execute("SELECT Cedula FROM usuarios WHERE Cedula = %s", (cedula,))
     resultado_busqueda = cursor.fetchone()

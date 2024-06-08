@@ -104,7 +104,7 @@ class CreateLogin:
         # ===================================================
         self.forgot_button = Button(
             self.lgn_frame,
-            text="Recuperar Acceso",
+            text="Restaurar Acceso",
             font=("yu gothic ui", 13, "bold"),
             fg="#1E90FF",
             relief=FLAT,

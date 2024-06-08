@@ -8,7 +8,7 @@ from RelacionMariaDB.RecuperarCuenta import *
 def SubventanaLogin(self):
     subventana = tk.Toplevel()
     subventana.title("Tempus - Recuperar Acceso")
-    subventana.geometry("380x420")
+    subventana.geometry("380x480")
     subventana.resizable(0, 0)
     
     self.lgn_frame = Frame(subventana, bg="#E6F0F3")
@@ -58,8 +58,9 @@ def SubventanaLogin(self):
         bg="#E6F0F3",
         font=("yu gothic ui", 13, "bold"),
     )
-    self.nuevo_usuario_label.pack(fill=tk.X, padx=25, pady=8)
+    self.nuevo_usuario_label.pack(fill=tk.X, padx=25, pady=(30,8))
 
+    vcmd = self.root.register(validate_tab)
     self.nuevo_usuario_entry = Entry(
         self.lgn_frame,
         highlightthickness=0,
@@ -68,6 +69,8 @@ def SubventanaLogin(self):
         fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(vcmd, "%P"),
     )
     self.nuevo_usuario_entry.pack(fill=tk.X, padx=30, pady=0)
 
@@ -84,8 +87,9 @@ def SubventanaLogin(self):
         bg="#E6F0F3",
         font=("yu gothic ui", 13, "bold"),
     )
-    self.nueva_clave_label.pack(fill=tk.X, padx=25, pady=8)
+    self.nueva_clave_label.pack(fill=tk.X, padx=25, pady=(30,8))
 
+    vcmd = self.root.register(validate_tab)
     self.nueva_clave_entry = Entry(
         self.lgn_frame,
         highlightthickness=0,
@@ -94,6 +98,8 @@ def SubventanaLogin(self):
         fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(vcmd, "%P"),
     )
     self.nueva_clave_entry.pack(fill=tk.X, padx=30, pady=0)
 
@@ -114,7 +120,7 @@ def SubventanaLogin(self):
         fg="white",
         command=lambda: RecuperarSesion(self=self, subventana=subventana),
     )
-    guardar_button.pack(pady=20)
+    guardar_button.pack(pady=(35, 0))
 
 
     self.forgot_button = Button(
@@ -128,4 +134,9 @@ def SubventanaLogin(self):
         background="#E6F0F3",
         cursor="hand2",
     )
-    self.forgot_button.pack(pady=7)
+    self.forgot_button.pack(pady=15)
+    
+    
+def validate_tab(new_value):
+        # Verifica que no haya espacios en blanco
+        return not " " in new_value
