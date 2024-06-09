@@ -108,7 +108,7 @@ class CreateLogin:
             borderwidth=0,
             background="#E6F0F3",
             cursor="hand2",
-            command=lambda: Subventana(self=self),
+            command=lambda: Subventana(self),
         )
 
         self.forgot_button.pack(pady=2)

@@ -67,7 +67,9 @@ class VentanaPrincipal:
         self.opcion_historial.add_command(label="Reparaciones")
 
         # Menú de Herramientas
-        self.menu_tempus.add_cascade(label="Salir del Sistema", command=self.Close_Windows)
+        self.menu_tempus.add_cascade(
+            label="Salir del Sistema", command=self.Close_Windows
+        )
 
     # Función para cerrar la ventana
     def Close_Windows(self):
