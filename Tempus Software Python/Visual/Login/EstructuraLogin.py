@@ -91,11 +91,11 @@ class CreateLogin:
             cursor="hand2",
             activebackground="#3047ff",
             fg="white",
-            command=lambda: Verificar(self=self, root=root),
+            command=lambda: Verificar(self, root),
         )
         self.login.pack(pady=35)
         # botón para iniciar sesión con la tecla enter
-        self.login.bind("<Return>", (lambda event: Verificar()))
+        self.login.bind("<Return>", (lambda event: Verificar(self, root)))  # Pasa root
 
         # botón para restaurar la contraseña y el usuario
         self.forgot_button = Button(

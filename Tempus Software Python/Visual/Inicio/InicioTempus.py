@@ -5,8 +5,8 @@ from tkinter import messagebox
 
 
 class VentanaPrincipal:
-    def __init__(self, root2):
-        self.root2 = root2
+    def __init__(self, root):
+        self.root2 = root
         self.root2.title("Inicio - Tempus Software")
         self.root2.geometry("1100x600")
         self.root2.resizable(0, 0)
@@ -72,12 +72,7 @@ class VentanaPrincipal:
         self.opcion_historial.add_command(label="Reparaciones")
 
         # Menú de Herramientas
-        self.opcion_herramienta = tk.Menu(
-            self.menu_tempus, tearoff=0, activeborderwidth=3
-        )
-        self.menu_tempus.add_cascade(
-            label="Salir del Sistema", command=self.Close_Windows
-        )
+        self.menu_tempus.add_cascade(label="Salir del Sistema", command=self.Close_Windows)
 
     # Función para cerrar la ventana
     def Close_Windows(self):

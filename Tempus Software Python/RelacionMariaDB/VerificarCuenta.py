@@ -3,7 +3,6 @@ from tkinter import *
 from tkinter import messagebox
 from Visual.Inicio.InicioTempus import VentanaPrincipal
 
-
 # verificar la conexion a la base de datos y verificar si el usuario y la contraseña son correctos
 def verificar_sesion(self, root):
     self.root = root
@@ -36,8 +35,8 @@ def verificar_sesion(self, root):
         # si el usuario y la contraseña son correctos, se muestra un mensaje de bienvenida y se abre la ventana principal
         if resultado:
             messagebox.showinfo(message="Bienvenido a Tempus Software", title="Mensaje")
-            VentanaPrincipal(self.root2)
-            self.root.destroy()
+            VentanaPrincipal(root)  # Pasa la raíz recibida como argumento
+            root.destroy()
         # si el usuario y la contraseña son incorrectos, se muestra un mensaje de error
         else:
             messagebox.showerror(message="Los Datos son Inválidos", title="Mensaje")
