@@ -1,7 +1,7 @@
 # LIBRERÍAS
+from tkinter import *
 from PIL import ImageTk, Image as imim
 import tkinter as tk
-from tkinter import *
 from tkinter import messagebox
 from tkinter.font import BOLD
 

@@ -1,29 +1,24 @@
+from tkinter import *
 from PIL import ImageTk, Image as imim
 import tkinter as tk
-from tkinter import *
 from tkinter import messagebox
 
 
 class VentanaPrincipal:
-    def __init__(self, root):
-        self.root2 = root
+    def __init__(self):
+        self.root2 = tk.Tk()
         self.root2.title("Inicio - Tempus Software")
         self.root2.geometry("1100x600")
         self.root2.resizable(0, 0)
-        # self.root2.protocol("WM_DELETE_WINDOW", self.Close_Windows)
 
-        # Crear un marco para contener los elementos
+        # Create a frame to contain elements
         self.lgn_frame = Frame(self.root2, bg="#FFFFFF")
         self.lgn_frame.pack(expand=YES, fill=BOTH)
 
-        # Cargar la imagen
-
-        logo_image = imim.open("images\\1.png")
-        self.logo_inicio = ImageTk.PhotoImage(logo_image)
-        self.logo_inicio_label = tk.Label(
-            self.lgn_frame, image=self.logo_inicio, bg="#FFFFFF"
-        )
-        self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        # logo_image = imim.open("images\\1.png")  # Replace with your image path
+        # self.logo_inicio = ImageTk.PhotoImage(logo_image)
+        # self.logo_inicio_label = tk.Label(self.lgn_frame, image=self.logo_inicio, bg="#FFFFFF")
+        # self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
         # Etiqueta de bienvenida
         self.username_label = Label(
@@ -78,12 +73,3 @@ class VentanaPrincipal:
     def Close_Windows(self):
         if messagebox.askokcancel("Close", "¿Desea Cerrar la Aplicación?"):
             self.root2.destroy()
-
-
-# Ejecutar la aplicación
-if __name__ == "__main__":
-    root2 = tk.Tk()
-    logo = "images\\logotipo.ico"
-    root2.iconbitmap(True, logo)
-    app = VentanaPrincipal(root2)
-    root2.mainloop()
