@@ -1,27 +1,50 @@
 from PIL import ImageTk, Image as imim
 import tkinter as tk
 from tkinter import *
+from tkinter import messagebox
 
 
 class VentanaPrincipal:
-    def __init__(self):
-        self.root2 = tk.Tk()
+    def __init__(self, root2):
+        self.root2 = root2
         self.root2.title("Inicio - Tempus Software")
-        self.root2.geometry("1200x700")
+        self.root2.geometry("1100x600")
         self.root2.resizable(0, 0)
-        
-        
-        self.lgn_frame = Frame(self.root2, bg="#E6F0F3")
-        self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
+        # self.root2.protocol("WM_DELETE_WINDOW", self.Close_Windows)
 
+        # Crear un marco para contener los elementos
+        self.lgn_frame = Frame(self.root2, bg="#FFFFFF")
+        self.lgn_frame.pack(expand=YES, fill=BOTH)
 
-        self.sign_in_image = imim.open("images\\1.png")
-        photo = ImageTk.PhotoImage(self.sign_in_image)
-        self.sign_in_image_label = Label(self.lgn_frame, image=photo, bg="#E6F0F3", anchor="center")
-        self.sign_in_image_label.image = photo
-        self.sign_in_image_label.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)      
-        
+        # Cargar la imagen
 
+        logo_image = imim.open("images\\1.png")
+        self.logo_inicio = ImageTk.PhotoImage(logo_image)
+        self.logo_inicio_label = tk.Label(
+            self.lgn_frame, image=self.logo_inicio, bg="#FFFFFF"
+        )
+        self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+
+        # Etiqueta de bienvenida
+        self.username_label = Label(
+            self.lgn_frame,
+            text="Welcome to\n Tempus Software.",
+            anchor="center",
+            bg="#FFFFFF",
+            fg="#000000",
+            font=("Exo 2", 21),
+        )
+        self.username_label.place(relx=0.5, rely=0.60, anchor=CENTER)
+
+        # Etiqueta del rol
+        self.rol_label = Label(
+            self.lgn_frame,
+            text="Tu aliado tecnológico: eficiencia y confianza al\n alcance de tu mano.",
+            bg="#FFFFFF",
+            fg="#000000",
+            font=("Inconsolata", 12),
+        )
+        self.rol_label.place(relx=0.5, rely=0.70, anchor=CENTER)
 
         # Menú principal
         self.menu_tempus = tk.Menu(self.root2, tearoff=0)
@@ -29,43 +52,43 @@ class VentanaPrincipal:
 
         # Menú de solicitud
         self.opcion_solicitud = tk.Menu(self.menu_tempus, tearoff=0)
-        self.menu_tempus.add_cascade(
-            label="Crear Solicitud", menu=self.opcion_solicitud
-        )
-        opciones = [
-            "Solicitud de Pedido",
-            "Solicitud de Venta",
-            "Solicitud de Reparación",
-        ]
-        for opcion in opciones:
-            self.opcion_solicitud.add_command(label=opcion)
+        self.menu_tempus.add_cascade(label="Solicitudes", menu=self.opcion_solicitud)
+
+        self.opcion_solicitud.add_command(label="Crear Pedido")
+        self.opcion_solicitud.add_command(label="Crear Venta")
+        self.opcion_solicitud.add_command(label="Crear Reparaciones")
 
         # Menú de clientes
         self.opcion_clientes = tk.Menu(self.menu_tempus, tearoff=0)
         self.menu_tempus.add_cascade(label="Clientes", menu=self.opcion_clientes)
-        opciones_clientes = ["Agregar Clientes", "Ver Clientes"]
-        for opcion_cliente in opciones_clientes:
-            self.opcion_clientes.add_command(label=opcion_cliente)
+        self.opcion_clientes.add_command(label="Clientes")
+        self.opcion_clientes.add_command(label="Agregar Clientes")
 
         # Menú de Historial
         self.opcion_historial = tk.Menu(self.menu_tempus, tearoff=0)
         self.menu_tempus.add_cascade(label="Historial", menu=self.opcion_historial)
-        opciones_historial = ["Ver Pedidos", "Ver Ventas", "Ver Reparaciones"]
-        for opcion_historial in opciones_historial:
-            self.opcion_historial.add_command(label=opcion_historial)
+        self.opcion_historial.add_command(label="Ventas")
+        self.opcion_historial.add_command(label="Pedidos")
+        self.opcion_historial.add_command(label="Reparaciones")
 
         # Menú de Herramientas
-        self.opcion_herramienta = tk.Menu(self.menu_tempus, tearoff=0)
-        self.menu_tempus.add_cascade(label="Herramientas", menu=self.opcion_herramienta)
-        opciones_herramienta = ["Ver Perfil", "Salir Sistema"]
-        for opcion_herramienta in opciones_herramienta:
-            self.opcion_herramienta.add_command(label=opcion_herramienta)
-            
-            
-        self.usuario = tk.Menu(self.menu_tempus, tearoff=0)
-        self.menu_tempus.add_cascade(label="", menu=self.usuario)
-            
+        self.opcion_herramienta = tk.Menu(
+            self.menu_tempus, tearoff=0, activeborderwidth=3
+        )
+        self.menu_tempus.add_cascade(
+            label="Salir del Sistema", command=self.Close_Windows
+        )
 
+    # Función para cerrar la ventana
+    def Close_Windows(self):
+        if messagebox.askokcancel("Close", "¿Desea Cerrar la Aplicación?"):
+            self.root2.destroy()
+
+
+# Ejecutar la aplicación
 if __name__ == "__main__":
-    app = VentanaPrincipal()
-    app.root2.mainloop()
+    root2 = tk.Tk()
+    logo = "images\\logotipo.ico"
+    root2.iconbitmap(True, logo)
+    app = VentanaPrincipal(root2)
+    root2.mainloop()

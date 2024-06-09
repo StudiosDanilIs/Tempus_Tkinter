@@ -10,7 +10,8 @@ def SubventanaLogin(self):
     subventana.title("Tempus - Recuperar Acceso")
     subventana.geometry("380x480")
     subventana.resizable(0, 0)
-    
+
+    # frame de recupera cuenta
     self.lgn_frame = Frame(subventana, bg="#E6F0F3")
     self.lgn_frame.pack(fill=tk.BOTH)
 
@@ -24,6 +25,7 @@ def SubventanaLogin(self):
     )
     titel_label.pack(fill=tk.X, padx=50, pady=23)
 
+    # cedula opcion de recuperación
     self.cedula_label = Label(
         self.lgn_frame,
         text="Ingresa tu Cédula",
@@ -34,6 +36,7 @@ def SubventanaLogin(self):
     )
     self.cedula_label.pack(fill=tk.X, padx=25, pady=8)
 
+    # entrada de cedula
     self.cedula_entry = Entry(
         self.lgn_frame,
         highlightthickness=0,
@@ -50,6 +53,7 @@ def SubventanaLogin(self):
     )
     self.cedula_line.pack(fill=tk.X, padx=30, pady=1)
 
+    # usurario opcion de recuperación
     self.nuevo_usuario_label = Label(
         self.lgn_frame,
         text="Nuevo Usuario",
@@ -58,8 +62,9 @@ def SubventanaLogin(self):
         bg="#E6F0F3",
         font=("yu gothic ui", 13, "bold"),
     )
-    self.nuevo_usuario_label.pack(fill=tk.X, padx=25, pady=(30,8))
+    self.nuevo_usuario_label.pack(fill=tk.X, padx=25, pady=(30, 8))
 
+    # entrada de usuario y  validación de tabulador
     vcmd = self.root.register(validate_tab)
     self.nuevo_usuario_entry = Entry(
         self.lgn_frame,
@@ -79,6 +84,7 @@ def SubventanaLogin(self):
     )
     self.nuevo_usuario_line.pack(fill=tk.X, padx=30, pady=1)
 
+    # clave opcion de recuperación
     self.nueva_clave_label = Label(
         self.lgn_frame,
         text="Nueva Clave",
@@ -87,8 +93,9 @@ def SubventanaLogin(self):
         bg="#E6F0F3",
         font=("yu gothic ui", 13, "bold"),
     )
-    self.nueva_clave_label.pack(fill=tk.X, padx=25, pady=(30,8))
+    self.nueva_clave_label.pack(fill=tk.X, padx=25, pady=(30, 8))
 
+    # entrada de clave y  validación de tabulador
     vcmd = self.root.register(validate_tab)
     self.nueva_clave_entry = Entry(
         self.lgn_frame,
@@ -108,6 +115,7 @@ def SubventanaLogin(self):
     )
     self.nueva_clave_line.pack(fill=tk.X, padx=30, pady=1)
 
+    # botón de guardar datos
     guardar_button = Button(
         self.lgn_frame,
         text="Guardar Datos",
@@ -122,7 +130,7 @@ def SubventanaLogin(self):
     )
     guardar_button.pack(pady=(35, 0))
 
-
+    # mostrar información de seguridad temporal
     self.forgot_button = Button(
         self.lgn_frame,
         text="Seguridad Tempus",
@@ -135,8 +143,9 @@ def SubventanaLogin(self):
         cursor="hand2",
     )
     self.forgot_button.pack(pady=15)
-    
-    
+
+
+# Función para validar que no haya espacios en blanco en la entrada
 def validate_tab(new_value):
-        # Verifica que no haya espacios en blanco
-        return not " " in new_value
+    # Verifica que no haya espacios en blanco
+    return not " " in new_value
