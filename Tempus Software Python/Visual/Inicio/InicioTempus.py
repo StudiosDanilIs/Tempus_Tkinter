@@ -3,6 +3,7 @@ from PIL import ImageTk, Image
 import tkinter as tk
 from tkinter import messagebox
 import util.ImagenRead as utl
+from Visual.Inicio.VentanaCliente import agregar_cliente as new_client
 
 
 class VentanaPrincipal:
@@ -59,7 +60,7 @@ class VentanaPrincipal:
         self.opcion_clientes = tk.Menu(self.menu_tempus, tearoff=0)
         self.menu_tempus.add_cascade(label="Clientes", menu=self.opcion_clientes)
         self.opcion_clientes.add_command(label="Clientes")
-        self.opcion_clientes.add_command(label="Agregar Clientes")
+        self.opcion_clientes.add_command(label="Agregar Clientes", command=lambda: self.agregar_cliente_con_self())
 
         # Menú de Historial
         self.opcion_historial = tk.Menu(self.menu_tempus, tearoff=0)
@@ -72,14 +73,21 @@ class VentanaPrincipal:
         self.menu_tempus.add_cascade(
             label="Salir del Sistema", command=self.Close_Windows
         )
-
+        
+        self.root2.mainloop() 
+        
+    def agregar_cliente_con_self(self):
+        new_client(self)
+    
     # Función para cerrar la ventana
     def Close_Windows(self):
         if messagebox.askokcancel("Close", "¿Desea Cerrar la Aplicación?"):
             self.root2.destroy()
+               
 
 
 # Crear una instancia de la ventana principal
 if __name__ == "__main__":
-    ventana = VentanaPrincipal()
-    ventana.root2.mainloop()
+    # ventana = VentanaPrincipal()
+    # ventana.root2.mainloop()
+    VentanaPrincipal()

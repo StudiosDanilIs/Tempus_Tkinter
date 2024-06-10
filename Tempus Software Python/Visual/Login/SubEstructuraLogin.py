@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from tkinter.font import BOLD
-from RelacionMariaDB.RecuperarCuenta import *
+from Modelo.Login.RecuperarCuenta import *
 
 
 def SubventanaLogin(self):

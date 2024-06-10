@@ -8,7 +8,7 @@ import util.ImagenRead as utl
 
 
 # módulos de la aplicación
-from RelacionMariaDB.VerificarCuenta import verificar_sesion as Verificar
+from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
 from Visual.Login.SubEstructuraLogin import SubventanaLogin as Subventana
 from Visual.Login.InfoSubventana import InformacionTempus as Info
 
@@ -79,6 +79,8 @@ class CreateLogin:
             insertbackground="#1E90FF",
         )
         self.password_entry.pack(fill=tk.X, padx=30, pady=0)
+        
+        self.password_entry.bind("<Return>", self.manejar_tecla)
 
         self.password_line = Canvas(
             self.lgn_frame, width=300, height=2.0, bg="#1E90FF", highlightthickness=0
@@ -132,8 +134,12 @@ class CreateLogin:
             command=lambda: Info(self=self),
         )
         self.forgot_button.pack(pady=2)
-
+        
         self.root.mainloop()
+    
+    def manejar_tecla(self, event):
+        if event.keysym == "Return":
+            Verificar(self)
         
 if __name__ == "__main__":
     CreateLogin()

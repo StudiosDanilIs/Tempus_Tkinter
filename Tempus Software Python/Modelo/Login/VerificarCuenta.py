@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from Visual.Inicio.InicioTempus import VentanaPrincipal
 
+
 # verificar la conexion a la base de datos y verificar si el usuario y la contraseña son correctos
 def verificar_sesion(self):
     # conexion a la base de datos

@@ -4,8 +4,10 @@
         "aplicacion",
         "busqueda",
         "cedula",
+        "highlightbackground",
         "Inconsolata",
         "instanciamos",
+        "keysym",
         "opcion",
         "pantall",
         "relx",
@@ -14,6 +16,7 @@
         "Sesion",
         "subventana",
         "tearoff",
+        "telefono",
         "validatecommand",
         "vcmd"
     ]
