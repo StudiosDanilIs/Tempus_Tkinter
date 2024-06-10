@@ -4,6 +4,8 @@ from PIL import ImageTk, Image as imim
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.font import BOLD
+import util.ImagenRead as utl
+
 
 # módulos de la aplicación
 from RelacionMariaDB.VerificarCuenta import verificar_sesion as Verificar
@@ -12,22 +14,25 @@ from Visual.Login.InfoSubventana import InformacionTempus as Info
 
 
 class CreateLogin:
-    def __init__(self, root):
-        self.root = root
+    def __init__(self):
+        self.root = tk.Tk()
         self.root.geometry("480x670")
         self.root.resizable(0, 0)
         self.root.title("Login - Tempus Software")
+        
+        logo = "images\\logotipo.ico"
+        self.root.iconbitmap(True, logo)
 
         # creación de la ventana principal
         self.lgn_frame = Frame(self.root, bg="#E6F0F3")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # incorporación de la imagen de la ventana principal
-        self.sign_in_image = imim.open("images\\logotipo.png")
-        photo = ImageTk.PhotoImage(self.sign_in_image)
-        self.sign_in_image_label = Label(self.lgn_frame, image=photo, bg="#E6F0F3")
-        self.sign_in_image_label.image = photo
+        logo = utl.leer_imagen("images//1.png", (200, 200))
+        self.sign_in_image_label = Label(self.lgn_frame, image=logo, bg="#E6F0F3")
+        self.sign_in_image_label.image = logo
         self.sign_in_image_label.pack(side="top", fill=tk.X, pady=30)
+
 
         # opcion del usuario para iniciar sesión o registrarse
         self.username_label = Label(
@@ -91,11 +96,11 @@ class CreateLogin:
             cursor="hand2",
             activebackground="#3047ff",
             fg="white",
-            command=lambda: Verificar(self, root),
+            command=lambda: Verificar(self),
         )
         self.login.pack(pady=35)
         # botón para iniciar sesión con la tecla enter
-        self.login.bind("<Return>", (lambda event: Verificar(self, root)))  # Pasa root
+        self.login.bind("<Return>", (lambda event: Verificar(self)))
 
         # botón para restaurar la contraseña y el usuario
         self.forgot_button = Button(
@@ -127,3 +132,8 @@ class CreateLogin:
             command=lambda: Info(self=self),
         )
         self.forgot_button.pack(pady=2)
+
+        self.root.mainloop()
+        
+if __name__ == "__main__":
+    CreateLogin()

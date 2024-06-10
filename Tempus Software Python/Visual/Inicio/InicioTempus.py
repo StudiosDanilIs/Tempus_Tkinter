@@ -1,7 +1,8 @@
 from tkinter import *
-from PIL import ImageTk, Image as imim
+from PIL import ImageTk, Image
 import tkinter as tk
 from tkinter import messagebox
+import util.ImagenRead as utl
 
 
 class VentanaPrincipal:
@@ -13,12 +14,13 @@ class VentanaPrincipal:
 
         # Create a frame to contain elements
         self.lgn_frame = Frame(self.root2, bg="#FFFFFF")
-        self.lgn_frame.pack(expand=YES, fill=BOTH)
+        self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
-        # logo_image = imim.open("images\\1.png")  # Replace with your image path
-        # self.logo_inicio = ImageTk.PhotoImage(logo_image)
-        # self.logo_inicio_label = tk.Label(self.lgn_frame, image=self.logo_inicio, bg="#FFFFFF")
-        # self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        # Cargar la imagen de fondo
+        logo = utl.leer_imagen("images//1.png", (200, 200))
+        self.logo_inicio_label = tk.Label(self.lgn_frame, image=logo, bg="#FFFFFF")
+        self.logo_inicio_label.image = logo
+        self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
         # Etiqueta de bienvenida
         self.username_label = Label(
@@ -75,3 +77,9 @@ class VentanaPrincipal:
     def Close_Windows(self):
         if messagebox.askokcancel("Close", "¿Desea Cerrar la Aplicación?"):
             self.root2.destroy()
+
+
+# Crear una instancia de la ventana principal
+if __name__ == "__main__":
+    ventana = VentanaPrincipal()
+    ventana.root2.mainloop()

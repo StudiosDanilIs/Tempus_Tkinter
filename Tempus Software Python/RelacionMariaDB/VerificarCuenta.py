@@ -4,8 +4,7 @@ from tkinter import messagebox
 from Visual.Inicio.InicioTempus import VentanaPrincipal
 
 # verificar la conexion a la base de datos y verificar si el usuario y la contraseña son correctos
-def verificar_sesion(self, root):
-    self.root = root
+def verificar_sesion(self):
     # conexion a la base de datos
     try:
         connection = mysql.connector.connect(
@@ -35,8 +34,8 @@ def verificar_sesion(self, root):
         # si el usuario y la contraseña son correctos, se muestra un mensaje de bienvenida y se abre la ventana principal
         if resultado:
             messagebox.showinfo(message="Bienvenido a Tempus Software", title="Mensaje")
-            VentanaPrincipal()  # Pasa la raíz recibida como argumento
             self.root.destroy()
+            VentanaPrincipal()
         # si el usuario y la contraseña son incorrectos, se muestra un mensaje de error
         else:
             messagebox.showerror(message="Los Datos son Inválidos", title="Mensaje")
