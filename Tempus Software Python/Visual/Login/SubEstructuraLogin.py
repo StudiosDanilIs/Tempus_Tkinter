@@ -129,7 +129,7 @@ def SubventanaLogin(self):
         cursor="hand2",
         activebackground="#3047ff",
         fg="white",
-        command=lambda: RecuperarSesion(self=self, subventana=subventana),
+        command=lambda: RecuperarSesion(self, subventana),
     )
     guardar_button.pack(pady=(35, 0))
 
@@ -155,5 +155,7 @@ def validate_tab(new_value):
 
 
 def validate_numeros(new_value):
-    # Verifica que el valor sea un número
-    return new_value.isdigit()
+    if new_value == '':
+        return True
+    else:
+        return new_value.isdigit()

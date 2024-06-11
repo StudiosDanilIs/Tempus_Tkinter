@@ -142,7 +142,7 @@ def agregar_cliente(self):
         cursor="hand2",
         activebackground="#3047ff",
         fg="white",
-        command=lambda: guardar_clientes(self),
+        command=lambda: guardar_clientes(self, subventana),
     )
     guardar_button.pack(pady=(24, 10), padx=(50, 30), side=LEFT)
 
@@ -163,12 +163,15 @@ def agregar_cliente(self):
 
 
 
-
 def validate_letras(new_value):
-    # Verifica que el valor contenga solo letras (mayúsculas o minúsculas)
-    return new_value.isalpha()
+    if new_value == '':
+        return True
+    else:
+        return new_value.isalpha()
 
 
 def validate_numeros(new_value):
-    # Verifica que el valor sea un número
-    return new_value.isdigit()
+    if new_value == '':
+        return True
+    else:
+        return new_value.isdigit()
