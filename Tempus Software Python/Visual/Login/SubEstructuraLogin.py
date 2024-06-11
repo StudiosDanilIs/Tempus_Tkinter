@@ -37,6 +37,7 @@ def SubventanaLogin(self):
     self.cedula_label.pack(fill=tk.X, padx=25, pady=8)
 
     # entrada de cedula
+    vcmd = self.root.register(validate_numeros)
     self.cedula_entry = Entry(
         self.lgn_frame,
         highlightthickness=0,
@@ -45,6 +46,8 @@ def SubventanaLogin(self):
         fg="#000000",
         font=("yu gothic ui ", 12, "bold"),
         insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(vcmd, "%P"),
     )
     self.cedula_entry.pack(fill=tk.X, padx=30, pady=0)
 
@@ -149,3 +152,8 @@ def SubventanaLogin(self):
 def validate_tab(new_value):
     # Verifica que no haya espacios en blanco
     return not " " in new_value
+
+
+def validate_numeros(new_value):
+    # Verifica que el valor sea un número
+    return new_value.isdigit()

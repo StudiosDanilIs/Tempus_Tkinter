@@ -7,11 +7,12 @@ from Visual.Inicio.VentanaCliente import agregar_cliente as new_client
 
 
 class VentanaPrincipal:
-    def __init__(self):
+    def __init__(self, usuario):
         self.root2 = tk.Tk()
         self.root2.title("Inicio - Tempus Software")
         self.root2.geometry("1100x600")
         self.root2.resizable(0, 0)
+        rol_programa = usuario
 
         # Create a frame to contain elements
         self.lgn_frame = Frame(self.root2, bg="#FFFFFF")
@@ -22,6 +23,17 @@ class VentanaPrincipal:
         self.logo_inicio_label = tk.Label(self.lgn_frame, image=logo, bg="#FFFFFF")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        
+        
+        self.rol_label = Label(
+            self.lgn_frame,
+            text=f"Nivel de Permisos: {rol_programa}",
+            anchor="center",
+            bg="#FFFFFF",
+            fg="#000000",
+            font=("Exo 2", 14),
+        )
+        self.rol_label.pack(fill=tk.BOTH, pady=14, padx=(545,2))
 
         # Etiqueta de bienvenida
         self.username_label = Label(

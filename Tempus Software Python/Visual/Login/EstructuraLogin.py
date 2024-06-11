@@ -45,12 +45,15 @@ class CreateLogin:
         )
         self.username_label.pack(fill=tk.X, padx=25, pady=8)
         # inserción de la entrada de texto para el usuario
+        vcmd = self.root.register(self.validate_tab)
         self.username_entry = Entry(
             self.lgn_frame,
             relief=FLAT,
             bg="#E6F0F3",
             font=("yu gothic ui ", 12, "bold"),
             insertbackground="#1E90FF",
+            validate="key",
+            validatecommand=(vcmd, "%P"),
         )
         self.username_entry.pack(fill=tk.X, padx=30, pady=0)
 
@@ -70,6 +73,7 @@ class CreateLogin:
         )
         self.password_label.pack(fill=tk.X, padx=25, pady=8)
         # inserción de la entrada de texto para la Clave
+        vcmd = self.root.register(self.validate_tab)
         self.password_entry = Entry(
             self.lgn_frame,
             relief=FLAT,
@@ -77,6 +81,8 @@ class CreateLogin:
             font=("yu gothic ui", 12, "bold"),
             show="*",
             insertbackground="#1E90FF",
+            validate="key",
+            validatecommand=(vcmd, "%P"),
         )
         self.password_entry.pack(fill=tk.X, padx=30, pady=0)
         
@@ -140,6 +146,11 @@ class CreateLogin:
     def manejar_tecla(self, event):
         if event.keysym == "Return":
             Verificar(self)
+            
+    def validate_tab(self, new_value):
+        # Verifica que no haya espacios en blanco
+        return not " " in new_value
+        
         
 if __name__ == "__main__":
     CreateLogin()

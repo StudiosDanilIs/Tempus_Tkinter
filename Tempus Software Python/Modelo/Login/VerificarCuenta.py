@@ -34,9 +34,9 @@ def verificar_sesion(self):
         resultado = cursor.fetchone()
         # si el usuario y la contraseña son correctos, se muestra un mensaje de bienvenida y se abre la ventana principal
         if resultado:
-            messagebox.showinfo(message="Bienvenido a Tempus Software", title="Mensaje")
+            messagebox.showinfo(message=f"Bienvenido {usuario} a Tempus Software", title="Mensaje")
             self.root.destroy()
-            VentanaPrincipal()
+            VentanaPrincipal(usuario)
         # si el usuario y la contraseña son incorrectos, se muestra un mensaje de error
         else:
             messagebox.showerror(message="Los Datos son Inválidos", title="Mensaje")

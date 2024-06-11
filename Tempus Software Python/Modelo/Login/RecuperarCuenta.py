@@ -28,15 +28,9 @@ def RecuperarSesion(self, subventana):
     nueva_clave = self.nueva_clave_entry.get()
 
     # Validación de longitud mínima (por ejemplo, al menos 6 caracteres)
-    if len(nuevo_usuario) < 6 or len(nueva_clave) < 6:
-        messagebox.showerror("Error", "Debes ingresar valores mayores a 6 dígitos")
+    if len(nuevo_usuario) < 6 or len(nueva_clave) < 6 or len(cedula) < 8:
+        messagebox.showerror("Error", "Datos No Aceptados Intente Nuevamente")
         return
-
-    # validación para la cédula
-    if not cedula.isdigit():
-        messagebox.showerror("Error", "Debes ingresar solo números para la cédula.")
-    elif len(cedula) != 8:
-        messagebox.showerror("Error", "La cédula debe tener 8 dígitos.")
 
     # cedula encorada en la base de datos
     cursor.execute("SELECT Cedula FROM usuarios WHERE Cedula = %s", (cedula,))

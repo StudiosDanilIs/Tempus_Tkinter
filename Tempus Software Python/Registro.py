@@ -48,7 +48,6 @@ class Tempus_Programa(customtkinter.CTk):
         self.menu_vertical = tk.Menu(self, tearoff=0)
 
         self.config(menu=self.menu_vertical)
-
         # Opción de pedido "tecnicamente"
 
         self.opcion_solicitud = tk.Menu(self.menu_vertical, tearoff=0)
