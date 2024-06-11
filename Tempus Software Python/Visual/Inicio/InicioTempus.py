@@ -7,33 +7,22 @@ from Visual.Inicio.VentanaCliente import agregar_cliente as new_client
 
 
 class VentanaPrincipal:
-    def __init__(self, usuario):
+    def __init__(self, nombre_rol):
         self.root2 = tk.Tk()
         self.root2.title("Inicio - Tempus Software")
         self.root2.geometry("1100x600")
         self.root2.resizable(0, 0)
-        rol_programa = usuario
+        rol_programa = nombre_rol
 
         # Create a frame to contain elements
         self.lgn_frame = Frame(self.root2, bg="#FFFFFF")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # Cargar la imagen de fondo
-        logo = utl.leer_imagen("images//1.png", (200, 200))
+        logo = utl.leer_imagen("images//logotipo.png", (200, 200))
         self.logo_inicio_label = tk.Label(self.lgn_frame, image=logo, bg="#FFFFFF")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
-        
-        
-        self.rol_label = Label(
-            self.lgn_frame,
-            text=f"Nivel de Permisos: {rol_programa}",
-            anchor="center",
-            bg="#FFFFFF",
-            fg="#000000",
-            font=("Exo 2", 14),
-        )
-        self.rol_label.pack(fill=tk.BOTH, pady=14, padx=(545,2))
 
         # Etiqueta de bienvenida
         self.username_label = Label(
@@ -42,19 +31,34 @@ class VentanaPrincipal:
             anchor="center",
             bg="#FFFFFF",
             fg="#000000",
-            font=("Exo 2", 21),
+            font=("Hipstelvetica", 20),
         )
         self.username_label.place(relx=0.5, rely=0.60, anchor=CENTER)
 
-        # Etiqueta del rol
-        self.rol_label = Label(
+        # Etiqueta de Eslogan
+        self.eslogan_label = Label(
             self.lgn_frame,
             text="Tu aliado tecnológico: eficiencia y confianza al\n alcance de tu mano.",
             bg="#FFFFFF",
             fg="#000000",
-            font=("Inconsolata", 12),
+            font=("Avenir", 13),
         )
-        self.rol_label.place(relx=0.5, rely=0.70, anchor=CENTER)
+        self.eslogan_label.place(relx=0.5, rely=0.70, anchor=CENTER)
+        
+        
+        # Etiqueta de permisos
+        self.rol_label = Button(
+            self.lgn_frame,
+            text=f"Nivel de Permisos: {rol_programa}",
+            font=("Avenir", 14),
+            width=30,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#3047ff",
+            fg="white",
+        )
+        self.rol_label.place(relx=0.5, rely=0.80, anchor=CENTER)
 
         # Menú principal
         self.menu_tempus = tk.Menu(self.root2, tearoff=0)

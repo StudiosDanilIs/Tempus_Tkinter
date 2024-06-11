@@ -28,7 +28,7 @@ class CreateLogin:
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # incorporación de la imagen de la ventana principal
-        logo = utl.leer_imagen("images//1.png", (200, 200))
+        logo = utl.leer_imagen("images//logotipo.png", (200, 200))
         self.sign_in_image_label = Label(self.lgn_frame, image=logo, bg="#E6F0F3")
         self.sign_in_image_label.image = logo
         self.sign_in_image_label.pack(side="top", fill=tk.X, pady=30)

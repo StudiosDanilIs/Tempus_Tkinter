@@ -34,9 +34,17 @@ def verificar_sesion(self):
         resultado = cursor.fetchone()
         # si el usuario y la contraseña son correctos, se muestra un mensaje de bienvenida y se abre la ventana principal
         if resultado:
-            messagebox.showinfo(message=f"Bienvenido {usuario} a Tempus Software", title="Mensaje")
+            # Obtener el ID del rol del usuario
+            id_rol = resultado[0]  # Ajusta según tu estructura de datos
+
+            # Consultar la tabla de roles para obtener el nombre del rol
+            cursor.execute("SELECT NombreRol FROM rolusuario WHERE id_RolUsuario = %s", (id_rol,))
+            nombre_rol = cursor.fetchone()[0]  # Obtener el primer resultado (nombre del rol)
+
+            # Mostrar el nivel de permisos en un mensaje de bienvenida
+            messagebox.showinfo(message=f"Bienvenido {nombre_rol} a Tempus Software", title="Mensaje")
             self.root.destroy()
-            VentanaPrincipal(usuario)
+            VentanaPrincipal(nombre_rol)
         # si el usuario y la contraseña son incorrectos, se muestra un mensaje de error
         else:
             messagebox.showerror(message="Los Datos son Inválidos", title="Mensaje")
