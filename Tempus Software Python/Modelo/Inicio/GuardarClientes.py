@@ -6,8 +6,8 @@ def guardar_clientes(self, subventana):
     try:
         connection = mysql.connector.connect(
             host="127.0.0.1",
-            user="Tempus09",
-            passwd="TNQ[C8Zm2tE-qOq_",
+            user="root",
+            passwd="210605",
             db="registro",
             port=3306,
         )

@@ -10,8 +10,8 @@ def verificar_sesion(self):
     try:
         connection = mysql.connector.connect(
             host="127.0.0.1",
-            user="Tempus09",
-            passwd="TNQ[C8Zm2tE-qOq_",
+            user="root",
+            passwd="210605",
             db="registro",
             port=3306,
         )
@@ -35,7 +35,7 @@ def verificar_sesion(self):
         # si el usuario y la contraseña son correctos, se muestra un mensaje de bienvenida y se abre la ventana principal
         if resultado:
             # Obtener el ID del rol del usuario
-            id_rol = resultado[0]  # Ajusta según tu estructura de datos
+            id_rol = resultado[1]  # Ajusta según tu estructura de datos
 
             # Consultar la tabla de roles para obtener el nombre del rol
             cursor.execute("SELECT NombreRol FROM rolusuario WHERE id_RolUsuario = %s", (id_rol,))
