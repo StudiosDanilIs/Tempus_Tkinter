@@ -20,7 +20,7 @@ class VentanaPrincipal:
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # Cargar la imagen de fondo
-        logo = utl.leer_imagen("images//logotipo.png", (200, 200))
+        logo = utl.leer_imagen("images//logo.png", (200, 200))
         self.logo_inicio_label = tk.Label(self.lgn_frame, image=logo, bg="#FFFFFF")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
