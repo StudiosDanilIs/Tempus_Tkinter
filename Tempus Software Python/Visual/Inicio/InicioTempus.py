@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import messagebox
 import util.ImagenRead as utl
 from Visual.Inicio.VentanaCliente import agregar_cliente as new_client
+from Visual.Inicio.MostrarClientes import mostrar_cliente as mos_client
 
 
 class VentanaPrincipal:
@@ -75,7 +76,7 @@ class VentanaPrincipal:
         # Menú de clientes
         self.opcion_clientes = tk.Menu(self.menu_tempus, tearoff=0)
         self.menu_tempus.add_cascade(label="Clientes", menu=self.opcion_clientes)
-        self.opcion_clientes.add_command(label="Clientes")
+        self.opcion_clientes.add_command(label="Clientes", command=lambda: self.mos_cliente_con_self())
         self.opcion_clientes.add_command(label="Agregar Clientes", command=lambda: self.agregar_cliente_con_self())
 
         # Menú de Historial
@@ -94,6 +95,9 @@ class VentanaPrincipal:
         
     def agregar_cliente_con_self(self):
         new_client(self)
+        
+    def mos_cliente_con_self(self):
+        mos_client(self)    
     
     # Función para cerrar la ventana
     def Close_Windows(self):

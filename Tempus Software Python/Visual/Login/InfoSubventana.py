@@ -55,8 +55,8 @@ def InformacionTempus(self):
     # perfil de Alvíarez
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Daniel Alvíarez\nBackend - Frontend - DBA",
-        font=("arial", 9, "bold"),
+        text="Daniel Alvíarez\nBackend - Frontend - DBA - Diseñador",
+        font=("arial", 10),
         justify=CENTER,
         anchor="nw",
         bg="#E6F0F3",
@@ -67,8 +67,8 @@ def InformacionTempus(self):
     # perfil de Zambrano
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Einner Zambrano\nBackend",
-        font=("arial", 9, "bold"),
+        text="Einner Zambrano\nNulo",
+        font=("arial", 10),
         justify=CENTER,
         anchor="nw",
         bg="#E6F0F3",
@@ -79,8 +79,8 @@ def InformacionTempus(self):
     # perfil de Grimaldo
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Daniel Grimaldo\nBackend",
-        font=("arial", 9, "bold"),
+        text="Daniel Grimaldo\nNulo",
+        font=("arial", 10),
         justify=CENTER,
         anchor="nw",
         bg="#E6F0F3",
@@ -91,8 +91,8 @@ def InformacionTempus(self):
     # perfil de Ramirez
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Victor Ramirez\nBackend - Diseñador Gráfico",
-        font=("arial", 9, "bold"),
+        text="Victor Ramirez\nNulo",
+        font=("arial", 10),
         justify=CENTER,
         anchor="nw",
         bg="#E6F0F3",

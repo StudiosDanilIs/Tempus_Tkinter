@@ -129,7 +129,7 @@ class CreateLogin:
         # información de la versión del software
         self.forgot_button = Button(
             self.lgn_frame,
-            text="Version Beta 1",
+            text="Version Alpha 1",
             font=("yu gothic ui", 13, "bold"),
             fg="#1E90FF",
             relief=FLAT,
