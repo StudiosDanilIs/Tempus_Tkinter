@@ -67,7 +67,7 @@ def InformacionTempus(self):
     # perfil de Zambrano
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Einner Zambrano\nNulo",
+        text="Einner Zambrano\Frontend",
         font=("arial", 10),
         justify=CENTER,
         anchor="nw",
@@ -79,7 +79,7 @@ def InformacionTempus(self):
     # perfil de Grimaldo
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Daniel Grimaldo\nNulo",
+        text="Daniel Grimaldo\Frontend",
         font=("arial", 10),
         justify=CENTER,
         anchor="nw",
@@ -91,7 +91,7 @@ def InformacionTempus(self):
     # perfil de Ramirez
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Victor Ramirez\nNulo",
+        text="Victor Ramirez\Frontend",
         font=("arial", 10),
         justify=CENTER,
         anchor="nw",
