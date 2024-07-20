@@ -63,11 +63,11 @@ def InformacionTempus(self):
         fg="#333333",
     )
     profile1_label.pack(fill=tk.BOTH, side=LEFT, padx=(10, 8), pady=15)
-
-    # perfil de Zambrano
+    
+    # perfil de Einner
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Einner Zambrano\Frontend",
+        text="Einner Z.",
         font=("arial", 10),
         justify=CENTER,
         anchor="nw",
@@ -79,7 +79,7 @@ def InformacionTempus(self):
     # perfil de Grimaldo
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Daniel Grimaldo\Frontend",
+        text="Daniel Grimaldo\nFrontend",
         font=("arial", 10),
         justify=CENTER,
         anchor="nw",
@@ -91,7 +91,7 @@ def InformacionTempus(self):
     # perfil de Ramirez
     profile1_label = tk.Label(
         self.lgn_frame,
-        text="Victor Ramirez\Frontend",
+        text="Victor Ramirez\nFrontend - Diseñador",
         font=("arial", 10),
         justify=CENTER,
         anchor="nw",

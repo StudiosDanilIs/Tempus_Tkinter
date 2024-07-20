@@ -1,33 +1,97 @@
 from tkinter import *
-from PIL import ImageTk, Image
 import tkinter as tk
-from tkinter import messagebox
-import util.ImagenRead as utl
-from Visual.Inicio.VentanaCliente import agregar_cliente as new_client
-from Visual.Inicio.MostrarClientes import mostrar_cliente as mos_client
+import util.Funciones as utl
+import tkinter as tk
+from tkinter import Frame
+import tkinter.messagebox as messagebox
 
 
 class VentanaPrincipal:
-    def __init__(self, nombre_rol):
+    def __init__(self, nombre_rol, **kwargs):
         self.root2 = tk.Tk()
         self.root2.title("Inicio - Tempus Software")
-        self.root2.geometry("1100x600")
+        self.root2.geometry("1100x635")
         self.root2.resizable(0, 0)
-        rol_programa = nombre_rol
+        self.rol_programa = nombre_rol
 
-        # Create a frame to contain elements
-        self.lgn_frame = Frame(self.root2, bg="#FFFFFF")
-        self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
+        # Crear el frame del menú lateral
+        self.menu_lateral = tk.Frame(self.root2, bg="gray", width=200)
+        self.menu_lateral.pack(side="left", fill="y")
+        self.menu_lateral.grid_rowconfigure(6, minsize=20)
 
-        # Cargar la imagen de fondo
-        logo = utl.leer_imagen("imagenes//logo.png", (200, 200))
-        self.logo_inicio_label = tk.Label(self.lgn_frame, image=logo, bg="#FFFFFF")
+        # Crear botones para las opciones
+        logo1 = utl.leer_imagen(utl.resource_path("imagenes/usuario.png"), size=(41, 45))
+        self.boton_opcion1 = self.crear_boton("Inicio", self.mostrar_opcion1, image=logo1)
+        self.boton_opcion1.image = logo1
+        self.boton_opcion1.place(relx=0.5, rely=0.36, anchor=tk.CENTER)  
+               
+        
+        logo2 = utl.leer_imagen(
+            utl.resource_path("imagenes/solicitudes.png"), size=(59, 61)
+        )
+        self.boton_opcion2 = self.crear_boton("Solicitudes", self.mostrar_opcion2, image=logo2)
+        self.boton_opcion2.image = logo2
+        self.boton_opcion2.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+
+        logo3 = utl.leer_imagen(utl.resource_path("imagenes/clientes.png"), size=(44, 59))
+        self.boton_opcion3 = self.crear_boton("Clientes", self.mostrar_opcion3, image=logo3)
+        self.boton_opcion3.image = logo3
+        self.boton_opcion3.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+
+        logo4 = utl.leer_imagen(utl.resource_path("imagenes/pagos.png"), size=(44, 64))
+        self.boton_opcion4 = self.crear_boton("Pagos", self.mostrar_opcion4, image=logo4)
+        self.boton_opcion4.image = logo4
+        self.boton_opcion4.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+
+        logo5 = utl.leer_imagen(utl.resource_path("imagenes/historial.png"), size=(44, 60))
+        self.boton_opcion5 = self.crear_boton("Historial", self.mostrar_opcion5, image=logo5)
+        self.boton_opcion5.image = logo5
+        self.boton_opcion5.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+
+        logo6 = utl.leer_imagen(utl.resource_path("imagenes/salir.png"), size=(57, 59))
+        self.boton_opcion6 = self.crear_boton("Salir", self.mostrar_opcion6, image=logo6)
+        self.boton_opcion6.image = logo6
+        self.boton_opcion6.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+
+        # Empaquetar los botones
+        self.boton_opcion1.pack(fill="x")
+        self.boton_opcion2.pack(fill="x")
+        self.boton_opcion3.pack(fill="x")
+        self.boton_opcion4.pack(fill="x")
+        self.boton_opcion5.pack(fill="x")
+        self.boton_opcion6.pack(fill="x")
+
+        # Crear el frame para el contenido principal
+        self.label_info = tk.Frame(self.root2, bg="white")
+        self.label_info.pack(fill="both", expand=True)
+
+        self.mostrar_opcion1()
+
+    def crear_boton(self, texto, comando, **kwargs):
+        boton = tk.Button(
+            self.menu_lateral,
+            text=texto,
+            borderwidth=0,
+            command=comando,
+            bg="#1778FB",
+            highlightthickness=2,
+            activebackground="#FFFFFF",
+            height=102,
+            width=150,
+            **kwargs
+        )
+        return boton
+
+    def mostrar_opcion1(self):
+        self.limpiar_contenido()
+        logo = utl.leer_imagen(utl.resource_path("imagenes/logo.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
         # Etiqueta de bienvenida
         self.username_label = Label(
-            self.lgn_frame,
+            self.label_info,
             text="Welcome to\n Tempus Software.",
             anchor="center",
             bg="#FFFFFF",
@@ -38,19 +102,18 @@ class VentanaPrincipal:
 
         # Etiqueta de Eslogan
         self.eslogan_label = Label(
-            self.lgn_frame,
+            self.label_info,
             text="Tu aliado tecnológico: eficiencia y confianza al\n alcance de tu mano.",
             bg="#FFFFFF",
             fg="#000000",
             font=("Avenir", 13),
         )
         self.eslogan_label.place(relx=0.5, rely=0.70, anchor=CENTER)
-        
-        
+
         # Etiqueta de permisos
         self.rol_label = Button(
-            self.lgn_frame,
-            text=f"Nivel de Permisos: {rol_programa}",
+            self.label_info,
+            text=f"Nivel de Permisos: {self.rol_programa}",
             font=("Avenir", 14),
             width=30,
             bd=0,
@@ -61,53 +124,57 @@ class VentanaPrincipal:
         )
         self.rol_label.place(relx=0.5, rely=0.80, anchor=CENTER)
 
-        # Menú principal
-        self.menu_tempus = tk.Menu(self.root2, tearoff=0)
-        self.root2.config(menu=self.menu_tempus)
+    def mostrar_opcion2(self):
+        self.limpiar_contenido()
+        logo = utl.leer_imagen(utl.resource_path("imagenes/logo.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        self.logo_inicio_label.image = logo
+        self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
-        # Menú de solicitud
-        self.opcion_solicitud = tk.Menu(self.menu_tempus, tearoff=0)
-        self.menu_tempus.add_cascade(label="Solicitudes", menu=self.opcion_solicitud)
+    def mostrar_opcion3(self):
+        self.limpiar_contenido()
+        logo = utl.leer_imagen(utl.resource_path("imagenes/salir_azul.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        self.logo_inicio_label.image = logo
+        self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
-        self.opcion_solicitud.add_command(label="Crear Pedido")
-        self.opcion_solicitud.add_command(label="Crear Venta")
-        self.opcion_solicitud.add_command(label="Crear Reparaciones")
+    def mostrar_opcion4(self):
+        self.limpiar_contenido()
+        logo = utl.leer_imagen(utl.resource_path("imagenes/clientes_azul.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        self.logo_inicio_label.image = logo
+        self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
-        # Menú de clientes
-        self.opcion_clientes = tk.Menu(self.menu_tempus, tearoff=0)
-        self.menu_tempus.add_cascade(label="Clientes", menu=self.opcion_clientes)
-        self.opcion_clientes.add_command(label="Clientes", command=lambda: self.mos_cliente_con_self())
-        self.opcion_clientes.add_command(label="Agregar Clientes", command=lambda: self.agregar_cliente_con_self())
+    def mostrar_opcion5(self):
+        self.limpiar_contenido()
+        logo = utl.leer_imagen(utl.resource_path("imagenes/historial_azul.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        self.logo_inicio_label.image = logo
+        self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
-        # Menú de Historial
-        self.opcion_historial = tk.Menu(self.menu_tempus, tearoff=0)
-        self.menu_tempus.add_cascade(label="Historial", menu=self.opcion_historial)
-        self.opcion_historial.add_command(label="Ventas")
-        self.opcion_historial.add_command(label="Pedidos")
-        self.opcion_historial.add_command(label="Reparaciones")
+    def mostrar_opcion6(self):
+        self.cerrar_sesion()
 
-        # Menú de Herramientas
-        self.menu_tempus.add_cascade(
-            label="Salir del Sistema", command=self.Close_Windows
+    # Función para cerrar la ventana
+    def cerrar_sesion(self):
+        respuesta = messagebox.askokcancel(
+            "Cerrar Programa", "¿Desea Salir del Sistema?"
         )
-        
-        self.root2.mainloop() 
-        
-    def agregar_cliente_con_self(self):
-        new_client(self)
-        
-    def mos_cliente_con_self(self):
-        mos_client(self)    
-    
+        if respuesta:
+            self.root2.destroy()
+
+    def limpiar_contenido(self):
+        # Elimina cualquier widget o contenido previo
+        for widget in self.label_info.winfo_children():
+            widget.destroy()
+            
     # Función para cerrar la ventana
     def Close_Windows(self):
         if messagebox.askokcancel("Close", "¿Desea Cerrar la Aplicación?"):
-            self.root2.destroy()
-               
-
+            self.root2.destroy()        
 
 # Crear una instancia de la ventana principal
 if __name__ == "__main__":
-    # ventana = VentanaPrincipal()
-    # ventana.root2.mainloop()
+    ventana = VentanaPrincipal()
+    ventana.root2.mainloop()
     VentanaPrincipal()

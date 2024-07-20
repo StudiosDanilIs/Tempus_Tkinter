@@ -4,7 +4,7 @@ from PIL import ImageTk, Image as imim
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.font import BOLD
-import util.ImagenRead as utl
+import util.Funciones as utl
 
 
 # módulos de la aplicación
@@ -18,17 +18,17 @@ class CreateLogin:
         self.root = tk.Tk()
         self.root.geometry("480x670")
         self.root.resizable(0, 0)
-        self.root.title("Login - Tempus Software")
+        self.root.title("Login - Tempus Software")       
         
         logo = "imagenes\\logo.ico"
-        self.root.iconbitmap(True, logo)
+        self.root.iconbitmap(True, logo) 
 
         # creación de la ventana principal
         self.lgn_frame = Frame(self.root, bg="#E6F0F3")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # incorporación de la imagen de la ventana principal
-        logo = utl.leer_imagen("imagenes//logo.png", (200, 200))
+        logo = utl.leer_imagen("imagenes//logo.png", (242, 242))
         self.sign_in_image_label = Label(self.lgn_frame, image=logo, bg="#E6F0F3")
         self.sign_in_image_label.image = logo
         self.sign_in_image_label.pack(side="top", fill=tk.X, pady=30)
@@ -129,7 +129,7 @@ class CreateLogin:
         # información de la versión del software
         self.forgot_button = Button(
             self.lgn_frame,
-            text="Version Alpha 1",
+            text="Version Alpha 2.0",
             font=("yu gothic ui", 13, "bold"),
             fg="#1E90FF",
             relief=FLAT,
