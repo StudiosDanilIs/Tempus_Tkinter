@@ -1,10 +1,10 @@
 from tkinter import *
 import tkinter as tk
-import util.Funciones as utl
+import util.PhotoImagenes as utl
 import tkinter as tk
 from tkinter import Frame
 import tkinter.messagebox as messagebox
-
+import Funciones.CambioMenu as status
 
 class VentanaPrincipal:
     def __init__(self, nombre_rol, **kwargs):
@@ -13,6 +13,7 @@ class VentanaPrincipal:
         self.root2.geometry("1100x635")
         self.root2.resizable(0, 0)
         self.rol_programa = nombre_rol
+        self.presionado = False
 
         # Crear el frame del menú lateral
         self.menu_lateral = tk.Frame(self.root2, bg="gray", width=200)
@@ -20,38 +21,50 @@ class VentanaPrincipal:
         self.menu_lateral.grid_rowconfigure(6, minsize=20)
 
         # Crear botones para las opciones
-        logo1 = utl.leer_imagen(utl.resource_path("imagenes/usuario.png"), size=(41, 45))
-        self.boton_opcion1 = self.crear_boton("Inicio", self.mostrar_opcion1, image=logo1)
-        self.boton_opcion1.image = logo1
+        self.logo1 = utl.leer_imagen(utl.resource_path("imagenes/usuario.png"), size=(41, 45))
+        self.boton_opcion1 = self.crear_boton("Inicio", self.mostrar_opcion1, image=self.logo1)
+        self.boton_opcion1.image = self.logo1
         self.boton_opcion1.place(relx=0.5, rely=0.36, anchor=tk.CENTER)  
-               
+        self.boton_opcion1.bind("<Enter>", lambda event: status.resaltar1(self, event))
+        self.boton_opcion1.bind("<Leave>", lambda event: status.restaurar1(self, event))      
         
-        logo2 = utl.leer_imagen(
+        self.logo2 = utl.leer_imagen(
             utl.resource_path("imagenes/solicitudes.png"), size=(59, 61)
         )
-        self.boton_opcion2 = self.crear_boton("Solicitudes", self.mostrar_opcion2, image=logo2)
-        self.boton_opcion2.image = logo2
+        self.boton_opcion2 = self.crear_boton("Solicitudes", self.mostrar_opcion2, image=self.logo2)
+        self.boton_opcion2.image = self.logo2
         self.boton_opcion2.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        self.boton_opcion2.bind("<Enter>", lambda event: status.resaltar2(self, event))
+        self.boton_opcion2.bind("<Leave>", lambda event: status.restaurar2(self, event))  
 
-        logo3 = utl.leer_imagen(utl.resource_path("imagenes/clientes.png"), size=(44, 59))
-        self.boton_opcion3 = self.crear_boton("Clientes", self.mostrar_opcion3, image=logo3)
-        self.boton_opcion3.image = logo3
+        self.logo3 = utl.leer_imagen(utl.resource_path("imagenes/clientes.png"), size=(44, 59))
+        self.boton_opcion3 = self.crear_boton("Clientes", self.mostrar_opcion3, image=self.logo3)
+        self.boton_opcion3.image = self.logo3
         self.boton_opcion3.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        self.boton_opcion3.bind("<Enter>", lambda event: status.resaltar3(self, event))
+        self.boton_opcion3.bind("<Leave>", lambda event: status.restaurar3(self, event))  
 
-        logo4 = utl.leer_imagen(utl.resource_path("imagenes/pagos.png"), size=(44, 64))
-        self.boton_opcion4 = self.crear_boton("Pagos", self.mostrar_opcion4, image=logo4)
-        self.boton_opcion4.image = logo4
+        self.logo4 = utl.leer_imagen(utl.resource_path("imagenes/pagos.png"), size=(44, 64))
+        self.boton_opcion4 = self.crear_boton("Pagos", self.mostrar_opcion4, image=self.logo4)
+        self.boton_opcion4.image = self.logo4
         self.boton_opcion4.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        self.boton_opcion4.bind("<Enter>", lambda event: status.resaltar4(self, event))
+        self.boton_opcion4.bind("<Leave>", lambda event: status.restaurar4(self, event))  
 
-        logo5 = utl.leer_imagen(utl.resource_path("imagenes/historial.png"), size=(44, 60))
-        self.boton_opcion5 = self.crear_boton("Historial", self.mostrar_opcion5, image=logo5)
-        self.boton_opcion5.image = logo5
+        self.logo5 = utl.leer_imagen(utl.resource_path("imagenes/historial.png"), size=(44, 60))
+        self.boton_opcion5 = self.crear_boton("Historial", self.mostrar_opcion5, image=self.logo5)
+        self.boton_opcion5.image = self.logo5
         self.boton_opcion5.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        self.boton_opcion5.bind("<Enter>", lambda event: status.resaltar5(self, event))
+        self.boton_opcion5.bind("<Leave>", lambda event: status.restaurar5(self, event))  
 
-        logo6 = utl.leer_imagen(utl.resource_path("imagenes/salir.png"), size=(57, 59))
-        self.boton_opcion6 = self.crear_boton("Salir", self.mostrar_opcion6, image=logo6)
-        self.boton_opcion6.image = logo6
+
+        self.logo6 = utl.leer_imagen(utl.resource_path("imagenes/salir.png"), size=(57, 59))
+        self.boton_opcion6 = self.crear_boton("Salir", self.mostrar_opcion6, image=self.logo6)
+        self.boton_opcion6.image = self.logo6
         self.boton_opcion6.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
+        self.boton_opcion6.bind("<Enter>", lambda event: status.resaltar6(self, event))
+        self.boton_opcion6.bind("<Leave>", lambda event: status.restaurar6(self, event))  
 
         # Empaquetar los botones
         self.boton_opcion1.pack(fill="x")

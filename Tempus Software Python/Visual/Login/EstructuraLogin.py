@@ -4,7 +4,7 @@ from PIL import ImageTk, Image as imim
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.font import BOLD
-import util.Funciones as utl
+import util.PhotoImagenes as utl
 
 
 # módulos de la aplicación
