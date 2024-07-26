@@ -23,7 +23,7 @@ class VentanaPrincipal:
         self.menu_lateral.grid_rowconfigure(6, minsize=20)
 
         # Crear botones para las opciones
-        self.logo1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home.png"), size=(48, 48))
+        self.logo1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home.png"), size=(44, 61))
         self.boton_opcion1 = self.crear_boton("Inicio", self.mostrar_opcion1, image=self.logo1)
         self.boton_opcion1.image = self.logo1
         self.boton_opcion1.place(relx=0.5, rely=0.36, anchor=tk.CENTER)  

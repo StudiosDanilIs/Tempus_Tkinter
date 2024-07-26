@@ -4,7 +4,7 @@ import util.PhotoImagenes as utl
 
 def resaltar1(self, event):
     if not self.presionado:
-        logo_cambio1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home.png"), size=(48, 48))
+        logo_cambio1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home2.png"), size=(44, 61))
         self.boton_opcion1.config(image=logo_cambio1, bg="#E6F0F3")
         self.boton_opcion1.image = logo_cambio1
         
