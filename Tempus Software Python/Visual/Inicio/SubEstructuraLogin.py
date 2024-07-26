@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from tkinter.font import BOLD
-from Modelo.Login.RecuperarCuenta import *
+from Modelo.Inicio.RecuperarCuenta import *
 
 
 def SubventanaLogin(self):
@@ -37,7 +37,7 @@ def SubventanaLogin(self):
     self.cedula_label.pack(fill=tk.X, padx=25, pady=8)
 
     # entrada de cedula
-    vcmd = self.root.register(validate_numeros)
+    vcmd = self.root2.register(validate_numeros)
     self.cedula_entry = Entry(
         self.lgn_frame,
         highlightthickness=0,
@@ -68,7 +68,7 @@ def SubventanaLogin(self):
     self.nuevo_usuario_label.pack(fill=tk.X, padx=25, pady=(30, 8))
 
     # entrada de usuario y  validación de tabulador
-    vcmd = self.root.register(validate_tab)
+    vcmd = self.root2.register(validate_tab)
     self.nuevo_usuario_entry = Entry(
         self.lgn_frame,
         highlightthickness=0,
@@ -99,7 +99,7 @@ def SubventanaLogin(self):
     self.nueva_clave_label.pack(fill=tk.X, padx=25, pady=(30, 8))
 
     # entrada de clave y  validación de tabulador
-    vcmd = self.root.register(validate_tab)
+    vcmd = self.root2.register(validate_tab)
     self.nueva_clave_entry = Entry(
         self.lgn_frame,
         highlightthickness=0,

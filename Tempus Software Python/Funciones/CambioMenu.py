@@ -4,38 +4,38 @@ import util.PhotoImagenes as utl
 
 def resaltar1(self, event):
     if not self.presionado:
-        logo_cambio1 = utl.leer_imagen(utl.resource_path("imagenes/usuario.png"), size=(57, 42))
-        self.boton_opcion1.config(image=logo_cambio1, bg="#ffffff")
+        logo_cambio1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home.png"), size=(48, 48))
+        self.boton_opcion1.config(image=logo_cambio1, bg="#E6F0F3")
         self.boton_opcion1.image = logo_cambio1
         
 def resaltar2(self, event):        
     if not self.presionado:
-        logo_cambio2 = utl.leer_imagen(utl.resource_path("imagenes/solicitud_azul.png"), size=(57, 42))
-        self.boton_opcion2.config(image=logo_cambio2, bg="#ffffff")
+        logo_cambio2 = utl.leer_imagen(utl.resource_path("imagenes/menu/solicitudes2.png"), size=(59, 61))
+        self.boton_opcion2.config(image=logo_cambio2, bg="#E6F0F3")
         self.boton_opcion2.image = logo_cambio2 
             
 def resaltar3(self, event):
     if not self.presionado:
-        logo_cambio3 = utl.leer_imagen(utl.resource_path("imagenes/clientes_azul.png"), size=(57, 42))
-        self.boton_opcion3.config(image=logo_cambio3, bg="#ffffff")
+        logo_cambio3 = utl.leer_imagen(utl.resource_path("imagenes/menu/clientes2.png"), size=(44, 59))
+        self.boton_opcion3.config(image=logo_cambio3, bg="#E6F0F3")
         self.boton_opcion3.image = logo_cambio3
         
 def resaltar4(self, event):        
     if not self.presionado:
-        logo_cambio4 = utl.leer_imagen(utl.resource_path("imagenes/pagos_azul.png"), size=(57, 42))
-        self.boton_opcion4.config(image=logo_cambio4, bg="#ffffff")
+        logo_cambio4 = utl.leer_imagen(utl.resource_path("imagenes/menu/pagos2.png"), size=(44, 64))
+        self.boton_opcion4.config(image=logo_cambio4, bg="#E6F0F3")
         self.boton_opcion4.image = logo_cambio4
         
 def resaltar5(self, event):
     if not self.presionado:
-        logo_cambio5 = utl.leer_imagen(utl.resource_path("imagenes/historial_azul.png"), size=(57, 42))
-        self.boton_opcion5.config(image=logo_cambio5, bg="#ffffff")
+        logo_cambio5 = utl.leer_imagen(utl.resource_path("imagenes/menu/historial2.png"), size=(44, 60))
+        self.boton_opcion5.config(image=logo_cambio5, bg="#E6F0F3")
         self.boton_opcion5.image = logo_cambio5
         
 def resaltar6(self, event):        
     if not self.presionado:
-        logo_cambio6 = utl.leer_imagen(utl.resource_path("imagenes/salir_azul.png"), size=(57, 42))
-        self.boton_opcion6.config(image=logo_cambio6, bg="#ffffff")
+        logo_cambio6 = utl.leer_imagen(utl.resource_path("imagenes/menu/salir2.png"), size=(57, 59))
+        self.boton_opcion6.config(image=logo_cambio6, bg="#E6F0F3")
         self.boton_opcion6.image = logo_cambio6
         
         

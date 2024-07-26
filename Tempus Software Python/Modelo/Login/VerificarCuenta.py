@@ -39,6 +39,7 @@ def verificar_sesion(self):
 
             # Consultar la tabla de roles para obtener el nombre del rol
             cursor.execute("SELECT NombreRol FROM rolusuario WHERE id_RolUsuario = %s", (id_rol,))
+            #cursor.execute("SELECT id_Usuario FROM usuarios WHERE id_Usuario = %s", (id_rol,))
             nombre_rol = cursor.fetchone()[0]  # Obtener el primer resultado (nombre del rol)
 
             # Mostrar el nivel de permisos en un mensaje de bienvenida

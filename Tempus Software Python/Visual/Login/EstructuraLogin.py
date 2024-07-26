@@ -9,7 +9,6 @@ import util.PhotoImagenes as utl
 
 # módulos de la aplicación
 from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
-from Visual.Login.SubEstructuraLogin import SubventanaLogin as Subventana
 from Visual.Login.InfoSubventana import InformacionTempus as Info
 
 
@@ -121,7 +120,6 @@ class CreateLogin:
             borderwidth=0,
             background="#E6F0F3",
             cursor="hand2",
-            command=lambda: Subventana(self),
         )
 
         self.forgot_button.pack(pady=2)

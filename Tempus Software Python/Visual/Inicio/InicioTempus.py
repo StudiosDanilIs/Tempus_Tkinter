@@ -6,6 +6,8 @@ from tkinter import Frame
 import tkinter.messagebox as messagebox
 import Funciones.CambioMenu as status
 
+from Visual.Inicio.SubEstructuraLogin import SubventanaLogin as Subventana
+
 class VentanaPrincipal:
     def __init__(self, nombre_rol, **kwargs):
         self.root2 = tk.Tk()
@@ -21,7 +23,7 @@ class VentanaPrincipal:
         self.menu_lateral.grid_rowconfigure(6, minsize=20)
 
         # Crear botones para las opciones
-        self.logo1 = utl.leer_imagen(utl.resource_path("imagenes/usuario.png"), size=(41, 45))
+        self.logo1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home.png"), size=(48, 48))
         self.boton_opcion1 = self.crear_boton("Inicio", self.mostrar_opcion1, image=self.logo1)
         self.boton_opcion1.image = self.logo1
         self.boton_opcion1.place(relx=0.5, rely=0.36, anchor=tk.CENTER)  
@@ -29,7 +31,7 @@ class VentanaPrincipal:
         self.boton_opcion1.bind("<Leave>", lambda event: status.restaurar1(self, event))      
         
         self.logo2 = utl.leer_imagen(
-            utl.resource_path("imagenes/solicitudes.png"), size=(59, 61)
+            utl.resource_path("imagenes/menu/solicitudes.png"), size=(59, 61)
         )
         self.boton_opcion2 = self.crear_boton("Solicitudes", self.mostrar_opcion2, image=self.logo2)
         self.boton_opcion2.image = self.logo2
@@ -37,21 +39,21 @@ class VentanaPrincipal:
         self.boton_opcion2.bind("<Enter>", lambda event: status.resaltar2(self, event))
         self.boton_opcion2.bind("<Leave>", lambda event: status.restaurar2(self, event))  
 
-        self.logo3 = utl.leer_imagen(utl.resource_path("imagenes/clientes.png"), size=(44, 59))
+        self.logo3 = utl.leer_imagen(utl.resource_path("imagenes/menu/clientes.png"), size=(44, 59))
         self.boton_opcion3 = self.crear_boton("Clientes", self.mostrar_opcion3, image=self.logo3)
         self.boton_opcion3.image = self.logo3
         self.boton_opcion3.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
         self.boton_opcion3.bind("<Enter>", lambda event: status.resaltar3(self, event))
         self.boton_opcion3.bind("<Leave>", lambda event: status.restaurar3(self, event))  
 
-        self.logo4 = utl.leer_imagen(utl.resource_path("imagenes/pagos.png"), size=(44, 64))
+        self.logo4 = utl.leer_imagen(utl.resource_path("imagenes/menu/pagos.png"), size=(44, 64))
         self.boton_opcion4 = self.crear_boton("Pagos", self.mostrar_opcion4, image=self.logo4)
         self.boton_opcion4.image = self.logo4
         self.boton_opcion4.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
         self.boton_opcion4.bind("<Enter>", lambda event: status.resaltar4(self, event))
         self.boton_opcion4.bind("<Leave>", lambda event: status.restaurar4(self, event))  
 
-        self.logo5 = utl.leer_imagen(utl.resource_path("imagenes/historial.png"), size=(44, 60))
+        self.logo5 = utl.leer_imagen(utl.resource_path("imagenes/menu/historial.png"), size=(44, 60))
         self.boton_opcion5 = self.crear_boton("Historial", self.mostrar_opcion5, image=self.logo5)
         self.boton_opcion5.image = self.logo5
         self.boton_opcion5.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
@@ -59,7 +61,7 @@ class VentanaPrincipal:
         self.boton_opcion5.bind("<Leave>", lambda event: status.restaurar5(self, event))  
 
 
-        self.logo6 = utl.leer_imagen(utl.resource_path("imagenes/salir.png"), size=(57, 59))
+        self.logo6 = utl.leer_imagen(utl.resource_path("imagenes/menu/salir.png"), size=(57, 59))
         self.boton_opcion6 = self.crear_boton("Salir", self.mostrar_opcion6, image=self.logo6)
         self.boton_opcion6.image = self.logo6
         self.boton_opcion6.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
@@ -75,7 +77,7 @@ class VentanaPrincipal:
         self.boton_opcion6.pack(fill="x")
 
         # Crear el frame para el contenido principal
-        self.label_info = tk.Frame(self.root2, bg="white")
+        self.label_info = tk.Frame(self.root2, bg="#E6F0F3")
         self.label_info.pack(fill="both", expand=True)
 
         self.mostrar_opcion1()
@@ -88,7 +90,7 @@ class VentanaPrincipal:
             command=comando,
             bg="#1778FB",
             highlightthickness=2,
-            activebackground="#FFFFFF",
+            activebackground="#E6F0F3",
             height=102,
             width=150,
             **kwargs
@@ -98,7 +100,7 @@ class VentanaPrincipal:
     def mostrar_opcion1(self):
         self.limpiar_contenido()
         logo = utl.leer_imagen(utl.resource_path("imagenes/logo.png"), size=(200, 200))
-        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#E6F0F3")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
@@ -107,7 +109,7 @@ class VentanaPrincipal:
             self.label_info,
             text="Welcome to\n Tempus Software.",
             anchor="center",
-            bg="#FFFFFF",
+            bg="#E6F0F3",
             fg="#000000",
             font=("Hipstelvetica", 20),
         )
@@ -117,7 +119,7 @@ class VentanaPrincipal:
         self.eslogan_label = Label(
             self.label_info,
             text="Tu aliado tecnológico: eficiencia y confianza al\n alcance de tu mano.",
-            bg="#FFFFFF",
+            bg="#E6F0F3",
             fg="#000000",
             font=("Avenir", 13),
         )
@@ -134,34 +136,35 @@ class VentanaPrincipal:
             cursor="hand2",
             activebackground="#3047ff",
             fg="white",
+            command=lambda: Subventana(self),
         )
         self.rol_label.place(relx=0.5, rely=0.80, anchor=CENTER)
 
     def mostrar_opcion2(self):
         self.limpiar_contenido()
         logo = utl.leer_imagen(utl.resource_path("imagenes/logo.png"), size=(200, 200))
-        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#E6F0F3")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
     def mostrar_opcion3(self):
         self.limpiar_contenido()
-        logo = utl.leer_imagen(utl.resource_path("imagenes/salir_azul.png"), size=(200, 200))
-        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        logo = utl.leer_imagen(utl.resource_path("imagenes/menu/salir2.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#E6F0F3")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
     def mostrar_opcion4(self):
         self.limpiar_contenido()
-        logo = utl.leer_imagen(utl.resource_path("imagenes/clientes_azul.png"), size=(200, 200))
-        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        logo = utl.leer_imagen(utl.resource_path("imagenes/menu/clientes2.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#E6F0F3")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
     def mostrar_opcion5(self):
         self.limpiar_contenido()
-        logo = utl.leer_imagen(utl.resource_path("imagenes/historial_azul.png"), size=(200, 200))
-        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
+        logo = utl.leer_imagen(utl.resource_path("imagenes/menu/historial2.png"), size=(200, 200))
+        self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#E6F0F3")
         self.logo_inicio_label.image = logo
         self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
