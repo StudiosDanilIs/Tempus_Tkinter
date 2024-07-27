@@ -17,6 +17,7 @@ class VentanaPrincipal:
         self.root2.title("Inicio - Tempus Software")
         self.root2.geometry("1100x635")
         self.root2.resizable(0, 0)
+        self.root2.protocol("WM_DELETE_WINDOW", self.cerrar_sesion)
         self.rol_programa = nombre_rol
         self.presionado = False
 

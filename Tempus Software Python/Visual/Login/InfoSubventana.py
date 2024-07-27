@@ -1,101 +1,72 @@
 import tkinter as tk
 from tkinter import *
 from tkinter.font import BOLD
-
+import util.PhotoImagenes as utl
 
 def InformacionTempus(self):
     miniVentana = tk.Toplevel()
     miniVentana.title("Tempus - Info")
-    miniVentana.geometry("600x340")
+    miniVentana.geometry("780x400")
     miniVentana.resizable(0, 0)
+    miniVentana.configure(bg="#E6F0F3")  # Color de fondo general más claro
 
-    # Frame para la información de los desarrolladores
-    self.lgn_frame = Frame(miniVentana, bg="#E6F0F3")
-    self.lgn_frame.pack(fill=tk.BOTH)
+    # Frame principal con un poco de padding
+    main_frame = Frame(miniVentana, bg="#E6F0F3", padx=20, pady=20)
+    main_frame.pack(fill=tk.BOTH, expand=True)
 
-    # Título de la aplicación
+    # Título de la aplicación (con un estilo más moderno)
     title_label = tk.Label(
-        self.lgn_frame,
-        text=" Tempus Software",
-        justify=LEFT,
-        anchor="w",
-        font=("Helvetica", 20, "bold"),
-        bg="#1E90FF",
-        fg="#E6F0F3",
-        height=2,
+        main_frame,
+        text="Tempus Software",
+        font=("Helvetica", 24, "bold"),
+        bg="#E6F0F3",
+        fg="#1E90FF"
     )
-    title_label.pack(fill=tk.BOTH, pady=14, padx=18)
+    title_label.pack(pady=10)
 
-    # Descripción de la aplicación
-    description_text = """Tempus App es un Software diseñado con el objetivo de mejorar la eficiencia y la productividad en el trabajo. Aunque no tiene fines de lucro, su enfoque es proporcionar soluciones prácticas y herramientas útiles para facilitar las tareas diarias."""
+    # Descripción con un separador visual
     description_label = tk.Label(
-        self.lgn_frame,
-        text=description_text,
-        justify=LEFT,
-        font=("arial", 12),
-        wraplength=530,
+        main_frame,
+        text="Tempus App es un Software diseñado con el objetivo de mejorar la eficiencia y la productividad en el trabajo. Aunque no tiene fines de lucro, su enfoque es proporcionar soluciones prácticas y herramientas útiles para facilitar las tareas diarias.",
+        font=("Arial", 12),
+        wraplength=700,
         bg="#E6F0F3",
-        fg="#333333",
-        height=5,
+        fg="#000000"
     )
-    description_label.pack(fill=tk.BOTH, pady=6, padx=18)
-
-    # Información del equipo de desarrollo
-    team_label = tk.Label(
-        self.lgn_frame,
-        text=" Equipo de Desarrollo",
-        justify=LEFT,
-        anchor="w",
-        font=("Helvetica", 14, "bold"),
-        bg="#E6F0F3",
-        fg="#1E90FF",
-    )
-    team_label.pack(fill=tk.BOTH, padx=19, pady=(2, 30))
-
-    # perfil de Alvíarez
-    profile1_label = tk.Label(
-        self.lgn_frame,
-        text="Daniel Alvíarez\nBackend - Frontend - DBA - Diseñador",
-        font=("arial", 10),
-        justify=CENTER,
-        anchor="nw",
-        bg="#E6F0F3",
-        fg="#333333",
-    )
-    profile1_label.pack(fill=tk.BOTH, side=LEFT, padx=(10, 8), pady=15)
+    description_label.pack(pady=10)
     
-    # perfil de Einner
-    profile1_label = tk.Label(
-        self.lgn_frame,
-        text="Einner Z.",
-        font=("arial", 10),
-        justify=CENTER,
-        anchor="nw",
-        bg="#E6F0F3",
-        fg="#333333",
-    )
-    profile1_label.pack(fill=tk.BOTH, side=LEFT, padx=(8, 8), pady=15)
+    separator = tk.Frame(main_frame, height=2, bg="#666666")
+    separator.pack(fill=tk.X, pady=10)
 
-    # perfil de Grimaldo
-    profile1_label = tk.Label(
-        self.lgn_frame,
-        text="Daniel Grimaldo\nFrontend",
-        font=("arial", 10),
-        justify=CENTER,
-        anchor="nw",
+    # Sección de equipo de desarrollo con un estilo más organizado
+    team_label = tk.Label(
+        main_frame,
+        text="Equipo de Desarrollo",
+        font=("Helvetica", 16, "bold"),
         bg="#E6F0F3",
-        fg="#333333",
+        fg="#1E90FF"
     )
-    profile1_label.pack(fill=tk.BOTH, side=LEFT, padx=(8, 8), pady=15)
+    team_label.pack(pady=10)
 
-    # perfil de Ramirez
-    profile1_label = tk.Label(
-        self.lgn_frame,
-        text="Victor Ramirez\nFrontend - Diseñador",
-        font=("arial", 10),
-        justify=CENTER,
-        anchor="nw",
-        bg="#E6F0F3",
-        fg="#333333",
-    )
-    profile1_label.pack(fill=tk.BOTH, side=LEFT, padx=(8, 10), pady=15)
+
+    def crear_perfil(name, role, image_file):
+        profile_frame = Frame(main_frame, bg="#E6F0F3")
+        profile_frame.pack(side=tk.LEFT, padx=18, pady=10)
+
+        # Cargar la imagen utilizando la función leer_imagen del módulo utl
+        image = utl.leer_imagen(utl.resource_path(f"imagenes/{image_file}"), (70, 70))
+
+        # Crear label para la imagen y el texto
+        image_label = tk.Label(profile_frame, image=image, bg="#E6F0F3")
+        image_label.image = image
+        image_label.pack()
+        text_label = tk.Label(profile_frame, text=f"{name}\n{role}", font=("Arial", 12), bg="#E6F0F3", fg="#000000")
+        text_label.pack()
+
+            
+
+    # Agregar perfiles de equipo
+    crear_perfil("Daniel Alvíarez", "Backend - Frontend - DBA", "user.png")
+    crear_perfil("Victor Ramirez", "Frontend - Diseñador", "user.png")
+    crear_perfil("Einner Zambrano", "", "user.png")
+    crear_perfil("Daniel Grimaldo", "", "user.png")

@@ -1,6 +1,5 @@
 # LIBRERÍAS
 from tkinter import *
-from PIL import ImageTk, Image as imim
 import tkinter as tk
 from tkinter import messagebox
 from tkinter.font import BOLD
@@ -15,9 +14,11 @@ from Visual.Login.InfoSubventana import InformacionTempus as Info
 class CreateLogin:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("480x670")
+        self.root.geometry("500x645")
         self.root.resizable(0, 0)
-        self.root.title("Login - Tempus Software")       
+        self.root.title("Login - Tempus Software")   
+        self.root.protocol("WM_DELETE_WINDOW", self.cerrar_sesion)
+ 
         
         logo = "imagenes\\logo.ico"
         self.root.iconbitmap(True, logo) 
@@ -27,7 +28,7 @@ class CreateLogin:
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # incorporación de la imagen de la ventana principal
-        logo = utl.leer_imagen("imagenes//logo.png", (242, 242))
+        logo = utl.leer_imagen(utl.resource_path("imagenes/logo.png"), size=(242, 242))
         self.sign_in_image_label = Label(self.lgn_frame, image=logo, bg="#E6F0F3")
         self.sign_in_image_label.image = logo
         self.sign_in_image_label.pack(side="top", fill=tk.X, pady=30)
@@ -71,6 +72,7 @@ class CreateLogin:
             font=("yu gothic ui", 13, "bold"),
         )
         self.password_label.pack(fill=tk.X, padx=25, pady=8)
+        
         # inserción de la entrada de texto para la Clave
         vcmd = self.root.register(self.validate_tab)
         self.password_entry = Entry(
@@ -106,6 +108,7 @@ class CreateLogin:
             command=lambda: Verificar(self),
         )
         self.login.pack(pady=35)
+
         # botón para iniciar sesión con la tecla enter
         self.login.bind("<Return>", (lambda event: Verificar(self)))
 
@@ -122,7 +125,7 @@ class CreateLogin:
             cursor="hand2",
         )
 
-        self.forgot_button.pack(pady=2)
+        self.forgot_button.pack(pady=(2,0))
 
         # información de la versión del software
         self.forgot_button = Button(
@@ -148,6 +151,14 @@ class CreateLogin:
     def validate_tab(self, new_value):
         # Verifica que no haya espacios en blanco
         return not " " in new_value
+    
+    # Función para cerrar la ventana
+    def cerrar_sesion(self):
+        respuesta = messagebox.askokcancel(
+            "Cerrar Programa", "¿Desea Salir del Sistema?"
+        )
+        if respuesta:
+            self.root.destroy()
         
         
 if __name__ == "__main__":
