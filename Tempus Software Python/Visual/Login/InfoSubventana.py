@@ -66,7 +66,7 @@ def InformacionTempus(self):
             
 
     # Agregar perfiles de equipo
-    crear_perfil("Daniel Alvíarez", "Backend - Frontend - DBA", "user.png")
+    crear_perfil("Daniel Hernandez", "Backend - Frontend - DBA", "user.png")
     crear_perfil("Victor Ramirez", "Frontend - Diseñador", "user.png")
-    crear_perfil("Einner Zambrano", "", "user.png")
-    crear_perfil("Daniel Grimaldo", "", "user.png")
+    crear_perfil("Einner Zambrano", "Colaborador", "user.png")
+    crear_perfil("Daniel Grimaldo", "Colaborador", "user.png")

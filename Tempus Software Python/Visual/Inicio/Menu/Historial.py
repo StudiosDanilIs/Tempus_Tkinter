@@ -3,7 +3,6 @@ import tkinter as tk
 import util.PhotoImagenes as utl
 from tkinter import Frame
 import tkinter.messagebox as messagebox
-import Funciones.CambioMenu as status
 
 def mostrar_opcion5(self):
     self.limpiar_contenido()

@@ -3,7 +3,6 @@ import tkinter as tk
 import util.PhotoImagenes as utl
 from tkinter import Frame
 import tkinter.messagebox as messagebox
-import Funciones.CambioMenu as status
 
 from Visual.Inicio.SubEstructuraLogin import SubventanaLogin as MySubventana
 
