@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 def mostrar_opcion3(self):
     self.limpiar_contenido()
 
@@ -33,9 +34,10 @@ def mostrar_opcion3(self):
         fg="#0046A4",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(self.root2.register(validate_name), "%P"),
     )
     self.cedula_entry.place(x=10, y=85)
-    
 
     # usurario opcion de recuperación
     self.apellido_label = tk.Label(
@@ -57,6 +59,8 @@ def mostrar_opcion3(self):
         fg="#0046A4",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(self.root2.register(validate_name), "%P"),
     )
     self.apellido_entry.place(x=10, y=155)
 
@@ -71,28 +75,33 @@ def mostrar_opcion3(self):
     self.cedula_label2.place(x=10, y=195)
 
     # Crear un estilo para el Combobox con borde de color
-    self.combo = ttk.Combobox(
+    self.cedula_entry = tk.Entry(
         self.label_info,
-        state="readonly",
+        highlightthickness=2,
+        highlightbackground="#1778FB",
+        relief=tk.FLAT,
+        justify=tk.CENTER,
         width=2,
-        values=["V", "J", "P", "E"],
+        fg="#0046A4",
+        font=("Poppins", 12, "bold"),
+        validate="key",
+        validatecommand=(self.root2.register(validate_clientes), "%P"),
     )
-    self.combo.place(x=10, y=225)
-    self.combo.set("V")  # Establece un valor predeterminado (puedes cambiarlo según tus necesidades)
-    self.combo.config(justify="center", foreground="#0046A4", font=("Poppins", 12, "bold"))
-
+    self.cedula_entry.place(x=10, y=225)
 
     self.cedula_entry2 = tk.Entry(  # Cambié el nombre de la variable
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
         relief=tk.FLAT,
-        width=22,
+        width=23,
         fg="#0046A4",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(self.root2.register(validate_document), "%P"),
     )
-    self.cedula_entry2.place(x=64, y=225)
+    self.cedula_entry2.place(x=53, y=225)
 
     # usurario opcion de recuperación
     self.telefono_label = tk.Label(  # Cambié el nombre de la variable
@@ -114,6 +123,8 @@ def mostrar_opcion3(self):
         fg="#0046A4",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(self.root2.register(validate_phone), "%P"),
     )
     self.telefono_entry.place(x=10, y=295)
 
@@ -182,3 +193,66 @@ def mostrar_opcion3(self):
         fg="white",
     )
     guardar_button3.place(x=35, y=565)
+
+
+def validate_clientes(new_value):
+    # Verifica que no haya espacios en blanco
+    if " " in new_value:
+        return False
+
+    # Verifica que la longitud del valor sea menor o igual a 1
+    if len(new_value) > 1:
+        return False
+
+    # Verifica si el valor está en la lista permitida (si no está vacío)
+    if new_value:
+        allowed_values = ["V", "C", "J", "P"]
+        return new_value.upper() in allowed_values
+
+    # Si el valor está vacío o se está borrando, permitir
+    return True
+
+
+def validate_name(new_value):
+    if " " in new_value:
+        return False
+
+    # Verifica que la longitud del valor sea menor o igual a 1
+    if len(new_value) > 20:
+        return False
+
+    if new_value.isalpha() or new_value == "":
+        return True
+
+    # Si el valor contiene números, la validación falla
+    return False
+
+
+def validate_phone(new_value):
+    if " " in new_value:
+        return False
+
+    # Verifica que la longitud del valor sea menor o igual a 1
+    if len(new_value) > 11:
+        return False
+
+    if new_value.isdigit() or new_value == "":
+        return True
+
+    # Si el valor contiene caracteres no numéricos, la validación falla
+    return False
+
+
+def validate_document(new_value):
+    if " " in new_value:
+        return False
+
+    # Verifica que la longitud del valor sea menor o igual a 1
+    if len(new_value) > 10:
+        return False
+
+    if new_value.isdigit() or new_value == "":
+        return True
+
+    # Si el valor contiene caracteres no numéricos, la validación falla
+    return False
