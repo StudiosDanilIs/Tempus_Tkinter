@@ -108,7 +108,7 @@ class VentanaPrincipal:
     # Función para cerrar la ventana
     def Close_Windows(self):
         if messagebox.askokcancel("Close", "¿Desea Cerrar la Aplicación?"):
-            self.root2.destroy()        
+            self.root2.destroy()               
 
 # Crear una instancia de la ventana principal
 if __name__ == "__main__":
