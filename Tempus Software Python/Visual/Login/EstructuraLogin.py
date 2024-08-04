@@ -196,10 +196,8 @@ class CreateLogin:
             bd=0,
             cursor="hand2",
             fg="white",
-            command=self.cambio_fondo,
         )
         self.login2.place(x=230, y=420)
-        
 
         # botón para iniciar sesión con la tecla enter
         self.login.bind("<Return>", (lambda event: Verificar(self)))
@@ -236,7 +234,7 @@ class CreateLogin:
             fg="white",
             command=self.abrir_perfil_facebook,
         )
-        self.login2.place(x=220, y=540)
+        self.login2.place(x=220, y=530)
 
         self.boton_login4 = utl.leer_imagen(
             utl.resource_path("imagenes/whatsapp.png"), size=(35, 35)
@@ -252,7 +250,7 @@ class CreateLogin:
             fg="white",
             command=self.abrir_perfil_whatsapp,
         )
-        self.login2.place(x=265, y=540)
+        self.login2.place(x=265, y=530)
 
         self.boton_login5 = utl.leer_imagen(
             utl.resource_path("imagenes/instagram.png"), size=(35, 35)
@@ -268,8 +266,8 @@ class CreateLogin:
             fg="white",
             command=self.abrir_perfil_instagram,
         )
-        self.login2.place(x=310, y=540)
-        
+        self.login2.place(x=310, y=530)
+
         self.forgot_button1 = Button(
             self.lgn_frame,
             text="Version Beta 1.0",
@@ -284,13 +282,25 @@ class CreateLogin:
             command=lambda: Info(self=self),
         )
         self.forgot_button1.place(x=40, y=600)
-        
+
+        self.boton_login9 = utl.leer_imagen(
+            utl.resource_path("imagenes/pincel.png"), size=(35, 35)
+        )
+        self.login3 = Button(
+            self.lgn_frame,
+            image=self.boton_login9,
+            width=50,
+            bg="#FFFFFF",
+            activebackground="#FFFFFF",
+            bd=0,
+            cursor="hand2",
+            fg="white",
+            command=self.cambio_fondo,
+        )
+        self.login3.place(x=180, y=600)
 
         self.boton_login6 = utl.leer_imagen(
-            utl.resource_path("imagenes/Fondo1.jpg"), size=(700, 700)
-        )
-        self.boton_login7 = utl.leer_imagen(
-            utl.resource_path("imagenes/Fondo2.jpg"), size=(700, 700)
+            utl.resource_path("imagenes/fondo1.jpg"), size=(700, 700)
         )
         self.login2 = Button(
             self.lgn_frame,
@@ -345,9 +355,15 @@ class CreateLogin:
     def cambio_fondo(self):
         self.presionado = not self.presionado
         if self.presionado:
+            self.boton_login7 = utl.leer_imagen(
+                utl.resource_path("imagenes/Fondo2.jpg"), size=(700, 700)
+            )
             self.login2.config(image=self.boton_login7)
         else:
-            self.login2.config(image=self.boton_login6)
+            self.boton_login10 = utl.leer_imagen(
+                utl.resource_path("imagenes/Fondo3.jpg"), size=(700, 700)
+            )
+            self.login2.config(image=self.boton_login10)
 
 
 if __name__ == "__main__":
