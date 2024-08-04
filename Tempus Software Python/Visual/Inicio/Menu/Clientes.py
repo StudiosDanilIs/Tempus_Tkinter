@@ -12,7 +12,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Informacion del Cliente",
         fg="#1778FB",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         font=("Poppins", 17, "bold"),
     )
     titel_label.place(x=10, y=10)
@@ -22,7 +22,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Nombre",
         fg="#1E90FF",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         font=("Poppins", 13, "bold"),
     )
     self.nombre_label.place(x=10, y=55)
@@ -49,7 +49,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Apellido",
         fg="#1E90FF",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         font=("Poppins", 13, "bold"),
     )
     self.apellido_label.place(x=10, y=125)
@@ -75,7 +75,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Cedula",
         fg="#1E90FF",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         font=("Poppins", 13, "bold"),
     )
     self.cedula_label.place(x=10, y=195)
@@ -115,7 +115,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Telefono",
         fg="#1E90FF",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         font=("Poppins", 13, "bold"),
     )
     self.telefono_label.place(x=10, y=265)
@@ -141,7 +141,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Direccion",
         fg="#1E90FF",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         font=("Poppins", 13, "bold"),
     )
     self.direccion_label.place(x=10, y=335)

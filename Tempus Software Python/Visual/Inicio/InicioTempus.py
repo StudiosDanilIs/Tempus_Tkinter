@@ -73,7 +73,7 @@ class VentanaPrincipal:
         self.boton_opcion6.pack(fill="x")
 
         # Crear el frame para el contenido principal                
-        self.label_info = tk.Frame(self.root2, bd=0, width=300, relief=tk.SOLID, padx=10, pady=10,bg='#E6F0F3')
+        self.label_info = tk.Frame(self.root2, bd=0, width=300, relief=tk.SOLID, padx=10, pady=10,bg='#FFFFFF')
         self.label_info.pack(side="left",expand=tk.YES,fill=tk.BOTH)
 
         mostrar_opcion1(self)
@@ -82,7 +82,7 @@ class VentanaPrincipal:
     def crear_boton(self, image=None, command=None, **kwargs):
         boton = tk.Button(self.menu_lateral, image=image, command=command,
                         borderwidth=0, highlightthickness=2, bg="#1778FB",
-                        activebackground="#E6F0F3", height=102, width=150,
+                        activebackground="#FFFFFF", height=102, width=150,
                         **kwargs)  # Pass remaining arguments using **kwargs
         return boton
 

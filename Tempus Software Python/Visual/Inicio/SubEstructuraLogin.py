@@ -15,14 +15,14 @@ def SubventanaLogin(self):
         subventana.protocol("WM_DELETE_WINDOW", lambda: cerrar_sesion(self))
 
         # frame de recupera cuenta
-        self.lgn_frame = Frame(subventana, bg="#E6F0F3")
+        self.lgn_frame = Frame(subventana, bg="#FFFFFF")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
         
         self.username_label = Label(
             self.lgn_frame,
             text="Herramientas de Usuario",
             anchor="w",
-            bg="#E6F0F3",
+            bg="#FFFFFF",
             fg="#1E90FF",
             font=("Hipstelvetica", 20),
         )
@@ -36,8 +36,8 @@ def SubventanaLogin(self):
             self.lgn_frame,
             width=200,
             image=address,
-            bg="#E6F0F3",
-            activebackground="#E6F0F3",
+            bg="#FFFFFF",
+            activebackground="#FFFFFF",
             bd=0,
             cursor="hand2",
         )
@@ -52,8 +52,8 @@ def SubventanaLogin(self):
             self.lgn_frame,
             width=200,
             image=delete,
-            bg="#E6F0F3",
-            activebackground="#E6F0F3",
+            bg="#FFFFFF",
+            activebackground="#FFFFFF",
             bd=0,
             cursor="hand2",
         )
@@ -68,8 +68,8 @@ def SubventanaLogin(self):
             self.lgn_frame,
             width=200,
             image=update,
-            bg="#E6F0F3",
-            activebackground="#E6F0F3",
+            bg="#FFFFFF",
+            activebackground="#FFFFFF",
             bd=0,
             cursor="hand2",
         )

@@ -12,7 +12,7 @@ def mostrar_opcion1(self):
     self.subventana_abierta = False
 
     logo = utl.leer_imagen(utl.resource_path("imagenes/logo.png"), size=(200, 200))
-    self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#E6F0F3")
+    self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
     self.logo_inicio_label.image = logo
     self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
 
@@ -21,7 +21,7 @@ def mostrar_opcion1(self):
         self.label_info,
         text="Welcome to\n Tempus Software.",
         anchor="center",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         fg="#000000",
         font=("Hipstelvetica", 20),
     )
@@ -31,7 +31,7 @@ def mostrar_opcion1(self):
     self.eslogan_label = Label(
         self.label_info,
         text="Tu aliado tecnológico: eficiencia y confianza al\n alcance de tu mano.",
-        bg="#E6F0F3",
+        bg="#FFFFFF",
         fg="#000000",
         font=("Avenir", 13),
     )

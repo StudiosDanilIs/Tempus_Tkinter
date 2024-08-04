@@ -12,7 +12,7 @@ def Clave_Verificar(self):
         sub_clave.protocol("WM_DELETE_WINDOW", lambda: cerrar_sesion(self))
 
         # Frame de recupera cuenta
-        self.lgn_frame = tk.Frame(sub_clave, bg="#E6F0F3")
+        self.lgn_frame = tk.Frame(sub_clave, bg="#FFFFFF")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # Entrada de clave a verificar
