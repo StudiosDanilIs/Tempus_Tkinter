@@ -219,7 +219,6 @@ class CreateLogin:
             font=("Poppins", 12, "bold"),
             activebackground="#FFFFFF",
             cursor="hand2",
-            command=lambda: Info(self=self),
         )
         self.forgot_button.place(x=70, y=540)
 
@@ -270,6 +269,22 @@ class CreateLogin:
             command=self.abrir_perfil_instagram,
         )
         self.login2.place(x=310, y=540)
+        
+        self.forgot_button1 = Button(
+            self.lgn_frame,
+            text="Version Beta 1.0",
+            relief=FLAT,
+            borderwidth=0,
+            background="#FFFFFF",
+            fg="#5E5E5E",
+            bg="#FFFFFF",
+            font=("Poppins", 12, "bold"),
+            activebackground="#FFFFFF",
+            cursor="hand2",
+            command=lambda: Info(self=self),
+        )
+        self.forgot_button1.place(x=40, y=600)
+        
 
         self.boton_login6 = utl.leer_imagen(
             utl.resource_path("imagenes/Fondo1.jpg"), size=(700, 700)
