@@ -14,7 +14,6 @@ from Visual.Inicio.Menu.Historial import mostrar_opcion5
 class VentanaPrincipal:
     def __init__(self, nombre_rol, **kwargs):
         self.root2 = tk.Tk()
-        self.root2.title("Inicio - Tempus Software")
         self.root2.geometry("1100x635")
         self.root2.resizable(0, 0)
         self.root2.protocol("WM_DELETE_WINDOW", self.cerrar_sesion)

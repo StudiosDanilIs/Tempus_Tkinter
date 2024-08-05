@@ -7,6 +7,7 @@ from SubVentanas.VerificarClave import Clave_Verificar as Clave
 def mostrar_opcion3(self):
     self.limpiar_contenido()
     self.subventana_abierta = False
+    self.root2.title("Clientes")
 
     titel_label = tk.Label(
         self.label_info,

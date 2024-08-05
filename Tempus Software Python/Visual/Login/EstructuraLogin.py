@@ -13,9 +13,9 @@ from SubVentanas.Login.InfoSubventana import InformacionTempus as Info
 class CreateLogin:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("1100x645")
+        self.root.geometry("1000x645")
         self.root.resizable(0, 0)
-        self.root.title("Login - Tempus Software")
+        self.root.title("Inicio de Sesion")
         self.estado_oculto = True
         self.subventana_abierta = False
         self.presionado = False
@@ -300,12 +300,12 @@ class CreateLogin:
         self.login3.place(x=180, y=600)
 
         self.boton_login6 = utl.leer_imagen(
-            utl.resource_path("imagenes/fondo1.jpg"), size=(700, 700)
+            utl.resource_path("imagenes/fondo1.jpg"), size=(500, 645)
         )
         self.login2 = Button(
             self.lgn_frame,
             image=self.boton_login6,
-            width=600,
+            width=500,
             bg="#FFFFFF",
             activebackground="#FFFFFF",
             bd=0,

@@ -10,7 +10,7 @@ from SubVentanas.Inicio.SubEstructuraLogin import SubventanaLogin as MySubventan
 def mostrar_opcion1(self):
     self.limpiar_contenido()
     self.subventana_abierta = False
-        
+    self.root2.title(f"Bienvenido {self.rol_programa}")        
     logo = utl.leer_imagen(utl.resource_path("imagenes/logo.png"), size=(200, 200))
     self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
     self.logo_inicio_label.image = logo

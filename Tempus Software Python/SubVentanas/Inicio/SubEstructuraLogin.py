@@ -9,7 +9,7 @@ import util.PhotoImagenes as utl
 def SubventanaLogin(self):
     if not self.subventana_abierta:
         subventana = tk.Toplevel()
-        subventana.title("Tempus - Recuperar Acceso")
+        subventana.title("Herramientas de Usuario")
         subventana.geometry("700x350")
         subventana.resizable(0, 0)
         subventana.protocol("WM_DELETE_WINDOW", lambda: cerrar_sesion(self))

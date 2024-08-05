@@ -6,7 +6,7 @@ from tkinter.font import BOLD
 def Clave_Verificar(self):
     if not self.subventana_abierta:
         sub_clave = tk.Toplevel()
-        sub_clave.title("Mi Aplicación")
+        sub_clave.title("Clave Unica")
         sub_clave.geometry("380x180")
         sub_clave.resizable(0, 0)
         sub_clave.protocol("WM_DELETE_WINDOW", lambda: cerrar_sesion(self))

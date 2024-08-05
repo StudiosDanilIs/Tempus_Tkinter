@@ -6,7 +6,7 @@ import util.PhotoImagenes as utl
 def InformacionTempus(self):
     if not self.subventana_abierta:
         miniVentana = tk.Toplevel()
-        miniVentana.title("Tempus - Info")
+        miniVentana.title("Detalles de la Version")
         miniVentana.geometry("780x400")
         miniVentana.resizable(0, 0)
         miniVentana.configure(bg="#FFFFFF")  # Color de fondo general más claro
