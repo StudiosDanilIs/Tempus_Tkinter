@@ -29,9 +29,11 @@ class VentanaPrincipal:
         
         # Crear botones para las opciones
         self.logo1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home.png"), size=(44, 61))
+        self.logo_inicial = utl.leer_imagen(utl.resource_path("imagenes/menu/home2.png"), size=(44, 61))
         self.boton_opcion1 = self.crear_boton(image=self.logo1, command=lambda: mostrar_opcion1(self))
         self.boton_opcion1.place(relx=0.5, rely=0.36, anchor=tk.CENTER)  
         self.boton_opcion1.bind("<Button>", lambda event: status.resaltar1(self, event))
+        self.boton_opcion1.config(bg='#FFFFFF', image=self.logo_inicial)
         
         self.logo2 = utl.leer_imagen(utl.resource_path("imagenes/menu/solicitudes.png"), size=(59, 61))
         self.boton_opcion2 = self.crear_boton(image=self.logo2, command=lambda: mostrar_opcion2(self))

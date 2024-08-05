@@ -4,7 +4,7 @@ import util.PhotoImagenes as utl
 from tkinter import Frame
 import tkinter.messagebox as messagebox
 
-from Visual.Inicio.SubEstructuraLogin import SubventanaLogin as MySubventana
+from SubVentanas.Inicio.SubEstructuraLogin import SubventanaLogin as MySubventana
 
 
 def mostrar_opcion1(self):

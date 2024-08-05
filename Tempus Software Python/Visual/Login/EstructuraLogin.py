@@ -7,7 +7,7 @@ from tkinter import messagebox
 from tkinter.font import BOLD
 import util.PhotoImagenes as utl
 from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
-from Visual.Login.InfoSubventana import InformacionTempus as Info
+from SubVentanas.Login.InfoSubventana import InformacionTempus as Info
 
 
 class CreateLogin:
@@ -360,10 +360,7 @@ class CreateLogin:
             )
             self.login2.config(image=self.boton_login7)
         else:
-            self.boton_login10 = utl.leer_imagen(
-                utl.resource_path("imagenes/Fondo3.jpg"), size=(700, 700)
-            )
-            self.login2.config(image=self.boton_login10)
+            self.login2.config(image=self.boton_login6)
 
 
 if __name__ == "__main__":

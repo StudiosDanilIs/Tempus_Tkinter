@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 
-from util.VerificarClave import Clave_Verificar as Clave 
+from SubVentanas.VerificarClave import Clave_Verificar as Clave 
 
 def mostrar_opcion3(self):
     self.limpiar_contenido()
