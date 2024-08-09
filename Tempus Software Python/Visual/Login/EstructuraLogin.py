@@ -19,12 +19,11 @@ class CreateLogin:
         self.estado_oculto = True
         self.subventana_abierta = False
         self.presionado = False
-
         logo = "imagenes\\logo.ico"
         self.root.iconbitmap(True, logo)
 
         # creación de la ventana principal
-        self.lgn_frame = Frame(self.root, bg="#FFFFFF")
+        self.lgn_frame = Frame(self.root, bg="#f0f0f0")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # incorporación de la imagen de la ventana principal
@@ -32,8 +31,8 @@ class CreateLogin:
             self.lgn_frame,
             text="Hola.",
             anchor="w",
-            bg="#FFFFFF",
-            fg="#0000FF",
+            bg="#f0f0f0",
+            fg="#1778FB",
             font=("Montserrat", 40),
         )
         self.username_label.place(x=60, y=62)
@@ -42,8 +41,8 @@ class CreateLogin:
             self.lgn_frame,
             text="Bienvenido!",
             anchor="w",
-            bg="#FFFFFF",
-            fg="#0000FF",
+            bg="#f0f0f0",
+            fg="#1778FB",
             font=("Montserrat", 46, "bold"),
         )
         self.username_label.place(x=60, y=125)
@@ -53,25 +52,26 @@ class CreateLogin:
             self.lgn_frame,
             text="Usuario",
             anchor="w",
-            bg="#FFFFFF",
-            fg="#5E5E5E",
+            bg="#f0f0f0",
+            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
-        self.username_label.place(x=75, y=223)
+        self.username_label.place(x=80, y=263)
         # inserción de la entrada de texto para el usuario
         self.username_entry = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#5E5E5E",
+            highlightbackground="#232323",
             relief=tk.FLAT,
-            fg="#5E5E5E",
+            fg="#232323",
+            background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#5E5E5E",
+            insertbackground="#232323",
             width=35,
             validate="key",
             validatecommand=(self.root.register(self.validate_tab), "%P"),
         )
-        self.username_entry.place(x=75, y=250, height=40)
+        self.username_entry.place(x=80, y=290, height=40)
         self.username_entry.bind("<Return>", self.pasar_usuario)
 
         # opcion del Clave para iniciar sesión o registrarse
@@ -79,27 +79,28 @@ class CreateLogin:
             self.lgn_frame,
             text="Contraseña",
             anchor="w",
-            bg="#FFFFFF",
-            fg="#5E5E5E",
+            bg="#f0f0f0",
+            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=75, y=293)
+        self.password_label.place(x=80, y=333)
 
         # inserción de la entrada de texto para la Clave
         self.password_entry = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#5E5E5E",
+            highlightbackground="#232323",
             relief=tk.FLAT,
-            fg="#5E5E5E",
+            fg="#232323",
+            background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#5E5E5E",
+            insertbackground="#232323",
             width=35,
             show="*",
             validate="key",
             validatecommand=(self.root.register(self.validate_tab), "%P"),
         )
-        self.password_entry.place(x=75, y=320, height=40)
+        self.password_entry.place(x=80, y=360, height=40)
 
         self.password_entry.bind("<Return>", self.ingresar_datos)
 
@@ -111,14 +112,14 @@ class CreateLogin:
             self.lgn_frame,
             width=30,
             image=self.clave,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
             bd=0,
             cursor="hand2",
             fg="white",
             command=lambda: self.Revertir(self),
         )
-        self.login.place(x=40, y=320)
+        self.login.place(x=40, y=360)
 
         self.usuario = utl.leer_imagen(
             utl.resource_path("imagenes/usuario.png"), size=(33, 33)
@@ -128,27 +129,27 @@ class CreateLogin:
             self.lgn_frame,
             width=30,
             image=self.usuario,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
             bd=0,
             cursor="hand2",
             fg="white",
         )
-        self.login.place(x=40, y=252)
+        self.login.place(x=40, y=292)
 
         estado_boton = tk.BooleanVar(
             value=False
         )  # Inicializamos la variable como False
         marcar_boton = tk.Checkbutton(
             self.lgn_frame,
-            fg="#5E5E5E",
-            bg="#FFFFFF",
+            fg="#232323",
+            bg="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            activebackground="#FFFFFF",
+            activebackground="#f0f0f0",
             text="Recordar Cuenta",
             variable=estado_boton,
         )
-        marcar_boton.place(x=70, y=365)
+        marcar_boton.place(x=75, y=405)
 
         # botón para restaurar la contraseña y el usuario
         self.forgot_button = Button(
@@ -156,15 +157,16 @@ class CreateLogin:
             text="Restaurar Cuenta?",
             relief=FLAT,
             borderwidth=0,
-            background="#FFFFFF",
-            fg="#5E5E5E",
-            bg="#FFFFFF",
+            background="#f0f0f0",
+            fg="#232323",
+            bg="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            activebackground="#FFFFFF",
+            activebackground="#f0f0f0",
             cursor="hand2",
+            command=lambda: self.mensaje_opciones(),
         )
 
-        self.forgot_button.place(x=250, y=365)
+        self.forgot_button.place(x=255, y=405)
 
         # botón para iniciar sesión
         self.boton_login = utl.leer_imagen(
@@ -174,14 +176,14 @@ class CreateLogin:
             self.lgn_frame,
             image=self.boton_login,
             width=170,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
             bd=0,
             cursor="hand2",
             fg="white",
             command=lambda: Verificar(self),
         )
-        self.login.place(x=70, y=420)
+        self.login.place(x=75, y=460)
 
         # botón para iniciar sesión
         self.boton_login2 = utl.leer_imagen(
@@ -191,123 +193,43 @@ class CreateLogin:
             self.lgn_frame,
             image=self.boton_login2,
             width=170,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
             bd=0,
             cursor="hand2",
             fg="white",
+            command=lambda: self.mensaje_opciones(),
         )
-        self.login2.place(x=230, y=420)
+        self.login2.place(x=240, y=460)
 
         # botón para iniciar sesión con la tecla enter
         self.login.bind("<Return>", (lambda event: Verificar(self)))
 
-        self.separator = tk.Frame(self.lgn_frame, width=250, height=2, bg="#666666")
-        self.separator.place(x=110, y=510)
-
         # información de la versión del software
-        self.forgot_button = Button(
-            self.lgn_frame,
-            text="Redes Sociales",
-            relief=FLAT,
-            borderwidth=0,
-            background="#FFFFFF",
-            fg="#5E5E5E",
-            bg="#FFFFFF",
-            font=("Poppins", 12, "bold"),
-            activebackground="#FFFFFF",
-            cursor="hand2",
-        )
-        self.forgot_button.place(x=70, y=540)
-
-        self.boton_login3 = utl.leer_imagen(
-            utl.resource_path("imagenes/facebook.png"), size=(35, 35)
-        )
-        self.login2 = Button(
-            self.lgn_frame,
-            image=self.boton_login3,
-            width=50,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
-            bd=0,
-            cursor="hand2",
-            fg="white",
-            command=self.abrir_perfil_facebook,
-        )
-        self.login2.place(x=220, y=530)
-
-        self.boton_login4 = utl.leer_imagen(
-            utl.resource_path("imagenes/whatsapp.png"), size=(35, 35)
-        )
-        self.login2 = Button(
-            self.lgn_frame,
-            image=self.boton_login4,
-            width=50,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
-            bd=0,
-            cursor="hand2",
-            fg="white",
-            command=self.abrir_perfil_whatsapp,
-        )
-        self.login2.place(x=265, y=530)
-
-        self.boton_login5 = utl.leer_imagen(
-            utl.resource_path("imagenes/instagram.png"), size=(35, 35)
-        )
-        self.login2 = Button(
-            self.lgn_frame,
-            image=self.boton_login5,
-            width=50,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
-            bd=0,
-            cursor="hand2",
-            fg="white",
-            command=self.abrir_perfil_instagram,
-        )
-        self.login2.place(x=310, y=530)
-
         self.forgot_button1 = Button(
             self.lgn_frame,
             text="Version Beta 1.0",
             relief=FLAT,
             borderwidth=0,
-            background="#FFFFFF",
-            fg="#5E5E5E",
-            bg="#FFFFFF",
+            background="#f0f0f0",
+            fg="#232323",
+            bg="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            activebackground="#FFFFFF",
+            activebackground="#f0f0f0",
             cursor="hand2",
             command=lambda: Info(self=self),
         )
         self.forgot_button1.place(x=40, y=600)
 
-        self.boton_login9 = utl.leer_imagen(
-            utl.resource_path("imagenes/pincel.png"), size=(35, 35)
-        )
-        self.login3 = Button(
-            self.lgn_frame,
-            image=self.boton_login9,
-            width=50,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
-            bd=0,
-            cursor="hand2",
-            fg="white",
-            command=self.cambio_fondo,
-        )
-        self.login3.place(x=180, y=600)
-
         self.boton_login6 = utl.leer_imagen(
-            utl.resource_path("imagenes/fondo1.jpg"), size=(500, 645)
+            utl.resource_path("imagenes/fondo2.jpg"), size=(500, 645)
         )
         self.login2 = Button(
             self.lgn_frame,
             image=self.boton_login6,
             width=500,
-            bg="#FFFFFF",
-            activebackground="#FFFFFF",
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
             bd=0,
         )
         self.login2.place(x=500)
@@ -333,35 +255,9 @@ class CreateLogin:
         else:
             self.password_entry.config(show="")  # Mostrar texto normal
 
-    def abrir_perfil_instagram(self):
-        # Abre el perfil de Instagram en el navegador
-        perfil_instagram = (
-            "https://www.instagram.com/tempus.09/"  # Reemplaza con el perfil deseado
-        )
-        webbrowser.open(perfil_instagram)
-
-    def abrir_perfil_facebook(self):
-        # Abre el perfil de Instagram en el navegador
-        perfil_instagram = "https://www.facebook.com/profile.php?id=100071946285434"  # Reemplaza con el perfil deseado
-        webbrowser.open(perfil_instagram)
-
-    def abrir_perfil_whatsapp(self):
-        # Abre el perfil de Instagram en el navegador
-        perfil_instagram = (
-            "https://wa.me/+584247233495"  # Reemplaza con el perfil deseado
-        )
-        webbrowser.open(perfil_instagram)
-
-    def cambio_fondo(self):
-        self.presionado = not self.presionado
-        if self.presionado:
-            self.boton_login7 = utl.leer_imagen(
-                utl.resource_path("imagenes/Fondo2.jpg"), size=(700, 700)
-            )
-            self.login2.config(image=self.boton_login7)
-        else:
-            self.login2.config(image=self.boton_login6)
-
-
+    def mensaje_opciones(self):
+        messagebox.showerror("Error", "Inicia Sesion para Usar esta Opcion")
+        
+        
 if __name__ == "__main__":
     CreateLogin()

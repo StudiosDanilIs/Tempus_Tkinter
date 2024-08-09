@@ -28,36 +28,40 @@ class VentanaPrincipal:
         
         # Crear botones para las opciones
         self.logo1 = utl.leer_imagen(utl.resource_path("imagenes/menu/home.png"), size=(44, 61))
-        self.logo_inicial = utl.leer_imagen(utl.resource_path("imagenes/menu/home2.png"), size=(44, 61))
         self.boton_opcion1 = self.crear_boton(image=self.logo1, command=lambda: mostrar_opcion1(self))
         self.boton_opcion1.place(relx=0.5, rely=0.36, anchor=tk.CENTER)  
-        self.boton_opcion1.bind("<Button>", lambda event: status.resaltar1(self, event))
-        self.boton_opcion1.config(bg='#FFFFFF', image=self.logo_inicial)
+        self.boton_opcion1.bind("<Enter>", lambda event: status.resaltar1(self, event))
+        self.boton_opcion1.bind("<Leave>", lambda event: status.restaurar1(self, event)) 
         
         self.logo2 = utl.leer_imagen(utl.resource_path("imagenes/menu/solicitudes.png"), size=(59, 61))
         self.boton_opcion2 = self.crear_boton(image=self.logo2, command=lambda: mostrar_opcion2(self))
         self.boton_opcion2.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
-        self.boton_opcion2.bind("<Button>", lambda event: status.resaltar2(self, event))
+        self.boton_opcion2.bind("<Enter>", lambda event: status.resaltar2(self, event))
+        self.boton_opcion2.bind("<Leave>", lambda event: status.restaurar2(self, event)) 
 
         self.logo3 = utl.leer_imagen(utl.resource_path("imagenes/menu/clientes.png"), size=(44, 59))
         self.boton_opcion3 = self.crear_boton(image=self.logo3, command=lambda: mostrar_opcion3(self))
         self.boton_opcion3.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
-        self.boton_opcion3.bind("<Button>", lambda event: status.resaltar3(self, event))
+        self.boton_opcion3.bind("<Enter>", lambda event: status.resaltar3(self, event))
+        self.boton_opcion3.bind("<Leave>", lambda event: status.restaurar3(self, event)) 
 
         self.logo4 = utl.leer_imagen(utl.resource_path("imagenes/menu/pagos.png"), size=(44, 64))
         self.boton_opcion4 = self.crear_boton(image=self.logo4, command=lambda: mostrar_opcion4(self))
         self.boton_opcion4.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
-        self.boton_opcion4.bind("<Button>", lambda event: status.resaltar4(self, event))
+        self.boton_opcion4.bind("<Enter>", lambda event: status.resaltar4(self, event))
+        self.boton_opcion4.bind("<Leave>", lambda event: status.restaurar4(self, event)) 
 
         self.logo5 = utl.leer_imagen(utl.resource_path("imagenes/menu/historial.png"), size=(44, 60))
         self.boton_opcion5 = self.crear_boton(image=self.logo5, command=lambda: mostrar_opcion5(self))
         self.boton_opcion5.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
-        self.boton_opcion5.bind("<Button>", lambda event: status.resaltar5(self, event))
+        self.boton_opcion5.bind("<Enter>", lambda event: status.resaltar5(self, event))
+        self.boton_opcion5.bind("<Leave>", lambda event: status.restaurar5(self, event)) 
 
         self.logo6 = utl.leer_imagen(utl.resource_path("imagenes/menu/salir.png"), size=(57, 59))
         self.boton_opcion6 = self.crear_boton(image=self.logo6, command=lambda: self.mostrar_opcion6())
         self.boton_opcion6.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
-        self.boton_opcion6.bind("<Button>", lambda event: status.resaltar6(self, event))
+        self.boton_opcion6.bind("<Enter>", lambda event: status.resaltar6(self, event))
+        self.boton_opcion6.bind("<Leave>", lambda event: status.restaurar6(self, event)) 
 
         # Empaquetar los botones
         self.boton_opcion1.pack(fill="x")
@@ -68,7 +72,7 @@ class VentanaPrincipal:
         self.boton_opcion6.pack(fill="x")
 
         # Crear el frame para el contenido principal                
-        self.label_info = tk.Frame(self.root2, bd=0, width=300, relief=tk.SOLID, padx=10, pady=10,bg='#FFFFFF')
+        self.label_info = tk.Frame(self.root2, bd=0, width=300, relief=tk.SOLID, padx=10, pady=10,bg='#f0f0f0')
         self.label_info.pack(side="left",expand=tk.YES,fill=tk.BOTH)
 
         mostrar_opcion1(self)
@@ -77,10 +81,10 @@ class VentanaPrincipal:
     def crear_boton(self, image=None, command=None, **kwargs):
         boton = tk.Button(self.menu_lateral, image=image, command=command,
                         borderwidth=0, highlightthickness=2, bg="#1778FB",
-                        activebackground="#FFFFFF", height=102, width=150,
+                        activebackground="#f0f0f0", height=102, width=150,
                         **kwargs)  # Pass remaining arguments using **kwargs
         return boton
-
+        
 
     def mostrar_opcion6(self):
         self.cerrar_sesion()

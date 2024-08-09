@@ -1,8 +1,9 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-
-from SubVentanas.VerificarClave import Clave_Verificar as Clave 
+from tkinter import messagebox
+import util.PhotoImagenes as utl
+from Modelo.Inicio.OpcionClientes import Agregar_Cliente, Modificar_Cliente, Eliminar_Cliente, Buscar_Cliente
 
 def mostrar_opcion3(self):
     self.limpiar_contenido()
@@ -13,7 +14,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Informacion del Cliente",
         fg="#1778FB",
-        bg="#FFFFFF",
+        bg="#f0f0f0",
         font=("Poppins", 17, "bold"),
     )
     titel_label.place(x=10, y=10)
@@ -23,7 +24,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Nombre",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
     self.nombre_label.place(x=10, y=55)
@@ -36,13 +37,14 @@ def mostrar_opcion3(self):
         relief=tk.FLAT,
         width=28,
         fg="#0046A4",
+        background="#f0f0f0",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
         validate="key",
         validatecommand=(self.root2.register(validate_name), "%P"),
     )
     self.nombre_entry.place(x=10, y=85)
-    
+
     self.nombre_entry.bind("<Return>", lambda event: self.apellido_entry.focus_set())
 
     # usurario opcion de recuperación
@@ -50,7 +52,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Apellido",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
     self.apellido_label.place(x=10, y=125)
@@ -63,26 +65,27 @@ def mostrar_opcion3(self):
         relief=tk.FLAT,
         width=28,
         fg="#0046A4",
+        background="#f0f0f0",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
         validate="key",
         validatecommand=(self.root2.register(validate_name), "%P"),
     )
     self.apellido_entry.place(x=10, y=155)
-    self.apellido_entry.bind("<Return>", lambda event: self.cedula_entry2.focus_set())
-    
+    self.apellido_entry.bind("<Return>", lambda event: self.indicador_cedula_entry.focus_set())
+
     # clave opcion de recuperación
     self.cedula_label = tk.Label(  # Cambié el nombre de la variable
         self.label_info,
         text="Cedula",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
     self.cedula_label.place(x=10, y=195)
 
     # Crear un estilo para el Combobox con borde de color
-    self.cedula_entry = tk.Entry(
+    self.indicador_cedula_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
@@ -90,33 +93,36 @@ def mostrar_opcion3(self):
         justify=tk.CENTER,
         width=2,
         fg="#0046A4",
+        background="#f0f0f0",
         font=("Poppins", 12, "bold"),
         validate="key",
         validatecommand=(self.root2.register(validate_clientes), "%P"),
     )
-    self.cedula_entry.place(x=10, y=225)
+    self.indicador_cedula_entry.place(x=10, y=225)
+    self.indicador_cedula_entry.bind("<Return>", lambda event: self.cedula_entry.focus_set())
 
-    self.cedula_entry2 = tk.Entry(  # Cambié el nombre de la variable
+    self.cedula_entry = tk.Entry(  # Cambié el nombre de la variable
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
         relief=tk.FLAT,
         width=23,
         fg="#0046A4",
+        background="#f0f0f0",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
         validate="key",
         validatecommand=(self.root2.register(validate_document), "%P"),
     )
-    self.cedula_entry2.place(x=53, y=225)
-    self.cedula_entry2.bind("<Return>", lambda event: self.telefono_entry.focus_set())
+    self.cedula_entry.place(x=53, y=225)
+    self.cedula_entry.bind("<Return>", lambda event: self.telefono_entry.focus_set())
 
     # usurario opcion de recuperación
     self.telefono_label = tk.Label(  # Cambié el nombre de la variable
         self.label_info,
         text="Telefono",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
     self.telefono_label.place(x=10, y=265)
@@ -129,6 +135,7 @@ def mostrar_opcion3(self):
         relief=tk.FLAT,
         width=28,
         fg="#0046A4",
+        background="#f0f0f0",
         font=("Poppins", 12, "bold"),
         insertbackground="#1E90FF",
         validate="key",
@@ -142,7 +149,7 @@ def mostrar_opcion3(self):
         self.label_info,
         text="Direccion",
         fg="#1E90FF",
-        bg="#FFFFFF",
+        bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
     self.direccion_label.place(x=10, y=335)
@@ -154,6 +161,7 @@ def mostrar_opcion3(self):
         width=28,
         font=("Poppins", 12, "bold"),
         fg="#0046A4",
+        background="#f0f0f0",
         insertbackground="#1778FB",
         highlightthickness=2,
         highlightbackground="#1E90FF",
@@ -173,39 +181,105 @@ def mostrar_opcion3(self):
         cursor="hand2",
         activebackground="#1778FB",
         fg="white",
-        command=lambda: Clave(self),
+        command=lambda: Agregar_Cliente(self),
     )
     guardar_button1.place(x=35, y=445)
 
     # botón de guardar datos
-    guardar_button2 = tk.Button(  # Cambié el nombre de la variable
-        self.label_info,
-        text="Modificar Cliente",
-        font=("Poppins", 13, "bold"),
-        width=20,
-        bd=0,
-        bg="#1E90FF",
-        cursor="hand2",
-        activebackground="#1778FB",
-        fg="white",
-        command=lambda: Clave(self),
-    )
-    guardar_button2.place(x=35, y=505)
+    if self.rol_programa == "Programador" or self.rol_programa == "Administrador":
+        guardar_button2 = tk.Button(  # Cambié el nombre de la variable
+            self.label_info,
+            text="Modificar Cliente",
+            font=("Poppins", 13, "bold"),
+            width=20,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+            command=lambda: Modificar_Cliente(self),
+        )
+        guardar_button2.place(x=35, y=505)
 
-    # botón de guardar datos
-    guardar_button3 = tk.Button(  # Cambié el nombre de la variable
+        # botón de guardar datos
+        guardar_button3 = tk.Button(  # Cambié el nombre de la variable
+            self.label_info,
+            text="Eliminar Cliente",
+            font=("Poppins", 13, "bold"),
+            width=20,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+            command=lambda: Eliminar_Cliente(self),
+        )
+        guardar_button3.place(x=35, y=565)
+    
+    else:
+        guardar_button2 = tk.Button(  # Cambié el nombre de la variable
+            self.label_info,
+            text="Modificar Cliente",
+            font=("Poppins", 13, "bold"),
+            width=20,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+           command=lambda: messagebox.showerror("Error", "No Tienes los Permisos Necesarios"),
+        )
+        guardar_button2.place(x=35, y=505)
+
+        # botón de guardar datos
+        guardar_button3 = tk.Button(  # Cambié el nombre de la variable
+            self.label_info,
+            text="Eliminar Cliente",
+            font=("Poppins", 13, "bold"),
+            width=20,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+            command=lambda: messagebox.showerror("Error", "No Tienes los Permisos Necesarios"),
+        )
+        guardar_button3.place(x=35, y=565)
+        
+        
+    self.buscar_cliente_entry = tk.Entry(  # Cambié el nombre de la variable
         self.label_info,
-        text="Eliminar Cliente",
-        font=("Poppins", 13, "bold"),
-        width=20,
-        bd=0,
-        bg="#1E90FF",
-        cursor="hand2",
-        activebackground="#1778FB",
-        fg="white",
-        command=lambda: Clave(self),
+        highlightthickness=2,
+        highlightbackground="#1778FB",
+        relief=tk.FLAT,
+        width=28,
+        fg="#0046A4",
+        background="#f0f0f0",
+        font=("Poppins", 12, "bold"),
+        insertbackground="#1E90FF",
+        validate="key",
+        validatecommand=(self.root2.register(validate_document), "%P"),
     )
-    guardar_button3.place(x=35, y=565)
+    self.buscar_cliente_entry.place(x=500, y=10)
+    self.buscar_cliente_entry.bind("<Return>", lambda event: Buscar_Cliente(self))
+    
+    
+    self.lupa = utl.leer_imagen(
+            utl.resource_path("imagenes/lupa.png"), size=(31, 31)
+        )
+
+    self.buscar = Button(
+        self.label_info,
+        width=30,
+        image=self.lupa,
+        bg="#f0f0f0",
+        activebackground="#f0f0f0",
+        bd=0,
+        cursor="hand2",
+        fg="white",
+        command=lambda: Buscar_Cliente(self),
+    )
+    self.buscar.place(x=760, y=10)  
 
 
 def validate_clientes(new_value):
