@@ -1,15 +1,23 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
 import util.PhotoImagenes as utl
-from Modelo.Inicio.OpcionClientes import Agregar_Cliente, Modificar_Cliente, Eliminar_Cliente, Buscar_Cliente
+from tkinter import messagebox
+from Modelo.Inicio.OpcionClientes import (
+    Agregar_Cliente,
+    Modificar_Cliente,
+    Eliminar_Cliente,
+    Buscar_Cliente,
+)
+
 
 def mostrar_opcion3(self):
+    # Limpiar el contenido del frame principal
     self.limpiar_contenido()
     self.subventana_abierta = False
-    self.root2.title("Clientes")
+    self.root2.title("Area de Clientes")
 
+    # Titulo de la ventana
     titel_label = tk.Label(
         self.label_info,
         text="Informacion del Cliente",
@@ -19,7 +27,7 @@ def mostrar_opcion3(self):
     )
     titel_label.place(x=10, y=10)
 
-    # cedula opcion de recuperación
+    # Area del Nombre del Cliente
     self.nombre_label = tk.Label(
         self.label_info,
         text="Nombre",
@@ -29,7 +37,6 @@ def mostrar_opcion3(self):
     )
     self.nombre_label.place(x=10, y=55)
 
-    # entrada de cedula
     self.nombre_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
@@ -44,10 +51,9 @@ def mostrar_opcion3(self):
         validatecommand=(self.root2.register(validate_name), "%P"),
     )
     self.nombre_entry.place(x=10, y=85)
-
     self.nombre_entry.bind("<Return>", lambda event: self.apellido_entry.focus_set())
 
-    # usurario opcion de recuperación
+    # Area del Apellido del Cliente
     self.apellido_label = tk.Label(
         self.label_info,
         text="Apellido",
@@ -56,9 +62,7 @@ def mostrar_opcion3(self):
         font=("Poppins", 13, "bold"),
     )
     self.apellido_label.place(x=10, y=125)
-
-    # entrada de usuario y  validación de tabulador
-    self.apellido_entry = tk.Entry(  # Cambié el nombre de la variable
+    self.apellido_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
@@ -72,10 +76,12 @@ def mostrar_opcion3(self):
         validatecommand=(self.root2.register(validate_name), "%P"),
     )
     self.apellido_entry.place(x=10, y=155)
-    self.apellido_entry.bind("<Return>", lambda event: self.indicador_cedula_entry.focus_set())
+    self.apellido_entry.bind(
+        "<Return>", lambda event: self.tipo_cedula_entry.focus_set()
+    )
 
-    # clave opcion de recuperación
-    self.cedula_label = tk.Label(  # Cambié el nombre de la variable
+    # Area de Cedula del Cliente
+    self.cedula_label = tk.Label(
         self.label_info,
         text="Cedula",
         fg="#1E90FF",
@@ -83,9 +89,7 @@ def mostrar_opcion3(self):
         font=("Poppins", 13, "bold"),
     )
     self.cedula_label.place(x=10, y=195)
-
-    # Crear un estilo para el Combobox con borde de color
-    self.indicador_cedula_entry = tk.Entry(
+    self.tipo_cedula_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
@@ -98,10 +102,9 @@ def mostrar_opcion3(self):
         validate="key",
         validatecommand=(self.root2.register(validate_clientes), "%P"),
     )
-    self.indicador_cedula_entry.place(x=10, y=225)
-    self.indicador_cedula_entry.bind("<Return>", lambda event: self.cedula_entry.focus_set())
-
-    self.cedula_entry = tk.Entry(  # Cambié el nombre de la variable
+    self.tipo_cedula_entry.place(x=10, y=225)
+    self.tipo_cedula_entry.bind("<Return>", lambda event: self.cedula_entry.focus_set())
+    self.cedula_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
@@ -117,8 +120,8 @@ def mostrar_opcion3(self):
     self.cedula_entry.place(x=53, y=225)
     self.cedula_entry.bind("<Return>", lambda event: self.telefono_entry.focus_set())
 
-    # usurario opcion de recuperación
-    self.telefono_label = tk.Label(  # Cambié el nombre de la variable
+    # Area de Telefono del Cliente
+    self.telefono_label = tk.Label(
         self.label_info,
         text="Telefono",
         fg="#1E90FF",
@@ -126,9 +129,7 @@ def mostrar_opcion3(self):
         font=("Poppins", 13, "bold"),
     )
     self.telefono_label.place(x=10, y=265)
-
-    # entrada de usuario y  validación de tabulador
-    self.telefono_entry = tk.Entry(  # Cambié el nombre de la variable
+    self.telefono_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
@@ -144,8 +145,8 @@ def mostrar_opcion3(self):
     self.telefono_entry.place(x=10, y=295)
     self.telefono_entry.bind("<Return>", lambda event: self.direccion_text.focus_set())
 
-    # usurario opcion de recuperación
-    self.direccion_label = tk.Label(  # Cambié el nombre de la variable
+    # Area de Direccion del Cliente
+    self.direccion_label = tk.Label(
         self.label_info,
         text="Direccion",
         fg="#1E90FF",
@@ -153,8 +154,6 @@ def mostrar_opcion3(self):
         font=("Poppins", 13, "bold"),
     )
     self.direccion_label.place(x=10, y=335)
-
-    # entrada de usuario y  validación de tabulador
     self.direccion_text = tk.Text(
         self.label_info,
         height=2,
@@ -168,10 +167,10 @@ def mostrar_opcion3(self):
         relief=tk.FLAT,
     )
     self.direccion_text.place(x=10, y=365)
-    self.direccion_text.bind("<Return>", lambda event: self.nombre_entry.focus_set())
+    self.direccion_text.bind("<Return>", lambda event: Agregar_Cliente(self))
 
-    # botón de guardar datos
-    guardar_button1 = tk.Button(  # Cambié el nombre de la variable
+    # Boton para añadir cliente
+    self.guardar_clientes_button = tk.Button(
         self.label_info,
         text="Añadir Cliente",
         font=("Poppins", 13, "bold"),
@@ -183,11 +182,12 @@ def mostrar_opcion3(self):
         fg="white",
         command=lambda: Agregar_Cliente(self),
     )
-    guardar_button1.place(x=35, y=445)
+    self.guardar_clientes_button.place(x=35, y=445)
 
-    # botón de guardar datos
+    # Validar que tipo de Cuenta es para usar diferentes funciones para cada una
     if self.rol_programa == "Programador" or self.rol_programa == "Administrador":
-        guardar_button2 = tk.Button(  # Cambié el nombre de la variable
+        # Boton para modificar cliente
+        self.modificar_clientes_button = tk.Button(
             self.label_info,
             text="Modificar Cliente",
             font=("Poppins", 13, "bold"),
@@ -199,10 +199,10 @@ def mostrar_opcion3(self):
             fg="white",
             command=lambda: Modificar_Cliente(self),
         )
-        guardar_button2.place(x=35, y=505)
+        self.modificar_clientes_button.place(x=35, y=505)
 
-        # botón de guardar datos
-        guardar_button3 = tk.Button(  # Cambié el nombre de la variable
+        # botón para eliminar cliente
+        self.eliminar_clientes_button = tk.Button(
             self.label_info,
             text="Eliminar Cliente",
             font=("Poppins", 13, "bold"),
@@ -214,10 +214,11 @@ def mostrar_opcion3(self):
             fg="white",
             command=lambda: Eliminar_Cliente(self),
         )
-        guardar_button3.place(x=35, y=565)
-    
+        self.eliminar_clientes_button.place(x=35, y=565)
+    # Solo para Niveles Bajos de Cuenta
     else:
-        guardar_button2 = tk.Button(  # Cambié el nombre de la variable
+        # Boton para modificar cliente pero no Funciona solo esta ahi
+        self.modificar_clientes_button = tk.Button(
             self.label_info,
             text="Modificar Cliente",
             font=("Poppins", 13, "bold"),
@@ -227,12 +228,14 @@ def mostrar_opcion3(self):
             cursor="hand2",
             activebackground="#1778FB",
             fg="white",
-           command=lambda: messagebox.showerror("Error", "No Tienes los Permisos Necesarios"),
+            command=lambda: messagebox.showerror(
+                "Error", "No Tienes los Permisos Necesarios"
+            ),
         )
-        guardar_button2.place(x=35, y=505)
+        self.modificar_clientes_button.place(x=35, y=505)
 
-        # botón de guardar datos
-        guardar_button3 = tk.Button(  # Cambié el nombre de la variable
+        # Boton para Eliminar cliente pero no Funciona solo esta ahi
+        self.eliminar_clientes_button = tk.Button(
             self.label_info,
             text="Eliminar Cliente",
             font=("Poppins", 13, "bold"),
@@ -242,12 +245,14 @@ def mostrar_opcion3(self):
             cursor="hand2",
             activebackground="#1778FB",
             fg="white",
-            command=lambda: messagebox.showerror("Error", "No Tienes los Permisos Necesarios"),
+            command=lambda: messagebox.showerror(
+                "Error", "No Tienes los Permisos Necesarios"
+            ),
         )
-        guardar_button3.place(x=35, y=565)
-        
-        
-    self.buscar_cliente_entry = tk.Entry(  # Cambié el nombre de la variable
+        self.eliminar_clientes_button.place(x=35, y=565)
+
+    # Area para buscar cliente por Documento
+    self.buscar_cliente_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
         highlightbackground="#1778FB",
@@ -262,12 +267,8 @@ def mostrar_opcion3(self):
     )
     self.buscar_cliente_entry.place(x=500, y=10)
     self.buscar_cliente_entry.bind("<Return>", lambda event: Buscar_Cliente(self))
-    
-    
-    self.lupa = utl.leer_imagen(
-            utl.resource_path("imagenes/lupa.png"), size=(31, 31)
-        )
 
+    self.lupa = utl.leer_imagen(utl.resource_path("imagenes/lupa.png"), size=(31, 31))
     self.buscar = Button(
         self.label_info,
         width=30,
@@ -279,67 +280,46 @@ def mostrar_opcion3(self):
         fg="white",
         command=lambda: Buscar_Cliente(self),
     )
-    self.buscar.place(x=760, y=10)  
+    self.buscar.place(x=760, y=10)
 
 
+# Funciones para validar Datos de Clientes
 def validate_clientes(new_value):
-    # Verifica que no haya espacios en blanco
     if " " in new_value:
         return False
-
-    # Verifica que la longitud del valor sea menor o igual a 1
     if len(new_value) > 1:
         return False
-
-    # Verifica si el valor está en la lista permitida (si no está vacío)
     if new_value:
         allowed_values = ["V", "C", "J", "P"]
         return new_value.upper() in allowed_values
-
-    # Si el valor está vacío o se está borrando, permitir
     return True
 
 
 def validate_name(new_value):
     if " " in new_value:
         return False
-
-    # Verifica que la longitud del valor sea menor o igual a 1
     if len(new_value) > 20:
         return False
-
     if new_value.isalpha() or new_value == "":
         return True
-
-    # Si el valor contiene números, la validación falla
     return False
 
 
 def validate_phone(new_value):
     if " " in new_value:
         return False
-
-    # Verifica que la longitud del valor sea menor o igual a 1
     if len(new_value) > 11:
         return False
-
     if new_value.isdigit() or new_value == "":
         return True
-
-    # Si el valor contiene caracteres no numéricos, la validación falla
     return False
 
 
 def validate_document(new_value):
     if " " in new_value:
         return False
-
-    # Verifica que la longitud del valor sea menor o igual a 1
     if len(new_value) > 10:
         return False
-
     if new_value.isdigit() or new_value == "":
         return True
-
-    # Si el valor contiene caracteres no numéricos, la validación falla
     return False

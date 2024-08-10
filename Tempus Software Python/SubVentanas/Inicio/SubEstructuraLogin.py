@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebox
 from tkinter.font import BOLD
-from Modelo.Inicio.RecuperarCuenta import *
+from tkinter import messagebox
 import util.PhotoImagenes as utl
+from Modelo.Inicio.RecuperarCuenta import *
 
 
 def SubventanaLogin(self):
@@ -14,11 +14,11 @@ def SubventanaLogin(self):
         subventana.resizable(0, 0)
         subventana.protocol("WM_DELETE_WINDOW", lambda: cerrar_sesion(self))
 
-        # frame de recupera cuenta
+        # Creación de un frame para el contenido de la subventana
         self.lgn_frame = Frame(subventana, bg="#FFFFFF")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
-        
-        self.username_label = Label(
+
+        self.informacion_ventana_label = Label(
             self.lgn_frame,
             text="Herramientas de Usuario",
             anchor="w",
@@ -26,58 +26,59 @@ def SubventanaLogin(self):
             fg="#1E90FF",
             font=("Hipstelvetica", 20),
         )
-        self.username_label.place(x=160, y=50)
+        self.informacion_ventana_label.place(x=160, y=50)
 
-        # incorporación de la imagen de la ventana principal
-        address = utl.leer_imagen(
+        # Agregar usuario
+        agregar = utl.leer_imagen(
             utl.resource_path("imagenes/agregar_usuario.png"), size=(120, 120)
         )
-        self.sign_in_image_label = Button(
+        self.boton_agregar = Button(
             self.lgn_frame,
             width=200,
-            image=address,
+            image=agregar,
             bg="#FFFFFF",
             activebackground="#FFFFFF",
             bd=0,
             cursor="hand2",
         )
-        self.sign_in_image_label.image = address
-        self.sign_in_image_label.place(x=60, y=130)
+        self.boton_agregar.image = agregar
+        self.boton_agregar.place(x=60, y=130)
 
-        # incorporación de la imagen de la ventana principal
-        delete = utl.leer_imagen(
+        # Eliminar usuario
+        borrar = utl.leer_imagen(
             utl.resource_path("imagenes/quitar_usuario.png"), size=(120, 120)
         )
-        self.sign_in_image_label = Button(
+        self.boton_borrar = Button(
             self.lgn_frame,
             width=200,
-            image=delete,
+            image=borrar,
             bg="#FFFFFF",
             activebackground="#FFFFFF",
             bd=0,
             cursor="hand2",
         )
-        self.sign_in_image_label.image = delete
-        self.sign_in_image_label.place(x=250, y=130)
+        self.boton_borrar.image = borrar
+        self.boton_borrar.place(x=250, y=130)
 
-        # incorporación de la imagen de la ventana principal
-        update = utl.leer_imagen(
+        # Modificar usuario
+        modificar = utl.leer_imagen(
             utl.resource_path("imagenes/modificar_usuario.png"), size=(120, 120)
         )
-        self.sign_in_image_label = Button(
+        self.boton_modificar = Button(
             self.lgn_frame,
             width=200,
-            image=update,
+            image=modificar,
             bg="#FFFFFF",
             activebackground="#FFFFFF",
             bd=0,
             cursor="hand2",
         )
-        self.sign_in_image_label.image = update
-        self.sign_in_image_label.place(x=440, y=130)
+        self.boton_modificar.image = modificar
+        self.boton_modificar.place(x=440, y=130)
 
+        # Abrir solo la subventana si no está abierta
         self.subventana_abierta = True
-        
+
         def cerrar_sesion(self):
             self.subventana_abierta = False
             subventana.destroy()

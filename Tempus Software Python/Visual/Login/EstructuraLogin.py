@@ -1,33 +1,32 @@
-# LIBRERÍAS
-from tkinter import *
-import tkinter as tk
-from tkinter import ttk
 import webbrowser
+import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
 from tkinter.font import BOLD
 import util.PhotoImagenes as utl
-from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
 from SubVentanas.Login.InfoSubventana import InformacionTempus as Info
+from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
 
 
 class CreateLogin:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("1000x645")
         self.root.resizable(0, 0)
+        self.root.geometry("1000x645")
         self.root.title("Inicio de Sesion")
+        self.presionado = False
         self.estado_oculto = True
         self.subventana_abierta = False
-        self.presionado = False
-        logo = "imagenes\\logo.ico"
+        logo = "imagenes\\logo2.ico"
         self.root.iconbitmap(True, logo)
 
         # creación de la ventana principal
         self.lgn_frame = Frame(self.root, bg="#f0f0f0")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
-        # incorporación de la imagen de la ventana principal
-        self.username_label = Label(
+        # Título de la ventana principal
+        self.title_label = Label(
             self.lgn_frame,
             text="Hola.",
             anchor="w",
@@ -35,9 +34,9 @@ class CreateLogin:
             fg="#1778FB",
             font=("Montserrat", 40),
         )
-        self.username_label.place(x=60, y=62)
+        self.title_label.place(x=60, y=62)
 
-        self.username_label = Label(
+        self.title2_label = Label(
             self.lgn_frame,
             text="Bienvenido!",
             anchor="w",
@@ -45,9 +44,9 @@ class CreateLogin:
             fg="#1778FB",
             font=("Montserrat", 46, "bold"),
         )
-        self.username_label.place(x=60, y=125)
+        self.title2_label.place(x=60, y=125)
 
-        # opcion del usuario para iniciar sesión o registrarse
+        # Area del Usuario
         self.username_label = Label(
             self.lgn_frame,
             text="Usuario",
@@ -57,7 +56,7 @@ class CreateLogin:
             font=("Poppins", 13, "bold"),
         )
         self.username_label.place(x=80, y=263)
-        # inserción de la entrada de texto para el usuario
+
         self.username_entry = Entry(
             self.lgn_frame,
             highlightthickness=2,
@@ -72,9 +71,26 @@ class CreateLogin:
             validatecommand=(self.root.register(self.validate_tab), "%P"),
         )
         self.username_entry.place(x=80, y=290, height=40)
-        self.username_entry.bind("<Return>", self.pasar_usuario)
+        self.username_entry.bind(
+            "<Return>", lambda event: self.password_entry.focus_set()
+        )
 
-        # opcion del Clave para iniciar sesión o registrarse
+        self.usuario = utl.leer_imagen(
+            utl.resource_path("imagenes/usuario.png"), size=(33, 33)
+        )
+        self.imagen_user_boton = Button(
+            self.lgn_frame,
+            width=30,
+            image=self.usuario,
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
+            bd=0,
+            cursor="hand2",
+            fg="white",
+        )
+        self.imagen_user_boton.place(x=40, y=292)
+
+        # Area de la Contraseña
         self.password_label = Label(
             self.lgn_frame,
             text="Contraseña",
@@ -85,7 +101,6 @@ class CreateLogin:
         )
         self.password_label.place(x=80, y=333)
 
-        # inserción de la entrada de texto para la Clave
         self.password_entry = Entry(
             self.lgn_frame,
             highlightthickness=2,
@@ -101,14 +116,12 @@ class CreateLogin:
             validatecommand=(self.root.register(self.validate_tab), "%P"),
         )
         self.password_entry.place(x=80, y=360, height=40)
-
-        self.password_entry.bind("<Return>", self.ingresar_datos)
+        self.password_entry.bind("<Return>", lambda event: Verificar(self))
 
         self.clave = utl.leer_imagen(
             utl.resource_path("imagenes/clave.png"), size=(33, 33)
         )
-
-        self.login = Button(
+        self.imagen_clave_boton = Button(
             self.lgn_frame,
             width=30,
             image=self.clave,
@@ -119,42 +132,25 @@ class CreateLogin:
             fg="white",
             command=lambda: self.Revertir(self),
         )
-        self.login.place(x=40, y=360)
+        self.imagen_clave_boton.place(x=40, y=362)
 
-        self.usuario = utl.leer_imagen(
-            utl.resource_path("imagenes/usuario.png"), size=(33, 33)
-        )
-
-        self.login = Button(
-            self.lgn_frame,
-            width=30,
-            image=self.usuario,
-            bg="#f0f0f0",
-            activebackground="#f0f0f0",
-            bd=0,
-            cursor="hand2",
-            fg="white",
-        )
-        self.login.place(x=40, y=292)
-
-        estado_boton = tk.BooleanVar(
-            value=False
-        )  # Inicializamos la variable como False
-        marcar_boton = tk.Checkbutton(
+        # Boton de Chetboc para guardar la cuenta
+        estado_boton = tk.BooleanVar(value=False)
+        self.marcar_boton = tk.Checkbutton(
             self.lgn_frame,
             fg="#232323",
             bg="#f0f0f0",
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
-            text="Recordar Cuenta",
+            text="Guardar Cuenta",
             variable=estado_boton,
         )
-        marcar_boton.place(x=75, y=405)
+        self.marcar_boton.place(x=75, y=405)
 
-        # botón para restaurar la contraseña y el usuario
-        self.forgot_button = Button(
+        # botón para restaurar la Cuenta
+        self.recuperar_button = Button(
             self.lgn_frame,
-            text="Restaurar Cuenta?",
+            text="Recuperar Cuenta?",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
@@ -163,18 +159,17 @@ class CreateLogin:
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
             cursor="hand2",
-            command=lambda: self.mensaje_opciones(),
+            command=lambda: self.mensaje_error(),
         )
-
-        self.forgot_button.place(x=255, y=405)
+        self.recuperar_button.place(x=255, y=405)
 
         # botón para iniciar sesión
-        self.boton_login = utl.leer_imagen(
+        self.imagen_iniciar_sesion = utl.leer_imagen(
             utl.resource_path("imagenes/boton1.png"), size=(170, 55)
         )
-        self.login = Button(
+        self.login_boton = Button(
             self.lgn_frame,
-            image=self.boton_login,
+            image=self.imagen_iniciar_sesion,
             width=170,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
@@ -183,32 +178,60 @@ class CreateLogin:
             fg="white",
             command=lambda: Verificar(self),
         )
-        self.login.place(x=75, y=460)
+        self.login_boton.place(x=75, y=460)
+        self.login_boton.bind("<Return>", (lambda event: Verificar(self)))
 
-        # botón para iniciar sesión
-        self.boton_login2 = utl.leer_imagen(
+        # botón para registrarse
+        self.imagen_registrarse = utl.leer_imagen(
             utl.resource_path("imagenes/boton2.png"), size=(170, 55)
         )
-        self.login2 = tk.Button(
+        self.registrarse_boton = tk.Button(
             self.lgn_frame,
-            image=self.boton_login2,
+            image=self.imagen_registrarse,
             width=170,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
             bd=0,
             cursor="hand2",
             fg="white",
-            command=lambda: self.mensaje_opciones(),
+            command=lambda: self.mensaje_error(),
         )
-        self.login2.place(x=240, y=460)
+        self.registrarse_boton.place(x=240, y=460)
 
-        # botón para iniciar sesión con la tecla enter
-        self.login.bind("<Return>", (lambda event: Verificar(self)))
-
-        # información de la versión del software
-        self.forgot_button1 = Button(
+        # Actualizar el Programa
+        self.imagen_update = utl.leer_imagen(
+            utl.resource_path("imagenes/git.png"), size=(35, 35)
+        )
+        self.update_boton = Button(
             self.lgn_frame,
-            text="Version Beta 1.0",
+            image=self.imagen_update,
+            width=50,
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
+            bd=0,
+            cursor="hand2",
+            fg="white",
+            command=lambda: self.abrir_perfil_github(),
+        )
+        self.update_boton.place(x=40, y=595)
+
+        self.update_label = Label(
+            self.lgn_frame,
+            text="Actualizar",
+            relief=FLAT,
+            borderwidth=0,
+            background="#f0f0f0",
+            fg="#232323",
+            bg="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            activebackground="#f0f0f0",
+        )
+        self.update_label.place(x=82, y=604)
+
+        # Version del Programa
+        self.version_boton = Button(
+            self.lgn_frame,
+            text="Version Beta 2.2",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
@@ -219,45 +242,47 @@ class CreateLogin:
             cursor="hand2",
             command=lambda: Info(self=self),
         )
-        self.forgot_button1.place(x=40, y=600)
+        self.version_boton.place(x=270, y=600)
 
-        self.boton_login6 = utl.leer_imagen(
+        # Fondo de la Ventana de Login
+        self.imagen_fondo_login = utl.leer_imagen(
             utl.resource_path("imagenes/fondo2.jpg"), size=(500, 645)
         )
-        self.login2 = Button(
+        self.fondo_label = Label(
             self.lgn_frame,
-            image=self.boton_login6,
-            width=500,
+            image=self.imagen_fondo_login,
+            width=501,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
             bd=0,
         )
-        self.login2.place(x=500)
+        self.fondo_label.place(x=500)
 
+        # Abrir la Ventana de Login
         self.root.mainloop()
 
-    def pasar_usuario(self, event):
-        self.password_entry.focus_set()
-
-    def ingresar_datos(self, event):
-        if event.keysym == "Return":
-            Verificar(self)
-
+    # Validación de Entradas de Texto para el Usuario y la Contraseña
     def validate_tab(self, new_value):
-        # Verifica que no haya espacios en blanco
         return not (" " in new_value) and len(new_value) <= 50
 
+    # Revelar o Ocultar la Contraseña en el Campo de Entrada de Texto para la Contraseña
     def Revertir(self, event):
         self.estado_oculto = not self.estado_oculto
-        # Actualiza el modo de visualización del campo de entrada
         if self.estado_oculto:
             self.password_entry.config(show="*")  # Mostrar asteriscos
         else:
             self.password_entry.config(show="")  # Mostrar texto normal
 
-    def mensaje_opciones(self):
+    # Mensaje para Opciones no Disponibles en EL Programa
+    def mensaje_error(self):
         messagebox.showerror("Error", "Inicia Sesion para Usar esta Opcion")
-        
-        
+
+    # Abrir el Perfil de GitHub para Actualizar el Programa
+    def abrir_perfil_github(self):
+        # Abre el perfil de Instagram en el navegador
+        perfil_github = "https://github.com/StudiosDanilIs/Tempus_Tkinter"  # Reemplaza con el perfil deseado
+        webbrowser.open(perfil_github)
+
+
 if __name__ == "__main__":
     CreateLogin()

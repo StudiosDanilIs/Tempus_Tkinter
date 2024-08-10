@@ -1,12 +1,11 @@
-import mysql.connector
 from tkinter import *
+import mysql.connector
 from tkinter import messagebox
 from Visual.Inicio.InicioTempus import VentanaPrincipal
 
 
-# verificar la conexion a la base de datos y verificar si el usuario y la contraseña son correctos
+# Verifica los datos para iniciar sesión en el programa
 def verificar_sesion(self):
-    # conexion a la base de datos
     try:
         connection = mysql.connector.connect(
             host="127.0.0.1",
@@ -16,40 +15,48 @@ def verificar_sesion(self):
             port=3306,
         )
         cursor = connection.cursor()
-    # mensaje de error si no se puede conectar a la base de datos
     except mysql.connector.Error as err:
         return messagebox.showerror(
             message=f"Error de conexión: {err}", title="Mensaje"
         )
-    # instancia de la clase VentanaPrincipal si el usuario y la contraseña son correctos
+
+    # Datos a Ingresar en la Base de Datos
     usuario = self.username_entry.get()
     password = self.password_entry.get()
 
-    # consulta a la base de datos para verificar si el usuario y la contraseña son correctos
+    # Verificar si la cuenta y la contraseña son correctas
     try:
         cursor.execute(
-            "SELECT * FROM usuarios WHERE Cuenta = %s AND Clave = %s",
+            "SELECT Nombre, id_RolUsuario FROM usuarios WHERE Cuenta = %s AND Clave = %s",
             (usuario, password),
         )
         resultado = cursor.fetchone()
-        # si el usuario y la contraseña son correctos, se muestra un mensaje de bienvenida y se abre la ventana principal
+
         if resultado:
-            # Obtener el ID del rol del usuario
-            id_rol = resultado[1]  # Ajusta según tu estructura de datos
+            # Se obtiene el nombre del usuario y el id del rol
+            nombre = resultado[0]  # El nombre está en la primera columna
+            id_rol = resultado[1]  # El id del rol está en la segunda columna
 
             # Consultar la tabla de roles para obtener el nombre del rol
-            cursor.execute("SELECT NombreRol FROM rolusuario WHERE id_RolUsuario = %s", (id_rol,))
-            #cursor.execute("SELECT id_Usuario FROM usuarios WHERE id_Usuario = %s", (id_rol,))
-            nombre_rol = cursor.fetchone()[0]  # Obtener el primer resultado (nombre del rol)
+            cursor.execute(
+                "SELECT NombreRol FROM rolusuario WHERE id_RolUsuario = %s", (id_rol,)
+            )
+            nombre_rol = cursor.fetchone()[
+                0
+            ]  # Obtener el nombre del rol desde la consulta
 
-            # Mostrar el nivel de permisos en un mensaje de bienvenida
-            messagebox.showinfo(message=f"Bienvenido {nombre_rol} a Tempus Software", title="Mensaje")
-            self.root.destroy()
-            VentanaPrincipal(nombre_rol)
-        # si el usuario y la contraseña son incorrectos, se muestra un mensaje de error
+            # Muestra un mensaje de bienvenida y da acceso a la ventana principal
+            messagebox.showinfo(
+                message=f"Bienvenido {nombre} a Tempus Software", title="Mensaje"
+            )
+            self.root.destroy()  # Cierra la ventana de inicio de sesión
+            VentanaPrincipal(
+                nombre, nombre_rol
+            )  # Abre la ventana principal con el nombre del usuario y el rol
         else:
-            messagebox.showerror(message="Los Datos son Inválidos", title="Mensaje")
-    # mensaje de error si no se puede ejecutar la consulta
+            messagebox.showerror(
+                message="La Cuenta no se Encuentra Registrada.", title="Mensaje"
+            )
     except mysql.connector.Error as err:
         messagebox.showerror(message=f"Error en la consulta: {err}", title="Mensaje")
     finally:

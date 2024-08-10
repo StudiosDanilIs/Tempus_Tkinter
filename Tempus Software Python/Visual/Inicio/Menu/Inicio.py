@@ -1,35 +1,41 @@
-from tkinter import *
 import tkinter as tk
-import util.PhotoImagenes as utl
+from tkinter import *
 from tkinter import Frame
+import util.PhotoImagenes as utl
 import tkinter.messagebox as messagebox
-from SubVentanas.Inicio.SubEstructuraLogin import SubventanaLogin as MySubventana
 from util.Funciones import actualizar_reloj
+from SubVentanas.Inicio.SubEstructuraLogin import SubventanaLogin as MySubventana
 
 
 def mostrar_opcion1(self):
+    # Limpiar el contenido del frame principal
     self.limpiar_contenido()
     self.subventana_abierta = False
-    self.root2.title("Inicio Sistema")   
-    
-    self.label_reloj = tk.Label(self.label_info, width=20, font=("Poppins", 48), bg="#f0f0f0", fg="#1E90FF")
+    self.root2.title("Ventana Principal")
+
+    # Muestra un RELOJ DIGITAL en la ventana principal
+    self.label_reloj = tk.Label(
+        self.label_info, width=20, font=("Poppins", 48), bg="#f0f0f0", fg="#1E90FF"
+    )
     self.label_reloj.place(x=90, y=200)
 
-    self.label_dia = tk.Label(self.label_info, font=("Poppins", 24), bg="#f0f0f0", fg="#1E90FF")
+    # Muestra un CALENDARIO en la ventana principal
+    self.label_dia = tk.Label(
+        self.label_info, font=("Poppins", 24), bg="#f0f0f0", fg="#1E90FF"
+    )
     self.label_dia.place(x=60, y=120)
-
+    # Actualizar el reloj y el día cada segundo
     actualizar_reloj(self)
-        
-      
+
     # Etiqueta de bienvenida
-    self.username_label = Label(
+    self.title_label = Label(
         self.label_info,
-        text="Bienvenido de vuelta!",
+        text=f"Bienvenido de vuelta! {self.nombre_cuenta}",
         bg="#f0f0f0",
         fg="#1E90FF",
         font=("Montserrat", 20),
     )
-    self.username_label.place(x=60, y=80)
+    self.title_label.place(x=60, y=80)
 
     # Etiqueta de Eslogan
     self.eslogan_label = Label(
