@@ -148,7 +148,7 @@ class CreateLogin:
         self.marcar_boton.place(x=75, y=405)
 
         # botón para restaurar la Cuenta
-        self.recuperar_button = Button(
+        self.recuperar_button = Label(
             self.lgn_frame,
             text="Recuperar Cuenta?",
             relief=FLAT,
@@ -159,9 +159,8 @@ class CreateLogin:
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
             cursor="hand2",
-            command=lambda: self.mensaje_error(),
         )
-        self.recuperar_button.place(x=255, y=405)
+        self.recuperar_button.place(x=255, y=410)
 
         # botón para iniciar sesión
         self.imagen_iniciar_sesion = utl.leer_imagen(

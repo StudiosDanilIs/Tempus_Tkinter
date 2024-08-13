@@ -280,7 +280,7 @@ def mostrar_opcion3(self):
         fg="white",
         command=lambda: Buscar_Cliente(self),
     )
-    self.buscar.place(x=760, y=10)
+    self.buscar.place(x=765, y=10)
 
 
 # Funciones para validar Datos de Clientes

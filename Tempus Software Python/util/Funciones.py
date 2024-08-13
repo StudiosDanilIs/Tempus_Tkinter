@@ -9,7 +9,7 @@ locale.setlocale(locale.LC_ALL, "es_VE.UTF-8")
 def actualizar_reloj(self):
     if hasattr(self, "label_reloj") and self.label_reloj.winfo_exists():
         hora_actual = datetime.now().strftime("%I:%M %p")
-        dia_actual = datetime.now().strftime("%A").capitalize()
+        dia_actual = datetime.now().strftime("%A, %d\nde %B %Y").capitalize()
         self.label_reloj.config(text=hora_actual)
         self.label_dia.config(text=dia_actual.capitalize())
         self.root2.after(1000, lambda: actualizar_reloj(self))

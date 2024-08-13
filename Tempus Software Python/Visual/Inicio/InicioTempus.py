@@ -102,7 +102,7 @@ class VentanaPrincipal:
 
         # Creación del Frame para las opciones
         self.label_info = tk.Frame(
-            self.root2, bd=0, width=300, relief=tk.SOLID, padx=10, pady=10, bg="#f0f0f0"
+            self.root2, bd=0, width=300, relief=tk.SOLID, padx=0, pady=0, bg="#f0f0f0"
         )
         self.label_info.pack(side="left", expand=tk.YES, fill=tk.BOTH)
 

@@ -4,60 +4,519 @@ from tkinter import Frame
 import util.PhotoImagenes as utl
 import tkinter.messagebox as messagebox
 from util.Funciones import actualizar_reloj
-from SubVentanas.Inicio.SubEstructuraLogin import SubventanaLogin as MySubventana
 
 
 def mostrar_opcion1(self):
     # Limpiar el contenido del frame principal
     self.limpiar_contenido()
     self.subventana_abierta = False
-    self.root2.title("Ventana Principal")
-
-    # Muestra un RELOJ DIGITAL en la ventana principal
-    self.label_reloj = tk.Label(
-        self.label_info, width=20, font=("Poppins", 48), bg="#f0f0f0", fg="#1E90FF"
+    self.root2.title("Inicio - Area de Cuentas")
+    
+    # Etiqueta de bienvenida
+    self.imagen_perfil = utl.leer_imagen(
+        utl.resource_path("imagenes/2.png"), size=(40, 40)
     )
-    self.label_reloj.place(x=90, y=200)
+    self.imagen_perfil_boton = Label(
+        self.label_info,
+        image=self.imagen_perfil,
+        width=50,
+        bg="#f0f0f0",
+        activebackground="#f0f0f0",
+        bd=0,
+        cursor="hand2",
+        fg="white",
+    )
+    self.imagen_perfil_boton.place(x=150, y=10)
+
+    self.bienvenida_label = Label(
+        self.label_info,
+        text=f"{self.nombre_cuenta}\nBienvenido de vuelta!",
+        bg="#f0f0f0",
+        fg="#1E90FF",
+        font=("Avenir", 15),
+        anchor="w",
+        justify="left",
+    )
+    self.bienvenida_label.place(x=200, y=5)
+
+
+
+    # Frame para mostrar la información dinámica
+    self.info_frame = Frame(self.label_info, bg="#f0f0f0")
+    self.info_frame.place(x=70, y=150, width=500, height=700)
+
+    # Botones para cambiar la información
+    self.imagen_agregar = utl.leer_imagen(
+        utl.resource_path("imagenes/editar.png"), size=(58, 58)
+    )
+    self.imagen_agregar_boton = Button(
+        self.label_info,
+        image=self.imagen_agregar,
+        width=115,
+        height=115,
+        bg="#FFFFFF",
+        activebackground="#FFFFFF",
+        bd=0,
+        cursor="hand2",
+        fg="white",
+        command=lambda: mostrar_informacion(self, "Modificar Cuenta"),
+    )
+    self.imagen_agregar_boton.place(x=0, y=0)
+
+    self.imagen_eliminar = utl.leer_imagen(
+        utl.resource_path("imagenes/agregar.png"), size=(58, 58)
+    )
+    self.imagen_eliminar_boton = Button(
+        self.label_info,
+        image=self.imagen_eliminar,
+        width=115,
+        height=115,
+        bg="#FFFFFF",
+        activebackground="#FFFFFF",
+        bd=0,
+        cursor="hand2",
+        fg="white",
+        command=lambda: mostrar_informacion(self, "Agregar Cuenta"),
+    )
+    self.imagen_eliminar_boton.place(x=0, y=117)
+
+    self.imagen_modificar = utl.leer_imagen(
+        utl.resource_path("imagenes/borrar.png"), size=(58, 58)
+    )
+    self.imagen_modificar_boton = Button(
+        self.label_info,
+        image=self.imagen_modificar,
+        width=115,
+        height=115,
+        bg="#FFFFFF",
+        activebackground="#FFFFFF",
+        bd=0,
+        cursor="hand2",
+        fg="white",
+        command=lambda: mostrar_informacion(self, "Eliminar Cuenta"),
+    )
+    self.imagen_modificar_boton.place(x=0, y=234)
+    
+    
+    self.espacio_blanco = Label(
+        self.label_info,
+        width=15,
+        height=40,
+        bg="#FFFFFF",
+        activebackground="#FFFFFF",
+        bd=0,
+        fg="white",
+    )
+    self.espacio_blanco.place(x=0, y=351, width=117)
+
 
     # Muestra un CALENDARIO en la ventana principal
     self.label_dia = tk.Label(
-        self.label_info, font=("Poppins", 24), bg="#f0f0f0", fg="#1E90FF"
-    )
-    self.label_dia.place(x=60, y=120)
-    # Actualizar el reloj y el día cada segundo
-    actualizar_reloj(self)
-
-    # Etiqueta de bienvenida
-    self.title_label = Label(
         self.label_info,
-        text=f"Bienvenido de vuelta! {self.nombre_cuenta}",
+        font=("Avenir", 18),
+        anchor="w",
+        justify="left",
         bg="#f0f0f0",
         fg="#1E90FF",
-        font=("Montserrat", 20),
     )
-    self.title_label.place(x=60, y=80)
+    self.label_dia.place(x=705, y=120)
 
-    # Etiqueta de Eslogan
-    self.eslogan_label = Label(
-        self.label_info,
-        text="Tu aliado tecnológico: eficiencia y confianza al\n alcance de tu mano.",
-        bg="#f0f0f0",
-        fg="#000000",
-        font=("Avenir", 13),
+    # Muestra un RELOJ DIGITAL en la ventana principal
+    self.label_reloj = tk.Label(
+        self.label_info, width=20, font=("Avenir", 25), bg="#f0f0f0", fg="#1E90FF"
     )
-    self.eslogan_label.place(x=60, y=160)
+    self.label_reloj.place(x=600, y=300)
+    actualizar_reloj(self)
 
-    # Etiqueta de permisos
-    self.rol_label = Button(
-        self.label_info,
-        text="Nivel de Permisos:",
-        font=("Avenir", 14),
-        width=30,
-        bd=0,
-        bg="#1E90FF",
-        cursor="hand2",
-        activebackground="#3047ff",
-        fg="white",
-        command=lambda: MySubventana(self),
-    )
-    self.rol_label.place(x=60, y=200)
+    mostrar_informacion(self, "Inicio Sistema")
+
+
+def mostrar_informacion(self, opcion):
+    # Limpiar el contenido del frame de información
+    for widget in self.info_frame.winfo_children():
+        widget.destroy()
+        
+    
+    if opcion == "Modificar Cuenta":
+        label = Label(
+            self.info_frame,
+            text="Modificar Usuario",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Montserrat", 17, "bold"),
+        )
+        label.place(x=130, y=10)
+
+        self.password_label = Label(
+            self.info_frame,
+            text="Usuario",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=60)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=90)
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Contraseña",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=130)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=160)
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Nuevo Usuario",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=200)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=230)
+        
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Nueva Contraseña",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=270)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=300)
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Clave Unica",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=340)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=370)
+        
+        self.guardar_clientes_button = tk.Button(
+            self.info_frame,
+            text="Modificar Datos",
+            font=("Poppins", 13, "bold"),
+            width=22,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+        )
+        self.guardar_clientes_button.place(x=142, y=420)
+
+
+    elif opcion == "Agregar Cuenta":
+        label = Label(
+            self.info_frame,
+            text="Agregar Usuario",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Montserrat", 17, "bold"),
+        )
+        label.place(x=130, y=10)
+
+        self.password_label = Label(
+            self.info_frame,
+            text="Nombre",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=60)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=90)
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Cedula",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=130)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=160)
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Usuario",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=200)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=230)
+        
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Contraseña",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=270)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=300)
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Clave Unica",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=340)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=370)
+        
+        self.guardar_clientes_button = tk.Button(
+            self.info_frame,
+            text="Guardar Datos",
+            font=("Poppins", 13, "bold"),
+            width=22,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+        )
+        self.guardar_clientes_button.place(x=142, y=420)
+        
+
+    elif opcion == "Eliminar Cuenta" and self.rol_programa == "Administrador":
+        label = Label(
+            self.info_frame,
+            text="Eliminar Usuario",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Montserrat", 17, "bold"),
+        )
+        label.place(x=130, y=10)
+
+        self.password_label = Label(
+            self.info_frame,
+            text="Cedula",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=60)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=90)
+        
+        self.password_label = Label(
+            self.info_frame,
+            text="Clave Unica",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.password_label.place(x=70, y=130)
+
+        self.password_entry = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+        )
+        self.password_entry.place(x=140, y=160)
+        
+        self.guardar_clientes_button = tk.Button(
+            self.info_frame,
+            text="Eliminar Datos",
+            font=("Poppins", 13, "bold"),
+            width=22,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+        )
+        self.guardar_clientes_button.place(x=142, y=210)
+
+
+    elif opcion == "Inicio Sistema":
+        self.title_label = Label(
+            self.info_frame,
+            text="Interfaz",
+            anchor="w",
+            bg="#f0f0f0",
+            fg="#1778FB",
+            font=("Montserrat", 30),
+        )
+        self.title_label.place(x=80, y=10)
+
+        self.title2_label = Label(
+            self.info_frame,
+            text="para opciones\nde Usuario",
+            anchor="w",
+            justify=LEFT,
+            bg="#f0f0f0",
+            fg="#1778FB",
+            font=("Montserrat", 36, "bold"),
+        )
+        self.title2_label.place(x=80, y=57)

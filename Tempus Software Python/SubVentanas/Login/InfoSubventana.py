@@ -74,10 +74,10 @@ def InformacionTempus(self):
             text_label.pack()
 
         # Agregar perfiles de equipo
-        crear_perfil("Daniel Hernandez", "Backend - Frontend - DBA", "user.png")
-        crear_perfil("Victor Ramirez", "Frontend - Diseñador", "user.png")
-        crear_perfil("Einner Zambrano", "Colaborador", "user.png")
-        crear_perfil("Daniel Grimaldo", "Colaborador", "user.png")
+        crear_perfil("Daniel Hernandez", "Backend - Frontend - DBA", "2.png")
+        crear_perfil("Victor Ramirez", "Frontend - Diseñador", "1.png")
+        crear_perfil("Einner Zambrano", "Colaborador", "2.png")
+        crear_perfil("Daniel Grimaldo", "Colaborador", "1.png")
 
         # permite que la subventana se abra solo si no está abierta
         self.subventana_abierta = True
