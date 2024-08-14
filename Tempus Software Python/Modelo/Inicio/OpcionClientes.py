@@ -237,6 +237,35 @@ def Modificar_Cliente(self):
         connection.close()
 
 
+def Obtener_Clientes(self):
+    try:
+        connection = mysql.connector.connect(
+            host="127.0.0.1",
+            user="root",
+            passwd="210605",
+            db="registro",
+            port=3306,
+        )
+        cursor = connection.cursor()
+
+        # Obtener todos los registros
+        cursor.execute("SELECT id_Cliente, Nombre, Apellido, Cedula, Telefono FROM datoscliente")
+        resultados = cursor.fetchall()
+
+        # Limpiar el Treeview antes de agregar nuevos datos
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+
+        # Agregar los datos al Treeview
+        for fila in resultados:
+            self.tree.insert("", "end", values=fila)
+
+    except mysql.connector.Error as err:
+        messagebox.showerror(message=f"Error al obtener los clientes: {err}", title="Mensaje")
+    finally:
+        connection.close()
+
+
 # Elimina los Datos en la Entrada de Texto de la Interfaz Gráfica
 def limpiar_campos(self):
     self.nombre_entry.delete(0, END)

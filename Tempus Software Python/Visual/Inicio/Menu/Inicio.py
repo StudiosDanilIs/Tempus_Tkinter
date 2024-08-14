@@ -11,7 +11,7 @@ def mostrar_opcion1(self):
     self.limpiar_contenido()
     self.subventana_abierta = False
     self.root2.title("Inicio - Area de Cuentas")
-    
+
     # Etiqueta de bienvenida
     self.imagen_perfil = utl.leer_imagen(
         utl.resource_path("imagenes/2.png"), size=(40, 40)
@@ -26,7 +26,7 @@ def mostrar_opcion1(self):
         cursor="hand2",
         fg="white",
     )
-    self.imagen_perfil_boton.place(x=150, y=10)
+    self.imagen_perfil_boton.place(x=695, y=10)
 
     self.bienvenida_label = Label(
         self.label_info,
@@ -37,13 +37,11 @@ def mostrar_opcion1(self):
         anchor="w",
         justify="left",
     )
-    self.bienvenida_label.place(x=200, y=5)
-
-
+    self.bienvenida_label.place(x=745, y=5)
 
     # Frame para mostrar la información dinámica
     self.info_frame = Frame(self.label_info, bg="#f0f0f0")
-    self.info_frame.place(x=70, y=150, width=500, height=700)
+    self.info_frame.place(x=70, y=150, width=800, height=700)
 
     # Botones para cambiar la información
     self.imagen_agregar = utl.leer_imagen(
@@ -96,8 +94,7 @@ def mostrar_opcion1(self):
         command=lambda: mostrar_informacion(self, "Eliminar Cuenta"),
     )
     self.imagen_modificar_boton.place(x=0, y=234)
-    
-    
+
     self.espacio_blanco = Label(
         self.label_info,
         width=15,
@@ -109,7 +106,6 @@ def mostrar_opcion1(self):
     )
     self.espacio_blanco.place(x=0, y=351, width=117)
 
-
     # Muestra un CALENDARIO en la ventana principal
     self.label_dia = tk.Label(
         self.label_info,
@@ -119,13 +115,13 @@ def mostrar_opcion1(self):
         bg="#f0f0f0",
         fg="#1E90FF",
     )
-    self.label_dia.place(x=705, y=120)
+    self.label_dia.place(x=415, y=5)
 
     # Muestra un RELOJ DIGITAL en la ventana principal
     self.label_reloj = tk.Label(
-        self.label_info, width=20, font=("Avenir", 25), bg="#f0f0f0", fg="#1E90FF"
+        self.label_info, width=8, font=("Avenir", 25), bg="#f0f0f0", fg="#1E90FF"
     )
-    self.label_reloj.place(x=600, y=300)
+    self.label_reloj.place(x=165, y=5)
     actualizar_reloj(self)
 
     mostrar_informacion(self, "Inicio Sistema")
@@ -135,8 +131,7 @@ def mostrar_informacion(self, opcion):
     # Limpiar el contenido del frame de información
     for widget in self.info_frame.winfo_children():
         widget.destroy()
-        
-    
+
     if opcion == "Modificar Cuenta":
         label = Label(
             self.info_frame,
@@ -170,7 +165,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=90)
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Contraseña",
@@ -194,7 +189,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=160)
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Nuevo Usuario",
@@ -218,8 +213,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=230)
-        
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Nueva Contraseña",
@@ -243,7 +237,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=300)
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Clave Unica",
@@ -267,7 +261,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=370)
-        
+
         self.guardar_clientes_button = tk.Button(
             self.info_frame,
             text="Modificar Datos",
@@ -280,7 +274,6 @@ def mostrar_informacion(self, opcion):
             fg="white",
         )
         self.guardar_clientes_button.place(x=142, y=420)
-
 
     elif opcion == "Agregar Cuenta":
         label = Label(
@@ -315,7 +308,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=90)
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Cedula",
@@ -339,7 +332,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=160)
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Usuario",
@@ -363,8 +356,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=230)
-        
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Contraseña",
@@ -388,7 +380,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=300)
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Clave Unica",
@@ -413,21 +405,38 @@ def mostrar_informacion(self, opcion):
         )
         self.password_entry.place(x=140, y=370)
         
-        self.guardar_clientes_button = tk.Button(
-            self.info_frame,
-            text="Guardar Datos",
-            font=("Poppins", 13, "bold"),
-            width=22,
-            bd=0,
-            bg="#1E90FF",
-            cursor="hand2",
-            activebackground="#1778FB",
-            fg="white",
-        )
-        self.guardar_clientes_button.place(x=142, y=420)
-        
+        if self.rol_programa == "Administrador":
+            self.guardar_clientes_button = tk.Button(
+                self.info_frame,
+                text="Guardar Datos",
+                font=("Poppins", 13, "bold"),
+                width=22,
+                bd=0,
+                bg="#1E90FF",
+                cursor="hand2",
+                activebackground="#1778FB",
+                fg="white",
+            )
+            self.guardar_clientes_button.place(x=142, y=420)
 
-    elif opcion == "Eliminar Cuenta" and self.rol_programa == "Administrador":
+        else:
+            self.guardar_clientes_button = tk.Button(
+                self.info_frame,
+                text="Eliminar Datos",
+                font=("Poppins", 13, "bold"),
+                width=22,
+                bd=0,
+                bg="#1E90FF",
+                cursor="hand2",
+                activebackground="#1778FB",
+                fg="white",
+                command=lambda: messagebox.showerror(
+                    "Error", "No Tienes los Permisos Necesarios"
+                ),
+            )
+            self.guardar_clientes_button.place(x=142, y=420)
+
+    elif opcion == "Eliminar Cuenta":
         label = Label(
             self.info_frame,
             text="Eliminar Usuario",
@@ -460,7 +469,7 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=90)
-        
+
         self.password_label = Label(
             self.info_frame,
             text="Clave Unica",
@@ -484,20 +493,37 @@ def mostrar_informacion(self, opcion):
             width=25,
         )
         self.password_entry.place(x=140, y=160)
-        
-        self.guardar_clientes_button = tk.Button(
-            self.info_frame,
-            text="Eliminar Datos",
-            font=("Poppins", 13, "bold"),
-            width=22,
-            bd=0,
-            bg="#1E90FF",
-            cursor="hand2",
-            activebackground="#1778FB",
-            fg="white",
-        )
-        self.guardar_clientes_button.place(x=142, y=210)
 
+        if self.rol_programa == "Administrador":
+            self.guardar_clientes_button = tk.Button(
+                self.info_frame,
+                text="Eliminar Datos",
+                font=("Poppins", 13, "bold"),
+                width=22,
+                bd=0,
+                bg="#1E90FF",
+                cursor="hand2",
+                activebackground="#1778FB",
+                fg="white",
+            )
+            self.guardar_clientes_button.place(x=142, y=210)
+
+        else:
+            self.guardar_clientes_button = tk.Button(
+                self.info_frame,
+                text="Eliminar Datos",
+                font=("Poppins", 13, "bold"),
+                width=22,
+                bd=0,
+                bg="#1E90FF",
+                cursor="hand2",
+                activebackground="#1778FB",
+                fg="white",
+                command=lambda: messagebox.showerror(
+                    "Error", "No Tienes los Permisos Necesarios"
+                ),
+            )
+            self.guardar_clientes_button.place(x=142, y=210)
 
     elif opcion == "Inicio Sistema":
         self.title_label = Label(
@@ -508,7 +534,7 @@ def mostrar_informacion(self, opcion):
             fg="#1778FB",
             font=("Montserrat", 30),
         )
-        self.title_label.place(x=80, y=10)
+        self.title_label.place(x=300, y=60)
 
         self.title2_label = Label(
             self.info_frame,
@@ -519,4 +545,4 @@ def mostrar_informacion(self, opcion):
             fg="#1778FB",
             font=("Montserrat", 36, "bold"),
         )
-        self.title2_label.place(x=80, y=57)
+        self.title2_label.place(x=300, y=107)

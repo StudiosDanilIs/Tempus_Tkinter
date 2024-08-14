@@ -29,7 +29,7 @@ class App:
             cursor="hand2",
             fg="white",
         )
-        self.imagen_perfil_boton.place(x=150, y=10)
+        self.imagen_perfil_boton.place(x=750, y=10)
 
         self.bienvenida_label = Label(
             self.label_info,
@@ -40,13 +40,13 @@ class App:
             anchor="w",
             justify="left",
         )
-        self.bienvenida_label.place(x=200, y=5)
+        self.bienvenida_label.place(x=800, y=5)
 
 
 
         # Frame para mostrar la información dinámica
         self.info_frame = Frame(self.label_info, bg="#f0f0f0")
-        self.info_frame.place(x=70, y=150, width=500, height=700)
+        self.info_frame.place(x=70, y=150, width=800, height=700)
 
         # Botones para cambiar la información
         self.imagen_agregar = utl.leer_imagen(
@@ -122,13 +122,13 @@ class App:
             bg="#f0f0f0",
             fg="#1E90FF",
         )
-        self.label_dia.place(x=705, y=120)
+        self.label_dia.place(x=450, y=5)
 
         # Muestra un RELOJ DIGITAL en la ventana principal
         self.label_reloj = tk.Label(
-            self.label_info, width=20, font=("Avenir", 25), bg="#f0f0f0", fg="#1E90FF"
+            self.label_info, width=8, font=("Avenir", 25), bg="#f0f0f0", fg="#1E90FF"
         )
-        self.label_reloj.place(x=600, y=300)
+        self.label_reloj.place(x=200, y=5)
         actualizar_reloj(self)
 
         self.mostrar_informacion("Inicio Sistema")
@@ -510,7 +510,7 @@ class App:
                 fg="#1778FB",
                 font=("Montserrat", 30),
             )
-            self.title_label.place(x=80, y=10)
+            self.title_label.place(x=300, y=10)
 
             self.title2_label = Label(
                 self.info_frame,
@@ -521,7 +521,7 @@ class App:
                 fg="#1778FB",
                 font=("Montserrat", 36, "bold"),
             )
-            self.title2_label.place(x=80, y=57)
+            self.title2_label.place(x=300, y=57)
 
 root = Tk()
 app = App(root)

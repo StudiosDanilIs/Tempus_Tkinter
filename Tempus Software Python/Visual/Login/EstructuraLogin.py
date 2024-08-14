@@ -230,7 +230,7 @@ class CreateLogin:
         # Version del Programa
         self.version_boton = Button(
             self.lgn_frame,
-            text="Version Beta 2.2",
+            text="Version Beta 3.0",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
