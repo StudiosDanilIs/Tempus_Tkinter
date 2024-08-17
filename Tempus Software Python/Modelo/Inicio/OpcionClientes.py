@@ -20,12 +20,12 @@ def Agregar_Cliente(self):
         )
 
     # Datos a Ingresar en la Base de Datos
-    name = self.nombre_entry.get()
-    apellido = self.apellido_entry.get()
-    documento = self.tipo_cedula_entry.get()
+    name = self.nombre_entry.get().capitalize()
+    apellido = self.apellido_entry.get().capitalize()
+    documento = self.tipo_cedula_entry.get().capitalize()
     cedula = self.cedula_entry.get()
     telefono = self.telefono_entry.get()
-    direccion = self.direccion_text.get("1.0", "end-1c")
+    direccion = self.direccion_text.get("1.0", "end-1c").capitalize()
 
     # Verifica que los campos no estén vacíos
     if (
@@ -195,12 +195,12 @@ def Modificar_Cliente(self):
         )
 
     # Datos a Ingresar en la Base de Datos
-    name = self.nombre_entry.get()
-    apellido = self.apellido_entry.get()
-    documento = self.tipo_cedula_entry.get()
+    name = self.nombre_entry.get().capitalize()
+    apellido = self.apellido_entry.get().capitalize()
+    documento = self.tipo_cedula_entry.get().capitalize()
     cedula = self.cedula_entry.get()
     telefono = self.telefono_entry.get()
-    direccion = self.direccion_text.get("1.0", "end-1c")
+    direccion = self.direccion_text.get("1.0", "end-1c").capitalize()
 
     # Verifica que los campos no estén vacíos
     if len(cedula) < 8:
