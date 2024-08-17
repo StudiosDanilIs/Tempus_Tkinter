@@ -14,7 +14,7 @@ class CreateLogin:
         self.root = tk.Tk()
         self.root.resizable(0, 0)
         self.root.geometry("1000x645")
-        self.root.title("Inicio de Sesion")
+        self.root.title("Inicio de Sesión")
         self.presionado = False
         self.estado_oculto = True
         self.subventana_abierta = False
@@ -164,7 +164,7 @@ class CreateLogin:
 
         # botón para iniciar sesión
         self.imagen_iniciar_sesion = utl.leer_imagen(
-            utl.resource_path("imagenes/boton1.png"), size=(170, 55)
+            utl.resource_path("imagenes/boton_iniciar_sesion.png"), size=(170, 55)
         )
         self.login_boton = Button(
             self.lgn_frame,
@@ -182,7 +182,7 @@ class CreateLogin:
 
         # botón para registrarse
         self.imagen_registrarse = utl.leer_imagen(
-            utl.resource_path("imagenes/boton2.png"), size=(170, 55)
+            utl.resource_path("imagenes/boton_registrarse.png"), size=(170, 55)
         )
         self.registrarse_boton = tk.Button(
             self.lgn_frame,
@@ -230,7 +230,7 @@ class CreateLogin:
         # Version del Programa
         self.version_boton = Button(
             self.lgn_frame,
-            text="Version Beta 3.0",
+            text="Versión Beta 3.0",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",

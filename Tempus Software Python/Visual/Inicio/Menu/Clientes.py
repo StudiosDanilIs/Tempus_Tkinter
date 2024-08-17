@@ -8,7 +8,7 @@ from Modelo.Inicio.OpcionClientes import (
     Modificar_Cliente,
     Eliminar_Cliente,
     Buscar_Cliente,
-    Obtener_Clientes
+    Obtener_Clientes,
 )
 
 
@@ -21,7 +21,7 @@ def mostrar_opcion3(self):
     # Titulo de la ventana
     titel_label = tk.Label(
         self.label_info,
-        text="Informacion del Cliente",
+        text="Información del Cliente",
         fg="#1778FB",
         bg="#f0f0f0",
         font=("Poppins", 17, "bold"),
@@ -84,7 +84,7 @@ def mostrar_opcion3(self):
     # Area de Cedula del Cliente
     self.cedula_label = tk.Label(
         self.label_info,
-        text="Cedula",
+        text="Cédula",
         fg="#1E90FF",
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
@@ -124,7 +124,7 @@ def mostrar_opcion3(self):
     # Area de Telefono del Cliente
     self.telefono_label = tk.Label(
         self.label_info,
-        text="Telefono",
+        text="Teléfono",
         fg="#1E90FF",
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
@@ -149,7 +149,7 @@ def mostrar_opcion3(self):
     # Area de Direccion del Cliente
     self.direccion_label = tk.Label(
         self.label_info,
-        text="Direccion",
+        text="Dirección",
         fg="#1E90FF",
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
@@ -269,8 +269,8 @@ def mostrar_opcion3(self):
     self.buscar_cliente_entry.place(x=320, y=30)
     self.buscar_cliente_entry.bind("<Return>", lambda event: Buscar_Cliente(self))
 
-    self.lupa = utl.leer_imagen(utl.resource_path("imagenes/lupa.png"), size=(31, 31))
-    self.buscar = Button(
+    self.lupa = utl.leer_imagen(utl.resource_path("imagenes/lupa.png"), size=(27, 27))
+    self.buscar = tk.Button(
         self.label_info,
         width=30,
         image=self.lupa,
@@ -281,8 +281,8 @@ def mostrar_opcion3(self):
         fg="white",
         command=lambda: Buscar_Cliente(self),
     )
-    self.buscar.place(x=585, y=30)
-    
+    self.buscar.place(x=590, y=30)
+
     self.eliminar_clientes_button = tk.Button(
         self.label_info,
         text="Refrescar Clientes",
@@ -295,34 +295,96 @@ def mostrar_opcion3(self):
         fg="white",
         command=lambda: Obtener_Clientes(self),
     )
-    self.eliminar_clientes_button.place(x=702, y=30)
-    
-      
-    
-    self.info_frame = Frame(self.label_info, bg="#80C5FF")
+    self.eliminar_clientes_button.place(x=686, y=30)
+
+    # Configuración del estilo
+    style = ttk.Style()
+    style.theme_use("default")
+    style.configure(
+        "Treeview",
+        font=("Poppins", 10),
+        foreground="#1778FB",
+        background="#DCEBFF",
+    )
+    style.map(
+        "Treeview",
+        background=[("selected", "#DCEBFF")],
+        foreground=[("selected", "#1778FB")],
+    )
+
+    style.configure(
+        "Treeview.Heading",
+        background="#DCEBFF",
+        foreground="#1778FB",
+        padding=0,
+        font=("Poppins", 12, "bold"),
+        relief="flat",
+        borderwidth=3,
+        anchor="center",
+        width=100,
+        height=25,
+    )
+    style.configure(
+        "Treeview", font=("Poppins", 10), foreground="#1778FB", background="#DCEBFF"
+    )
+    style.configure(
+        "Vertical.TScrollbar",
+        troughcolor="#1778FB",
+        background="#1778FB",
+        relief="flat",
+        borderwidth=1,
+        width=12,
+        highlightcolor="#1778FB",
+        highlightbackground="#1778FB",
+        highlightthickness=1
+    )
+
+    # Crear el marco de información
+    self.info_frame = tk.Frame(self.label_info, bg="#DCEBFF")
     self.info_frame.place(x=320, y=80, width=590, height=515)
 
-    self.tree = ttk.Treeview(self.info_frame, columns=("ID", "Nombre", "Apellido", "Cedula", "Telefono"), show="headings")
-    self.tree.heading("ID", text="#")
-    self.tree.heading("Nombre", text="Nombre")
-    self.tree.heading("Apellido", text="Apellido")
-    self.tree.heading("Cedula", text="Cedula")
-    self.tree.heading("Telefono", text="Telefono")
+    # Crear el Treeview con el estilo personalizado
+    self.tree = ttk.Treeview(
+        self.info_frame,
+        columns=("ID", "Nombre", "Apellido", "Cedula", "Telefono"),
+        show="headings",
+        style="Treeview",
+    )
 
-    scrollbar = ttk.Scrollbar(self.info_frame, orient="vertical", command=self.tree.yview)
+    # Configurar los encabezados de las columnas
+    self.tree.heading("ID", text="#", anchor="center")
+    self.tree.heading("Nombre", text="Nombre", anchor="center")
+    self.tree.heading("Apellido", text="Apellido", anchor="center")
+    self.tree.heading("Cedula", text="Cédula", anchor="center")
+    self.tree.heading("Telefono", text="Teléfono", anchor="center")
+
+    # Configurar la fuente para los encabezados y las filas
+    self.tree.tag_configure("heading", font=("Poppins", 12, "bold"))
+    self.tree.tag_configure("row", font=("Poppins", 10))
+
+    # Configurar el ancho de las columnas y la alineación
+    for col in self.tree["columns"]:
+        self.tree.column(col, minwidth=100, width=114, anchor="center")
+
+    # Crear la barra de desplazamiento
+    scrollbar = ttk.Scrollbar(
+        self.info_frame,
+        orient="vertical",
+        command=self.tree.yview,
+        style="Vertical.TScrollbar",
+    )
     self.tree.configure(yscrollcommand=scrollbar.set)
 
+    # Colocar el Treeview y la barra de desplazamiento en el marco
     self.tree.grid(row=0, column=0, sticky="nsew")
     scrollbar.grid(row=0, column=1, sticky="ns")
 
-    # Configurar el grid para que se ajuste al tamaño del frame
+    # Configurar el marco de información
     self.info_frame.grid_rowconfigure(0, weight=1)
     self.info_frame.grid_columnconfigure(0, weight=1)
     self.info_frame.grid_columnconfigure(1, weight=0)
-    
-    Obtener_Clientes(self)
-        
 
+    Obtener_Clientes(self)
 
 
 # Funciones para validar Datos de Clientes
