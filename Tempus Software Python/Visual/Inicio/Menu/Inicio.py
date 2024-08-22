@@ -1,9 +1,15 @@
+import re
 import tkinter as tk
 from tkinter import *
 from tkinter import Frame
 import util.PhotoImagenes as utl
 import tkinter.messagebox as messagebox
 from util.Funciones import actualizar_reloj
+from Modelo.Inicio.OpcionUsuarios import (
+    Agregar_Usuarios,
+    Modificar_Usuarios,
+    Eliminar_Usuarios,
+)
 
 
 def mostrar_opcion1(self):
@@ -23,28 +29,27 @@ def mostrar_opcion1(self):
         bg="#f0f0f0",
         activebackground="#f0f0f0",
         bd=0,
-        cursor="hand2",
         fg="white",
     )
-    self.imagen_perfil_boton.place(x=170, y=30)
+    self.imagen_perfil_boton.place(x=170, y=29)
 
-    self.bienvenida_label = Label(
+    self.nombre_label = Label(
         self.label_info,
         text=f"{self.nombre_cuenta}",
         bg="#f0f0f0",
         fg="#1E90FF",
         font=("Avenir", 18, "bold"),
     )
-    self.bienvenida_label.place(x=220, y=15)
-    
-    self.bienvenida_label = Label(
+    self.nombre_label.place(x=220, y=15)
+
+    self.rol_label = Label(
         self.label_info,
         text=f"{self.rol_programa}",
         bg="#f0f0f0",
         fg="#1E90FF",
         font=("Avenir", 14),
     )
-    self.bienvenida_label.place(x=220, y=45)
+    self.rol_label.place(x=220, y=45)
 
     # Frame para mostrar la información dinámica
     self.info_frame = Frame(self.label_info, bg="#f0f0f0")
@@ -52,7 +57,7 @@ def mostrar_opcion1(self):
 
     # Botones para cambiar la información
     self.imagen_agregar = utl.leer_imagen(
-        utl.resource_path("imagenes/editar.png"), size=(51, 59)
+        utl.resource_path("imagenes/agregar.png"), size=(51, 59)
     )
     self.imagen_agregar_boton = Button(
         self.label_info,
@@ -64,29 +69,12 @@ def mostrar_opcion1(self):
         bd=0,
         cursor="hand2",
         fg="white",
-        command=lambda: mostrar_informacion(self, "Modificar Usuario"),
+        command=lambda: mostrar_informacion(self, "Agregar Usuario"),
     )
     self.imagen_agregar_boton.place(x=0, y=0)
 
-    self.imagen_eliminar = utl.leer_imagen(
-        utl.resource_path("imagenes/agregar.png"), size=(51, 60)
-    )
-    self.imagen_eliminar_boton = Button(
-        self.label_info,
-        image=self.imagen_eliminar,
-        width=110,
-        height=110,
-        bg="#FFFFFF",
-        activebackground="#FFFFFF",
-        bd=0,
-        cursor="hand2",
-        fg="white",
-        command=lambda: mostrar_informacion(self, "Agregar Usuario"),
-    )
-    self.imagen_eliminar_boton.place(x=0, y=111)
-
     self.imagen_modificar = utl.leer_imagen(
-        utl.resource_path("imagenes/borrar.png"), size=(49, 60)
+        utl.resource_path("imagenes/editar.png"), size=(51, 60)
     )
     self.imagen_modificar_boton = Button(
         self.label_info,
@@ -98,9 +86,26 @@ def mostrar_opcion1(self):
         bd=0,
         cursor="hand2",
         fg="white",
+        command=lambda: mostrar_informacion(self, "Modificar Usuario"),
+    )
+    self.imagen_modificar_boton.place(x=0, y=111)
+
+    self.imagen_eliminar = utl.leer_imagen(
+        utl.resource_path("imagenes/borrar.png"), size=(49, 60)
+    )
+    self.imagen_eliminar_boton = Button(
+        self.label_info,
+        image=self.imagen_eliminar,
+        width=110,
+        height=110,
+        bg="#FFFFFF",
+        activebackground="#FFFFFF",
+        bd=0,
+        cursor="hand2",
+        fg="white",
         command=lambda: mostrar_informacion(self, "Eliminar Usuario"),
     )
-    self.imagen_modificar_boton.place(x=0, y=222)
+    self.imagen_eliminar_boton.place(x=0, y=222)
 
     self.espacio_blanco = Label(
         self.label_info,
@@ -114,7 +119,7 @@ def mostrar_opcion1(self):
     self.espacio_blanco.place(x=0, y=333, width=112)
 
     # Muestra un CALENDARIO en la ventana principal
-    self.label_dia = tk.Label(
+    self.fecha_label = tk.Label(
         self.label_info,
         font=("Avenir", 18, "bold"),
         anchor="w",
@@ -122,9 +127,9 @@ def mostrar_opcion1(self):
         bg="#f0f0f0",
         fg="#1E90FF",
     )
-    self.label_dia.place(x=480, y=15)
-    
-    self.label_dia2 = tk.Label(
+    self.fecha_label.place(x=480, y=15)
+
+    self.anno_label = tk.Label(
         self.label_info,
         font=("Avenir", 14),
         anchor="w",
@@ -132,10 +137,10 @@ def mostrar_opcion1(self):
         bg="#f0f0f0",
         fg="#1E90FF",
     )
-    self.label_dia2.place(x=480, y=45)
+    self.anno_label.place(x=480, y=45)
 
     # Muestra un RELOJ DIGITAL en la ventana principal
-    self.label_reloj = tk.Label(
+    self.dia_label = tk.Label(
         self.label_info,
         width=8,
         anchor="w",
@@ -144,9 +149,9 @@ def mostrar_opcion1(self):
         bg="#f0f0f0",
         fg="#1E90FF",
     )
-    self.label_reloj.place(x=740, y=15)
-    
-    self.label_reloj2 = tk.Label(
+    self.dia_label.place(x=740, y=15)
+
+    self.hora_label = tk.Label(
         self.label_info,
         width=8,
         anchor="w",
@@ -155,7 +160,7 @@ def mostrar_opcion1(self):
         bg="#f0f0f0",
         fg="#1E90FF",
     )
-    self.label_reloj2.place(x=740, y=45)
+    self.hora_label.place(x=740, y=45)
     actualizar_reloj(self)
 
     mostrar_informacion(self, "Inicio Sistema")
@@ -166,160 +171,17 @@ def mostrar_informacion(self, opcion):
     for widget in self.info_frame.winfo_children():
         widget.destroy()
 
-    if opcion == "Modificar Usuario":
-        label = Label(
-            self.info_frame,
-            text="Modificar Usuario",
-            bg="#f0f0f0",
-            fg="#1E90FF",
-            font=("Montserrat", 17, "bold"),
-        )
-        label.place(x=110, y=20)
-
-        self.password_label = Label(
-            self.info_frame,
-            text="Usuario",
-            anchor="w",
-            justify="left",
-            bg="#f0f0f0",
-            fg="#1E90FF",
-            font=("Poppins", 13, "bold"),
-        )
-        self.password_label.place(x=110, y=70)
-
-        self.password_entry = Entry(
-            self.info_frame,
-            highlightthickness=2,
-            highlightbackground="#1778FB",
-            relief=tk.FLAT,
-            fg="#0046A4",
-            background="#f0f0f0",
-            font=("Poppins", 12, "bold"),
-            insertbackground="#1E90FF",
-            width=25,
-        )
-        self.password_entry.place(x=110, y=100)
-
-        self.password_label = Label(
-            self.info_frame,
-            text="Contraseña",
-            anchor="w",
-            justify="left",
-            bg="#f0f0f0",
-            fg="#1E90FF",
-            font=("Poppins", 13, "bold"),
-        )
-        self.password_label.place(x=110, y=140)
-
-        self.password_entry = Entry(
-            self.info_frame,
-            highlightthickness=2,
-            highlightbackground="#1778FB",
-            relief=tk.FLAT,
-            fg="#0046A4",
-            background="#f0f0f0",
-            font=("Poppins", 12, "bold"),
-            insertbackground="#1E90FF",
-            width=25,
-        )
-        self.password_entry.place(x=110, y=170)
-
-        self.password_label = Label(
-            self.info_frame,
-            text="Nuevo Usuario",
-            anchor="w",
-            justify="left",
-            bg="#f0f0f0",
-            fg="#1E90FF",
-            font=("Poppins", 13, "bold"),
-        )
-        self.password_label.place(x=110, y=210)
-
-        self.password_entry = Entry(
-            self.info_frame,
-            highlightthickness=2,
-            highlightbackground="#1778FB",
-            relief=tk.FLAT,
-            fg="#0046A4",
-            background="#f0f0f0",
-            font=("Poppins", 12, "bold"),
-            insertbackground="#1E90FF",
-            width=25,
-        )
-        self.password_entry.place(x=110, y=240)
-
-        self.password_label = Label(
-            self.info_frame,
-            text="Nueva Contraseña",
-            anchor="w",
-            justify="left",
-            bg="#f0f0f0",
-            fg="#1E90FF",
-            font=("Poppins", 13, "bold"),
-        )
-        self.password_label.place(x=110, y=280)
-
-        self.password_entry = Entry(
-            self.info_frame,
-            highlightthickness=2,
-            highlightbackground="#1778FB",
-            relief=tk.FLAT,
-            fg="#0046A4",
-            background="#f0f0f0",
-            font=("Poppins", 12, "bold"),
-            insertbackground="#1E90FF",
-            width=25,
-        )
-        self.password_entry.place(x=110, y=310)
-
-        self.password_label = Label(
-            self.info_frame,
-            text="Clave Única",
-            anchor="w",
-            justify="left",
-            bg="#f0f0f0",
-            fg="#1E90FF",
-            font=("Poppins", 13, "bold"),
-        )
-        self.password_label.place(x=110, y=350)
-
-        self.password_entry = Entry(
-            self.info_frame,
-            highlightthickness=2,
-            highlightbackground="#1778FB",
-            relief=tk.FLAT,
-            fg="#0046A4",
-            background="#f0f0f0",
-            font=("Poppins", 12, "bold"),
-            insertbackground="#1E90FF",
-            width=25,
-        )
-        self.password_entry.place(x=110, y=380)
-
-        self.guardar_clientes_button = tk.Button(
-            self.info_frame,
-            text="Modificar Datos",
-            font=("Poppins", 13, "bold"),
-            width=22,
-            bd=0,
-            bg="#1E90FF",
-            cursor="hand2",
-            activebackground="#1778FB",
-            fg="white",
-        )
-        self.guardar_clientes_button.place(x=112, y=430)
-
-    elif opcion == "Agregar Usuario":
-        label = Label(
+    if opcion == "Agregar Usuario":
+        titulo_label = Label(
             self.info_frame,
             text="Agregar Usuario",
             bg="#f0f0f0",
             fg="#1E90FF",
             font=("Montserrat", 17, "bold"),
         )
-        label.place(x=110, y=20)
+        titulo_label.place(x=110, y=20)
 
-        self.password_label = Label(
+        self.nombre_agregar_label = Label(
             self.info_frame,
             text="Nombre",
             anchor="w",
@@ -328,9 +190,9 @@ def mostrar_informacion(self, opcion):
             fg="#1E90FF",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=110, y=70)
+        self.nombre_agregar_label.place(x=110, y=70)
 
-        self.password_entry = Entry(
+        self.nombre_agregar = Entry(
             self.info_frame,
             highlightthickness=2,
             highlightbackground="#1778FB",
@@ -340,10 +202,15 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
             width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_name), "%P"),
         )
-        self.password_entry.place(x=110, y=100)
+        self.nombre_agregar.place(x=110, y=100)
+        self.nombre_agregar.bind(
+            "<Return>", lambda event: self.cedula_agregar.focus_set()
+        )
 
-        self.password_label = Label(
+        self.cedula_agregar_label = Label(
             self.info_frame,
             text="Cédula",
             anchor="w",
@@ -352,9 +219,9 @@ def mostrar_informacion(self, opcion):
             fg="#1E90FF",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=110, y=140)
+        self.cedula_agregar_label.place(x=110, y=140)
 
-        self.password_entry = Entry(
+        self.cedula_agregar = Entry(
             self.info_frame,
             highlightthickness=2,
             highlightbackground="#1778FB",
@@ -364,10 +231,15 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
             width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_cedula), "%P"),
         )
-        self.password_entry.place(x=110, y=170)
+        self.cedula_agregar.place(x=110, y=170)
+        self.cedula_agregar.bind(
+            "<Return>", lambda event: self.usuario_agregar.focus_set()
+        )
 
-        self.password_label = Label(
+        self.usuario_agregar_label = Label(
             self.info_frame,
             text="Usuario",
             anchor="w",
@@ -376,9 +248,9 @@ def mostrar_informacion(self, opcion):
             fg="#1E90FF",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=110, y=210)
+        self.usuario_agregar_label.place(x=110, y=210)
 
-        self.password_entry = Entry(
+        self.usuario_agregar = Entry(
             self.info_frame,
             highlightthickness=2,
             highlightbackground="#1778FB",
@@ -388,10 +260,15 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
             width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_ingresar), "%P"),
         )
-        self.password_entry.place(x=110, y=240)
+        self.usuario_agregar.place(x=110, y=240)
+        self.usuario_agregar.bind(
+            "<Return>", lambda event: self.clave_agregar.focus_set()
+        )
 
-        self.password_label = Label(
+        self.clave_agregar_label = Label(
             self.info_frame,
             text="Contraseña",
             anchor="w",
@@ -400,9 +277,9 @@ def mostrar_informacion(self, opcion):
             fg="#1E90FF",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=110, y=280)
+        self.clave_agregar_label.place(x=110, y=280)
 
-        self.password_entry = Entry(
+        self.clave_agregar = Entry(
             self.info_frame,
             highlightthickness=2,
             highlightbackground="#1778FB",
@@ -412,10 +289,13 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
             width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_ingresar), "%P"),
         )
-        self.password_entry.place(x=110, y=310)
+        self.clave_agregar.place(x=110, y=310)
+        self.clave_agregar.bind("<Return>", lambda event: self.clave_unica.focus_set())
 
-        self.password_label = Label(
+        self.clave_unica_label = Label(
             self.info_frame,
             text="Clave Única",
             anchor="w",
@@ -424,9 +304,9 @@ def mostrar_informacion(self, opcion):
             fg="#1E90FF",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=110, y=350)
+        self.clave_unica_label.place(x=110, y=350)
 
-        self.password_entry = Entry(
+        self.clave_unica = Entry(
             self.info_frame,
             highlightthickness=2,
             highlightbackground="#1778FB",
@@ -436,11 +316,14 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
             width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_clave_unica), "%P"),
         )
-        self.password_entry.place(x=110, y=380)
+        self.clave_unica.place(x=110, y=380)
+        self.clave_unica.bind("<Return>", lambda event: Agregar_Usuarios(self))
 
         if self.rol_programa == "Administrador":
-            self.guardar_clientes_button = tk.Button(
+            self.agregar_usuarios_boton = tk.Button(
                 self.info_frame,
                 text="Guardar Datos",
                 font=("Poppins", 13, "bold"),
@@ -450,13 +333,14 @@ def mostrar_informacion(self, opcion):
                 cursor="hand2",
                 activebackground="#1778FB",
                 fg="white",
+                command=lambda: Agregar_Usuarios(self),
             )
-            self.guardar_clientes_button.place(x=112, y=430)
+            self.agregar_usuarios_boton.place(x=112, y=430)
 
         else:
-            self.guardar_clientes_button = tk.Button(
+            self.agregar_usuarios_boton = tk.Button(
                 self.info_frame,
-                text="Eliminar Datos",
+                text="Guardar Datos",
                 font=("Poppins", 13, "bold"),
                 width=22,
                 bd=0,
@@ -468,19 +352,186 @@ def mostrar_informacion(self, opcion):
                     "Error", "No Tienes los Permisos Necesarios"
                 ),
             )
-            self.guardar_clientes_button.place(x=112, y=430)
+            self.agregar_usuarios_boton.place(x=112, y=430)
+
+    elif opcion == "Modificar Usuario":
+        titulo_label = Label(
+            self.info_frame,
+            text="Modificar Usuario",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Montserrat", 17, "bold"),
+        )
+        titulo_label.place(x=110, y=20)
+
+        self.usuario_modificar_label = Label(
+            self.info_frame,
+            text="Usuario",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.usuario_modificar_label.place(x=110, y=70)
+
+        self.usuario_modificar = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_ingresar), "%P"),
+        )
+        self.usuario_modificar.place(x=110, y=100)
+        self.usuario_modificar.bind(
+            "<Return>", lambda event: self.clave_modificar.focus_set()
+        )
+
+        self.clave_modificar_label = Label(
+            self.info_frame,
+            text="Contraseña",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.clave_modificar_label.place(x=110, y=140)
+
+        self.clave_modificar = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_ingresar), "%P"),
+        )
+        self.clave_modificar.place(x=110, y=170)
+        self.clave_modificar.bind(
+            "<Return>", lambda event: self.nuevo_usuario_modificar.focus_set()
+        )
+
+        self.nuevo_usuario_modificar_label = Label(
+            self.info_frame,
+            text="Nuevo Usuario",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.nuevo_usuario_modificar_label.place(x=110, y=210)
+
+        self.nuevo_usuario_modificar = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_ingresar), "%P"),
+        )
+        self.nuevo_usuario_modificar.place(x=110, y=240)
+        self.nuevo_usuario_modificar.bind(
+            "<Return>", lambda event: self.nueva_clave_modificar.focus_set()
+        )
+
+        self.nueva_clave_modificar_label = Label(
+            self.info_frame,
+            text="Nueva Contraseña",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.nueva_clave_modificar_label.place(x=110, y=280)
+
+        self.nueva_clave_modificar = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_ingresar), "%P"),
+        )
+        self.nueva_clave_modificar.place(x=110, y=310)
+        self.nueva_clave_modificar.bind(
+            "<Return>", lambda event: self.clave_unica.focus_set()
+        )
+
+        self.clave_unica_label = Label(
+            self.info_frame,
+            text="Ingresa Clave Única",
+            anchor="w",
+            justify="left",
+            bg="#f0f0f0",
+            fg="#1E90FF",
+            font=("Poppins", 13, "bold"),
+        )
+        self.clave_unica_label.place(x=110, y=360)
+
+        self.clave_unica = Entry(
+            self.info_frame,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+            width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_clave_unica), "%P"),
+        )
+        self.clave_unica.place(x=110, y=390)
+        self.clave_unica.bind("<Return>", lambda event: Modificar_Usuarios(self))
+
+        self.modificar_usuarios_boton = tk.Button(
+            self.info_frame,
+            text="Modificar Datos",
+            font=("Poppins", 13, "bold"),
+            width=22,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+            command=lambda: Modificar_Usuarios(self),
+        )
+        self.modificar_usuarios_boton.place(x=112, y=440)
 
     elif opcion == "Eliminar Usuario":
-        label = Label(
+        titulo_label = Label(
             self.info_frame,
             text="Eliminar Usuario",
             bg="#f0f0f0",
             fg="#1E90FF",
             font=("Montserrat", 17, "bold"),
         )
-        label.place(x=110, y=20)
+        titulo_label.place(x=110, y=20)
 
-        self.password_label = Label(
+        self.cedula_eliminar_label = Label(
             self.info_frame,
             text="Cédula",
             anchor="w",
@@ -489,9 +540,9 @@ def mostrar_informacion(self, opcion):
             fg="#1E90FF",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=110, y=70)
+        self.cedula_eliminar_label.place(x=110, y=70)
 
-        self.password_entry = Entry(
+        self.cedula_eliminar = Entry(
             self.info_frame,
             highlightthickness=2,
             highlightbackground="#1778FB",
@@ -501,21 +552,26 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
             width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_cedula), "%P"),
         )
-        self.password_entry.place(x=110, y=100)
+        self.cedula_eliminar.place(x=110, y=100)
+        self.cedula_eliminar.bind(
+            "<Return>", lambda event: self.clave_unica.focus_set()
+        )
 
-        self.password_label = Label(
+        self.clave_unica_label = Label(
             self.info_frame,
-            text="Clave Única",
+            text="Ingresa Clave Única",
             anchor="w",
             justify="left",
             bg="#f0f0f0",
             fg="#1E90FF",
             font=("Poppins", 13, "bold"),
         )
-        self.password_label.place(x=110, y=140)
+        self.clave_unica_label.place(x=110, y=150)
 
-        self.password_entry = Entry(
+        self.clave_unica = Entry(
             self.info_frame,
             highlightthickness=2,
             highlightbackground="#1778FB",
@@ -525,11 +581,14 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
             width=25,
+            validate="key",
+            validatecommand=(self.root2.register(validate_clave_unica), "%P"),
         )
-        self.password_entry.place(x=110, y=170)
+        self.clave_unica.place(x=110, y=180)
+        self.clave_unica.bind("<Return>", lambda event: Eliminar_Usuarios(self))
 
         if self.rol_programa == "Administrador":
-            self.guardar_clientes_button = tk.Button(
+            self.eliminar_usuarios_boton = tk.Button(
                 self.info_frame,
                 text="Eliminar Datos",
                 font=("Poppins", 13, "bold"),
@@ -539,11 +598,12 @@ def mostrar_informacion(self, opcion):
                 cursor="hand2",
                 activebackground="#1778FB",
                 fg="white",
+                command=lambda: Eliminar_Usuarios(self),
             )
-            self.guardar_clientes_button.place(x=112, y=220)
+            self.eliminar_usuarios_boton.place(x=112, y=230)
 
         else:
-            self.guardar_clientes_button = tk.Button(
+            self.eliminar_usuarios_boton = tk.Button(
                 self.info_frame,
                 text="Eliminar Datos",
                 font=("Poppins", 13, "bold"),
@@ -557,10 +617,10 @@ def mostrar_informacion(self, opcion):
                     "Error", "No Tienes los Permisos Necesarios"
                 ),
             )
-            self.guardar_clientes_button.place(x=112, y=220)
+            self.eliminar_usuarios_boton.place(x=112, y=230)
 
     elif opcion == "Inicio Sistema":
-        self.title_label = Label(
+        self.titulo_label = Label(
             self.info_frame,
             text="Interfaz",
             anchor="w",
@@ -568,9 +628,9 @@ def mostrar_informacion(self, opcion):
             fg="#1778FB",
             font=("Montserrat", 30),
         )
-        self.title_label.place(x=200, y=60)
+        self.titulo_label.place(x=200, y=65)
 
-        self.title2_label = Label(
+        self.titulo2_label = Label(
             self.info_frame,
             text="para opciones\nde Usuario",
             anchor="w",
@@ -579,4 +639,63 @@ def mostrar_informacion(self, opcion):
             fg="#1778FB",
             font=("Montserrat", 36, "bold"),
         )
-        self.title2_label.place(x=200, y=107)
+        self.titulo2_label.place(x=200, y=112)
+
+
+# Funciones para validar Datos de Clientes
+def validate_name(new_value):
+    if " " in new_value:
+        return False
+    if len(new_value) > 20:
+        return False
+    if new_value.isalpha() or new_value == "":
+        return True
+    return False
+
+
+def validate_clave_unica(new_value):
+    if " " in new_value:
+        return False
+    if len(new_value) > 6:
+        return False
+    if new_value.isdigit() or new_value == "":
+        return True
+    return False
+
+
+def validate_cedula(new_value):
+    if " " in new_value:
+        return False
+    if len(new_value) > 10:
+        return False
+    if new_value.isdigit() or new_value == "":
+        return True
+    return False
+
+
+def validate_ingresar(new_value):
+    # Permitir solo letras, números y un símbolo especial (por ejemplo, @)
+    pattern = r"^[a-zA-Z0-9@._-]*$"  # Incluye los símbolos permitidos
+
+    # Verificar si hay espacios
+    if " " in new_value:
+        return False
+
+    # Verificar la longitud
+    if len(new_value) > 40:
+        return False
+
+    # Verificar el patrón
+    if not re.match(pattern, new_value):
+        return False
+
+    # Verificar que solo haya un símbolo especial de cada tipo
+    if (
+        new_value.count("@") > 1
+        or new_value.count(".") > 1
+        or new_value.count("_") > 1
+        or new_value.count("-") > 1
+    ):
+        return False
+
+    return True

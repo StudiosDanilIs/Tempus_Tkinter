@@ -1,3 +1,4 @@
+import re
 import webbrowser
 import tkinter as tk
 from tkinter import *
@@ -230,7 +231,7 @@ class CreateLogin:
         # Version del Programa
         self.version_boton = Button(
             self.lgn_frame,
-            text="Versión Beta 3.0",
+            text="Versión Beta 3.5.1",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
@@ -262,7 +263,30 @@ class CreateLogin:
 
     # Validación de Entradas de Texto para el Usuario y la Contraseña
     def validate_tab(self, new_value):
-        return not (" " in new_value) and len(new_value) <= 50
+        pattern = r"^[a-zA-Z0-9@._-]*$"  # Incluye los símbolos permitidos
+
+        # Verificar si hay espacios
+        if " " in new_value:
+            return False
+
+        # Verificar la longitud
+        if len(new_value) > 40:
+            return False
+
+        # Verificar el patrón
+        if not re.match(pattern, new_value):
+            return False
+
+        # Verificar que solo haya un símbolo especial de cada tipo
+        if (
+            new_value.count("@") > 1
+            or new_value.count(".") > 1
+            or new_value.count("_") > 1
+            or new_value.count("-") > 1
+        ):
+            return False
+
+        return True
 
     # Revelar o Ocultar la Contraseña en el Campo de Entrada de Texto para la Contraseña
     def Revertir(self, event):

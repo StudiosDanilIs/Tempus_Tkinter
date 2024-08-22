@@ -7,19 +7,21 @@ locale.setlocale(locale.LC_ALL, "es_VE.UTF-8")
 
 # Agrega un ReLoJ a la interfaz gráfica de usuario (GUI) de Tkinter
 def actualizar_reloj(self):
-    if hasattr(self, "label_reloj") and self.label_reloj.winfo_exists():
-        hora_actual = datetime.now().strftime("%A")
-        dia_actual = datetime.now().strftime("%d %B").capitalize()
+    if hasattr(self, "dia_label") and self.dia_label.winfo_exists():
+        fecha_actual = datetime.now().strftime("%d %B")
+        anno_actual = datetime.now().strftime("%Y")
         
-        hora_actual2 = datetime.now().strftime("%I:%M %p")
-        dia_actual2 = datetime.now().strftime("%Y").capitalize()
+        dia_actual = datetime.now().strftime("%A").capitalize()
+        hora_actual = datetime.now().strftime("%I:%M %p")
         
+        # Convertir solo la primera letra del mes a mayúscula
+        fecha_actual_resultado = fecha_actual[:3] + fecha_actual[3:].title()
         
-        self.label_reloj.config(text=hora_actual)
-        self.label_dia.config(text=dia_actual.capitalize())
+        self.fecha_label.config(text=fecha_actual_resultado)
+        self.anno_label.config(text=anno_actual.capitalize())
         
-        self.label_reloj2.config(text=hora_actual2)
-        self.label_dia2.config(text=dia_actual2.capitalize())
+        self.dia_label.config(text=dia_actual)
+        self.hora_label.config(text=hora_actual)
         self.root2.after(1000, lambda: actualizar_reloj(self))
     else:
         pass

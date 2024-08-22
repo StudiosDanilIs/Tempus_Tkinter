@@ -249,7 +249,9 @@ def Obtener_Clientes(self):
         cursor = connection.cursor()
 
         # Obtener todos los registros
-        cursor.execute("SELECT id_Cliente, Nombre, Apellido, Cedula, Telefono FROM datoscliente")
+        cursor.execute(
+            "SELECT id_Cliente, Nombre, Apellido, Cedula, Telefono FROM datoscliente"
+        )
         resultados = cursor.fetchall()
 
         # Limpiar el Treeview antes de agregar nuevos datos
@@ -261,7 +263,9 @@ def Obtener_Clientes(self):
             self.tree.insert("", "end", values=fila)
 
     except mysql.connector.Error as err:
-        messagebox.showerror(message=f"Error al obtener los clientes: {err}", title="Mensaje")
+        messagebox.showerror(
+            message=f"Error al obtener los clientes: {err}", title="Mensaje"
+        )
     finally:
         connection.close()
 

@@ -186,7 +186,7 @@ def mostrar_opcion3(self):
     self.guardar_clientes_button.place(x=50, y=465)
 
     # Validar que tipo de Cuenta es para usar diferentes funciones para cada una
-    if self.rol_programa == "Programador" or self.rol_programa == "Administrador":
+    if self.rol_programa == "Administrador":
         # Boton para modificar cliente
         self.modificar_clientes_button = tk.Button(
             self.label_info,
