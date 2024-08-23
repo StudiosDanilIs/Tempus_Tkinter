@@ -8,6 +8,7 @@ from tkinter.font import BOLD
 import util.PhotoImagenes as utl
 from SubVentanas.Login.InfoSubventana import InformacionTempus as Info
 from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
+from LoginReset import Secret_Login
 
 
 class CreateLogin:
@@ -194,7 +195,7 @@ class CreateLogin:
             bd=0,
             cursor="hand2",
             fg="white",
-            command=lambda: self.mensaje_error(),
+            command=lambda: Secret_Login(self.root),
         )
         self.registrarse_boton.place(x=240, y=460)
 
@@ -295,10 +296,6 @@ class CreateLogin:
             self.password_entry.config(show="*")  # Mostrar asteriscos
         else:
             self.password_entry.config(show="")  # Mostrar texto normal
-
-    # Mensaje para Opciones no Disponibles en EL Programa
-    def mensaje_error(self):
-        messagebox.showerror("Error", "Inicia Sesion para Usar esta Opcion")
 
     # Abrir el Perfil de GitHub para Actualizar el Programa
     def abrir_perfil_github(self):
