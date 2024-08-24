@@ -1,7 +1,7 @@
 from tkinter import *
 import mysql.connector
 from tkinter import messagebox
-from VentanaPrincipal import VentanaPrincipal
+from Visual.Inicio import VentanaPrincipal
 
 def verificar_sesion(self):
     try:
@@ -43,22 +43,36 @@ def verificar_sesion(self):
                 nombre = resultado[0]
                 id_rol = resultado[1]
 
-                # Muestra un mensaje de bienvenida y da acceso a la ventana principal
-                messagebox.showinfo(
-                    message="Bienvenido a Tempus Software", title="Mensaje"
+                cursor.execute(
+                    "SELECT NombreRol FROM rolusuario WHERE id_RolUsuario = %s",
+                    (id_rol,),
                 )
-                self.root.destroy()
-                ventana_principal = VentanaPrincipal()
-                # Establecer un temporizador para cerrar la sesión después de 1 minuto
-                ventana_principal.root2.after(1 * 60 * 1000, lambda: cerrar_sesion(ventana_principal))
+                nombre_rol_result = cursor.fetchone()
+
+                if nombre_rol_result:
+                    nombre_rol = nombre_rol_result[0]
+                    # Muestra un mensaje de bienvenida y da acceso a la ventana principal
+                    messagebox.showinfo(
+                        message=f"Bienvenido {nombre} a Tempus Software", title="Mensaje"
+                    )
+                    self.root.destroy()
+                    ventana_principal = VentanaPrincipal(nombre, nombre_rol)
+                    # Establecer un temporizador para cerrar la sesión después de 1 minuto
+                    ventana_principal.root2.after(
+                        2 * 60 * 1000, lambda: cerrar_sesion(ventana_principal)
+                    )
+                else:
+                    messagebox.showerror(
+                        message="No se pudo obtener el nombre del rol.", title="Mensaje"
+                    )
             else:
                 messagebox.showerror(
-                    message="La Cuenta no se Encuentra Registrada o no es 'System'.",
+                    message="Perdón pero esta Cuenta no existe.",
                     title="Mensaje",
                 )
         else:
             messagebox.showerror(
-                message="Clave única incorrecta o no tienes permisos de administrador.",
+                message="Clave única invalida no es Admin",
                 title="Mensaje",
             )
     except mysql.connector.Error as err:
@@ -67,5 +81,5 @@ def verificar_sesion(self):
         connection.close()
 
 def cerrar_sesion(ventana_principal):
-    messagebox.showinfo(message="Tu sesión ha expirado.", title="Mensaje")
+    messagebox.showinfo(message="Tu sesión ha expirado. Saliendo Ahora", title="Cerrando")
     ventana_principal.cerrar()

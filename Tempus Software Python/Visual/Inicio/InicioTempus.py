@@ -139,6 +139,8 @@ class VentanaPrincipal:
         for widget in self.label_info.winfo_children():
             widget.destroy()
 
+    def cerrar(self):
+        self.root2.destroy()
 
 # Crear una instancia de la ventana principal
 if __name__ == "__main__":
