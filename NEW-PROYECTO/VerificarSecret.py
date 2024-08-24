@@ -1,7 +1,8 @@
 from tkinter import *
 import mysql.connector
 from tkinter import messagebox
-from Visual.Inicio.InicioTempus import VentanaPrincipal
+from datetime import datetime, timedelta
+from VentanaPrincipal import VentanaPrincipal
 
 def verificar_sesion(self):
     try:
@@ -32,23 +33,37 @@ def verificar_sesion(self):
         resultado = cursor.fetchone()
 
         if resultado:
-            # Verificar si la cuenta y la contraseña son correctas y pertenecen a "Root System"
+            # Verificar si la cuenta y la contraseña son correctas y pertenecen a "System"
             cursor.execute(
-                "SELECT Nombre, id_RolUsuario FROM usuarios WHERE Cuenta = %s AND Clave = %s AND id_RolUsuario = 0",
+                "SELECT Nombre, id_RolUsuario, Time_Sesion FROM usuarios WHERE Cuenta = %s AND Clave = %s AND id_RolUsuario = '1'",
                 (usuario, password),
             )
             resultado = cursor.fetchone()
 
             if resultado:
+                nombre = resultado[0]
+                id_rol = resultado[1]
+                Time_Sesion = resultado[2]
+
+                # Actualizar la hora de inicio de sesión y la duración de la sesión
+                cursor.execute(
+                    "UPDATE usuarios SET Time_Sesion = %s WHERE Cuenta = %s",
+                    (2, usuario),
+                )
+                connection.commit()
+
                 # Muestra un mensaje de bienvenida y da acceso a la ventana principal
                 messagebox.showinfo(
                     message="Bienvenido a Tempus Software", title="Mensaje"
                 )
                 self.root.destroy()
-                VentanaPrincipal()
+                ventana_principal = VentanaPrincipal()
+                # Establecer un temporizador para cerrar la sesión después de 1 minuto
+                ventana_principal.root2.after(2 * 60 * 1000, lambda: cerrar_sesion(ventana_principal))
             else:
                 messagebox.showerror(
-                    message="La Cuenta no se Encuentra Registrada o no es 'Root System'.", title="Mensaje"
+                    message="La Cuenta no se Encuentra Registrada o no es 'System'.",
+                    title="Mensaje",
                 )
         else:
             messagebox.showerror(
@@ -59,3 +74,7 @@ def verificar_sesion(self):
         messagebox.showerror(message=f"Error en la consulta: {err}", title="Mensaje")
     finally:
         connection.close()
+
+def cerrar_sesion(ventana_principal):
+    messagebox.showinfo(message="Tu sesión ha expirado.", title="Mensaje")
+    ventana_principal.cerrar()

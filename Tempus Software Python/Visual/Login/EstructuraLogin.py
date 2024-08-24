@@ -8,7 +8,6 @@ from tkinter.font import BOLD
 import util.PhotoImagenes as utl
 from SubVentanas.Login.InfoSubventana import InformacionTempus as Info
 from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
-from LoginReset import Secret_Login
 
 
 class CreateLogin:
@@ -195,7 +194,6 @@ class CreateLogin:
             bd=0,
             cursor="hand2",
             fg="white",
-            command=lambda: Secret_Login(self.root),
         )
         self.registrarse_boton.place(x=240, y=460)
 

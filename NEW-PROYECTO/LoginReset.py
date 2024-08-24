@@ -3,19 +3,17 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.font import BOLD
 import util.PhotoImagenes as utl
-from Modelo.Login.VerificarSecret import verificar_sesion as Validar
+from VerificarSecret import verificar_sesion as Validar
 
 class Secret_Login:
-    def __init__(self, root):
-        self.root = root
-        self.root.destroy()
-        self.ventana_secret = tk.Tk()
-        self.ventana_secret.resizable(0, 0)
-        self.ventana_secret.geometry("480x600")
-        self.ventana_secret.title("LOGIN SECRET - RESET")
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.resizable(0, 0)
+        self.root.geometry("480x600")
+        self.root.title("LOGIN SECRET - RESET")
 
         # creación de la ventana principal
-        self.lgn_frame = Frame(self.ventana_secret, bg="#f0f0f0")
+        self.lgn_frame = Frame(self.root, bg="#f0f0f0")
         self.lgn_frame.pack(expand=tk.YES, fill=tk.BOTH)
 
         # Título de la ventana principal
@@ -116,7 +114,7 @@ class Secret_Login:
             show="*",
         )
         self.password_unica_entry.place(x=80, y=410, height=40)
-        self.password_unica_entry.bind("<Return>", lambda event: Verificar(self))
+        self.password_unica_entry.bind("<Return>", lambda event: Validar(self))
         
         
 
@@ -133,7 +131,7 @@ class Secret_Login:
             bd=0,
             cursor="hand2",
             fg="white",
-            command=self.ventana_secret.destroy
+            command=self.root.destroy
         )
         self.login_boton.place(x=75, y=500)
 
@@ -155,4 +153,7 @@ class Secret_Login:
         self.registrarse_boton.place(x=240, y=500)
 
         # Abrir la Ventana de Login
-        self.ventana_secret.mainloop()
+        self.root.mainloop()
+
+if __name__ == "__main__":
+    Secret_Login()        
