@@ -1,7 +1,6 @@
 from tkinter import *
 import mysql.connector
 from tkinter import messagebox
-from datetime import datetime, timedelta
 from VentanaPrincipal import VentanaPrincipal
 
 def verificar_sesion(self):
@@ -35,7 +34,7 @@ def verificar_sesion(self):
         if resultado:
             # Verificar si la cuenta y la contraseña son correctas y pertenecen a "System"
             cursor.execute(
-                "SELECT Nombre, id_RolUsuario, Time_Sesion FROM usuarios WHERE Cuenta = %s AND Clave = %s AND id_RolUsuario = '1'",
+                "SELECT Nombre, id_RolUsuario FROM usuarios WHERE Cuenta = %s AND Clave = %s AND id_RolUsuario = '1'",
                 (usuario, password),
             )
             resultado = cursor.fetchone()
@@ -43,14 +42,6 @@ def verificar_sesion(self):
             if resultado:
                 nombre = resultado[0]
                 id_rol = resultado[1]
-                Time_Sesion = resultado[2]
-
-                # Actualizar la hora de inicio de sesión y la duración de la sesión
-                cursor.execute(
-                    "UPDATE usuarios SET Time_Sesion = %s WHERE Cuenta = %s",
-                    (2, usuario),
-                )
-                connection.commit()
 
                 # Muestra un mensaje de bienvenida y da acceso a la ventana principal
                 messagebox.showinfo(
@@ -59,7 +50,7 @@ def verificar_sesion(self):
                 self.root.destroy()
                 ventana_principal = VentanaPrincipal()
                 # Establecer un temporizador para cerrar la sesión después de 1 minuto
-                ventana_principal.root2.after(2 * 60 * 1000, lambda: cerrar_sesion(ventana_principal))
+                ventana_principal.root2.after(1 * 60 * 1000, lambda: cerrar_sesion(ventana_principal))
             else:
                 messagebox.showerror(
                     message="La Cuenta no se Encuentra Registrada o no es 'System'.",
