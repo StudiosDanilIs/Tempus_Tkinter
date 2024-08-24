@@ -15,7 +15,8 @@ class GitHubDownloader:
         self.download_button.pack(pady=20)
 
     def download_file(self):
-        url = "https://github.com/StudiosDanilIs/Tempus_Tkinter/releases/download/v1.0/tu_aplicacion.exe"
+        url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus_Tkinter/main/Proyecto/guiformat.exe"
+        local_filename = "Tempus Sistema.exe"
 
         try:
             response = requests.get(url)
