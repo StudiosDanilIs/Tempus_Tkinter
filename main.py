@@ -29,10 +29,10 @@ class GitHubDownloader:
     def download_file(self):
         option = self.option_var.get()
         if option == "Opción 1":
-            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus_Tkinter/main/Proyecto/archivo1.exe"
+            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus_Tkinter/main/gato.exe"
             local_filename = "archivo1.exe"
         elif option == "Opción 2":
-            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus_Tkinter/main/Proyecto/archivo2.exe"
+            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus_Tkinter/main/perro.exe"
             local_filename = "archivo2.exe"
         else:
             messagebox.showerror("Error", "Por favor, seleccione una opción válida.")
