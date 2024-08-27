@@ -25,15 +25,15 @@ class GitHubDownloader:
         # Botón de descarga
         self.download_button = ctk.CTkButton(root, text="Descargar", command=self.download_file, fg_color="#1778FB", text_color="#000000")
         self.download_button.pack(pady=20)
-
+        
     def download_file(self):
         option = self.option_var.get()
         if option == "Tempus Gestión":
-            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus_Tkinter/main/gato.exe"
-            local_filename = "Tempus Gestión.exe"
+            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus-App/main/Gestion.exe"
+            local_filename = "Sistema de Gestión.exe"
         elif option == "Tempus Reset":
-            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus_Tkinter/main/perro.exe"
-            local_filename = "Tempus Reset.exe"
+            url = "https://raw.githubusercontent.com/StudiosDanilIs/Tempus-App/main/Recuperar.exe"
+            local_filename = "Recuperar Usuarios.exe"
         else:
             messagebox.showerror("Error", "Por favor, seleccione una opción válida.")
             return
