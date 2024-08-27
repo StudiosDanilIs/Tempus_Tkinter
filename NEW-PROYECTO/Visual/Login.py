@@ -120,9 +120,7 @@ class Secret_Login:
         self.password_unica_entry.bind("<Return>", lambda event: Validar(self))
         
         # botón para registrarse
-        self.imagen_registrarse2 = utl.leer_imagen(
-            utl.resource_path("imagenes/boton_iniciar_sesion.png"), size=(170, 55)
-        )
+        self.imagen_registrarse2 = utl.leer_imagen("boton_iniciar_sesion.png", size=(170, 55))
         self.registrarse_boton = tk.Button(
             self.lgn_frame,
             image=self.imagen_registrarse2,
@@ -137,9 +135,7 @@ class Secret_Login:
         self.registrarse_boton.place(x=75, y=500)
 
         # botón para iniciar sesión
-        self.imagen_iniciar_sesion1 = utl.leer_imagen(
-            utl.resource_path("imagenes/boton_salir.png"), size=(170, 55)
-        )
+        self.imagen_iniciar_sesion1 = utl.leer_imagen("boton_salir.png", size=(170, 55))
         self.login_boton = Button(
             self.lgn_frame,
             image=self.imagen_iniciar_sesion1,

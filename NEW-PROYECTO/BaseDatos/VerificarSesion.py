@@ -6,10 +6,10 @@ from Visual.Inicio import VentanaPrincipal
 def verificar_sesion(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bwgmj3osiuz7xl3trcvk-mysql.services.clever-cloud.com",
+            user="usgdjhacbrtwcr8d",
+            passwd="ytoPadfaz6Y4CZ6AwTnn",
+            db="bwgmj3osiuz7xl3trcvk",
             port=3306,
         )
         cursor = connection.cursor()
