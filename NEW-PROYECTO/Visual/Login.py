@@ -11,6 +11,10 @@ class Secret_Login:
         self.root.resizable(0, 0)
         self.root.geometry("480x600")
         self.root.title("Iniciar Sesión")
+        icono = utl.resource_path("imagenes/logo1.ico")
+        self.root.iconbitmap(icono)
+
+
 
         # creación de la ventana principal
         self.lgn_frame = Frame(self.root, bg="#f0f0f0")
@@ -132,7 +136,7 @@ class Secret_Login:
             fg="white",
             command=lambda: Validar(self),
         )
-        self.registrarse_boton.place(x=75, y=500)
+        self.registrarse_boton.place(x=75, y=475)
 
         # botón para iniciar sesión
         self.imagen_iniciar_sesion1 = utl.leer_imagen("boton_salir.png", size=(170, 55))
@@ -147,7 +151,17 @@ class Secret_Login:
             fg="white",
             command=self.root.destroy
         )
-        self.login_boton.place(x=240, y=500)
+        self.login_boton.place(x=240, y=475)
+        
+        self.title_label = Label(
+            self.lgn_frame,
+            text="Version 1.0",
+            anchor="w",
+            bg="#f0f0f0",
+            fg="#1778FB",
+            font=("Montserrat", 12),
+        )
+        self.title_label.place(x=20, y=550)
 
         # Abrir la Ventana de Login
         self.root.mainloop()

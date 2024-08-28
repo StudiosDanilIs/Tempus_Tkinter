@@ -2,6 +2,7 @@ import re
 import tkinter as tk
 from tkinter import *
 from tkinter import Frame
+import util.PhotoImagenes as utl
 import tkinter.messagebox as messagebox
 from BaseDatos.ModificarUsuarios import ModificarUsuarios
 
@@ -10,6 +11,9 @@ class VentanaPrincipal:
         self.root2 = tk.Tk()
         self.root2.resizable(0, 0)
         self.root2.geometry("750x450")
+        self.root2.title("Recuperar Usuario")
+        icono = utl.resource_path("imagenes/logo1.ico")
+        self.root2.iconbitmap(icono)
         self.nombre = nombre
         self.nombre_rol = nombre_rol
         
