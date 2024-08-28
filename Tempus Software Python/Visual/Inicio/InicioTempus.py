@@ -27,9 +27,7 @@ class VentanaPrincipal:
         self.menu_lateral.grid_rowconfigure(6, minsize=20)
 
         # Boton 1 Inicio del Sistema
-        self.logo1 = utl.leer_imagen(
-            utl.resource_path("imagenes/menu/home.png"), size=(44, 61)
-        )
+        self.logo1 = utl.leer_imagen("menu/home.png", size=(44, 61))
         self.boton_opcion1 = self.crear_boton(
             image=self.logo1, command=lambda: mostrar_opcion1(self)
         )
@@ -38,9 +36,7 @@ class VentanaPrincipal:
         self.boton_opcion1.bind("<Leave>", lambda event: status.restaurar1(self, event))
 
         # Boton 2 Solicitudes
-        self.logo2 = utl.leer_imagen(
-            utl.resource_path("imagenes/menu/solicitudes.png"), size=(59, 61)
-        )
+        self.logo2 = utl.leer_imagen("menu/solicitudes.png", size=(59, 61))
         self.boton_opcion2 = self.crear_boton(
             image=self.logo2, command=lambda: mostrar_opcion2(self)
         )
@@ -49,9 +45,7 @@ class VentanaPrincipal:
         self.boton_opcion2.bind("<Leave>", lambda event: status.restaurar2(self, event))
 
         # Boton 3 Clientes
-        self.logo3 = utl.leer_imagen(
-            utl.resource_path("imagenes/menu/clientes.png"), size=(44, 59)
-        )
+        self.logo3 = utl.leer_imagen("menu/clientes.png", size=(44, 59))
         self.boton_opcion3 = self.crear_boton(
             image=self.logo3, command=lambda: mostrar_opcion3(self)
         )
@@ -60,9 +54,7 @@ class VentanaPrincipal:
         self.boton_opcion3.bind("<Leave>", lambda event: status.restaurar3(self, event))
 
         # Boton 4 Pagos
-        self.logo4 = utl.leer_imagen(
-            utl.resource_path("imagenes/menu/pagos.png"), size=(44, 64)
-        )
+        self.logo4 = utl.leer_imagen("menu/pagos.png", size=(44, 64))
         self.boton_opcion4 = self.crear_boton(
             image=self.logo4, command=lambda: mostrar_opcion4(self)
         )
@@ -71,9 +63,7 @@ class VentanaPrincipal:
         self.boton_opcion4.bind("<Leave>", lambda event: status.restaurar4(self, event))
 
         # Boton 5 Historial
-        self.logo5 = utl.leer_imagen(
-            utl.resource_path("imagenes/menu/historial.png"), size=(44, 60)
-        )
+        self.logo5 = utl.leer_imagen("menu/historial.png", size=(44, 60))
         self.boton_opcion5 = self.crear_boton(
             image=self.logo5, command=lambda: mostrar_opcion5(self)
         )
@@ -82,9 +72,7 @@ class VentanaPrincipal:
         self.boton_opcion5.bind("<Leave>", lambda event: status.restaurar5(self, event))
 
         # Boton 6 Salir
-        self.logo6 = utl.leer_imagen(
-            utl.resource_path("imagenes/menu/salir.png"), size=(57, 59)
-        )
+        self.logo6 = utl.leer_imagen("menu/salir.png", size=(57, 59))
         self.boton_opcion6 = self.crear_boton(
             image=self.logo6, command=lambda: self.cerrar_sesion()
         )

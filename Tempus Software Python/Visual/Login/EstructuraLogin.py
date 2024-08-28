@@ -76,9 +76,7 @@ class CreateLogin:
             "<Return>", lambda event: self.password_entry.focus_set()
         )
 
-        self.usuario = utl.leer_imagen(
-            utl.resource_path("imagenes/usuario.png"), size=(33, 33)
-        )
+        self.usuario = utl.leer_imagen("usuario.png", size=(33, 33))
         self.imagen_user_boton = Button(
             self.lgn_frame,
             width=30,
@@ -119,9 +117,7 @@ class CreateLogin:
         self.password_entry.place(x=80, y=360, height=40)
         self.password_entry.bind("<Return>", lambda event: Verificar(self))
 
-        self.clave = utl.leer_imagen(
-            utl.resource_path("imagenes/clave.png"), size=(33, 33)
-        )
+        self.clave = utl.leer_imagen("clave.png", size=(33, 33))
         self.imagen_clave_boton = Button(
             self.lgn_frame,
             width=30,
@@ -165,7 +161,7 @@ class CreateLogin:
 
         # botón para iniciar sesión
         self.imagen_iniciar_sesion = utl.leer_imagen(
-            utl.resource_path("imagenes/boton_iniciar_sesion.png"), size=(170, 55)
+            "boton_iniciar_sesion.png", size=(170, 55)
         )
         self.login_boton = Button(
             self.lgn_frame,
@@ -183,7 +179,7 @@ class CreateLogin:
 
         # botón para registrarse
         self.imagen_registrarse = utl.leer_imagen(
-            utl.resource_path("imagenes/boton_registrarse.png"), size=(170, 55)
+            "boton_registrarse.png", size=(170, 55)
         )
         self.registrarse_boton = tk.Button(
             self.lgn_frame,
@@ -198,9 +194,7 @@ class CreateLogin:
         self.registrarse_boton.place(x=240, y=460)
 
         # Actualizar el Programa
-        self.imagen_update = utl.leer_imagen(
-            utl.resource_path("imagenes/git.png"), size=(35, 35)
-        )
+        self.imagen_update = utl.leer_imagen("git.png", size=(35, 35))
         self.update_boton = Button(
             self.lgn_frame,
             image=self.imagen_update,
@@ -230,7 +224,7 @@ class CreateLogin:
         # Version del Programa
         self.version_boton = Button(
             self.lgn_frame,
-            text="Versión PreAlpha 4",
+            text="Versión PreAlpha 5",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
@@ -244,9 +238,7 @@ class CreateLogin:
         self.version_boton.place(x=270, y=600)
 
         # Fondo de la Ventana de Login
-        self.imagen_fondo_login = utl.leer_imagen(
-            utl.resource_path("imagenes/fondo2.jpg"), size=(500, 645)
-        )
+        self.imagen_fondo_login = utl.leer_imagen("fondo2.jpg", size=(500, 645))
         self.fondo_label = Label(
             self.lgn_frame,
             image=self.imagen_fondo_login,

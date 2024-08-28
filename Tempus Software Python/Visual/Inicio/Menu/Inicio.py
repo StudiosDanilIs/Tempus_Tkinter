@@ -19,9 +19,7 @@ def mostrar_opcion1(self):
     self.root2.title("Inicio - Area de Cuentas")
 
     # Etiqueta de bienvenida
-    self.imagen_perfil = utl.leer_imagen(
-        utl.resource_path("imagenes/usuario_inicio.png"), size=(33, 37)
-    )
+    self.imagen_perfil = utl.leer_imagen("usuario_inicio.png", size=(33, 33))
     self.imagen_perfil_boton = Label(
         self.label_info,
         image=self.imagen_perfil,
@@ -56,9 +54,7 @@ def mostrar_opcion1(self):
     self.info_frame.place(x=70, y=100, width=800, height=700)
 
     # Botones para cambiar la información
-    self.imagen_agregar = utl.leer_imagen(
-        utl.resource_path("imagenes/agregar.png"), size=(51, 59)
-    )
+    self.imagen_agregar = utl.leer_imagen("agregar.png", size=(51, 59))
     self.imagen_agregar_boton = Button(
         self.label_info,
         image=self.imagen_agregar,
@@ -73,9 +69,7 @@ def mostrar_opcion1(self):
     )
     self.imagen_agregar_boton.place(x=0, y=0)
 
-    self.imagen_modificar = utl.leer_imagen(
-        utl.resource_path("imagenes/editar.png"), size=(51, 60)
-    )
+    self.imagen_modificar = utl.leer_imagen("editar.png", size=(51, 60))
     self.imagen_modificar_boton = Button(
         self.label_info,
         image=self.imagen_modificar,
@@ -90,9 +84,7 @@ def mostrar_opcion1(self):
     )
     self.imagen_modificar_boton.place(x=0, y=111)
 
-    self.imagen_eliminar = utl.leer_imagen(
-        utl.resource_path("imagenes/borrar.png"), size=(49, 60)
-    )
+    self.imagen_eliminar = utl.leer_imagen("borrar.png", size=(49, 60))
     self.imagen_eliminar_boton = Button(
         self.label_info,
         image=self.imagen_eliminar,

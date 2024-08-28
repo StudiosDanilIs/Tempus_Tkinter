@@ -4,13 +4,13 @@ from PIL import ImageTk, Image
 
 # Código de la función para leer imágenes
 def leer_imagen(path, size):
-    return ImageTk.PhotoImage(Image.open(path).resize(size, Image.ADAPTIVE))
+    """Lee una imagen y la redimensiona, manejando errores de ruta"""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Ajusta esta parte para reflejar tu estructura de carpetas
+    image_path = os.path.join(script_dir, "..", "imagenes", path)
 
-
-# Código de la función para gestionar rutas absoluta y ruta relativa
-def resource_path(relative_path):
     try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-    return os.path.join(base_path, relative_path)
+        return ImageTk.PhotoImage(Image.open(image_path).resize(size, Image.ADAPTIVE))
+    except FileNotFoundError:
+        print(f"Error: No se encontró la imagen '{path}'. Verifica la ruta.")
+        return None

@@ -56,9 +56,7 @@ def InformacionTempus(self):
             profile_frame.pack(side=tk.LEFT, padx=18, pady=10)
 
             # Cargar la imagen utilizando la función leer_imagen del módulo utl
-            image = utl.leer_imagen(
-                utl.resource_path(f"imagenes/{image_file}"), (70, 70)
-            )
+            image = utl.leer_imagen(f"{image_file}", size=(70, 70))
 
             # Crear label para la imagen y el texto
             image_label = tk.Label(profile_frame, image=image, bg="#f0f0f0")

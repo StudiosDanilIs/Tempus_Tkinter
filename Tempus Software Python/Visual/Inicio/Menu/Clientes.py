@@ -269,7 +269,7 @@ def mostrar_opcion3(self):
     self.buscar_cliente_entry.place(x=320, y=30)
     self.buscar_cliente_entry.bind("<Return>", lambda event: Buscar_Cliente(self))
 
-    self.lupa = utl.leer_imagen(utl.resource_path("imagenes/lupa.png"), size=(27, 27))
+    self.lupa = utl.leer_imagen("lupa.png", size=(27, 27))
     self.buscar = tk.Button(
         self.label_info,
         width=30,
