@@ -19,8 +19,8 @@ class CreateLogin:
         self.presionado = False
         self.estado_oculto = True
         self.subventana_abierta = False
-        logo = "imagenes\\logo2.ico"
-        self.root.iconbitmap(True, logo)
+        icono = utl.resource_path("imagenes/logo2.ico")
+        self.root.iconbitmap(True, icono)
 
         # creación de la ventana principal
         self.lgn_frame = Frame(self.root, bg="#f0f0f0")
