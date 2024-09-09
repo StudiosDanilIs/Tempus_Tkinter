@@ -283,9 +283,9 @@ def mostrar_opcion3(self):
     )
     self.buscar.place(x=590, y=30)
 
-    self.eliminar_clientes_button = tk.Button(
+    self.descargar_datos_button = tk.Button(
         self.label_info,
-        text="Refrescar Clientes",
+        text="Actualizar Lista",
         font=("Poppins", 13, "bold"),
         width=20,
         bd=0,
@@ -293,9 +293,9 @@ def mostrar_opcion3(self):
         cursor="hand2",
         activebackground="#1778FB",
         fg="white",
-        command=lambda: Obtener_Clientes(self),
+        command=lambda: actualizar_lista(self),
     )
-    self.eliminar_clientes_button.place(x=686, y=30)
+    self.descargar_datos_button.place(x=686, y=30)
 
     # Configuración del estilo
     style = ttk.Style()
@@ -307,22 +307,22 @@ def mostrar_opcion3(self):
         background="#DCEBFF",
     )
     style.map(
-        "Treeview",
+        "Treeview.Heading",
         background=[("selected", "#DCEBFF")],
-        foreground=[("selected", "#1778FB")],
+        foreground=[("selected", "#DCEBFF")],
     )
 
     style.configure(
         "Treeview.Heading",
         background="#DCEBFF",
         foreground="#1778FB",
-        padding=0,
+        padding=3,
         font=("Poppins", 12, "bold"),
         relief="flat",
         borderwidth=3,
         anchor="center",
         width=100,
-        height=25,
+        height=60,
     )
     style.configure(
         "Treeview", font=("Poppins", 10), foreground="#1778FB", background="#DCEBFF"
@@ -333,7 +333,7 @@ def mostrar_opcion3(self):
         background="#1778FB",
         relief="flat",
         borderwidth=1,
-        width=12,
+        width=10,
         highlightcolor="#1778FB",
         highlightbackground="#1778FB",
         highlightthickness=1
@@ -350,6 +350,14 @@ def mostrar_opcion3(self):
         show="headings",
         style="Treeview",
     )
+    
+    column_widths = {
+        "ID": 50,  # Adjust widths as needed
+        "Nombre": 120,
+        "Apellido": 120,
+        "Cedula": 120,
+        "Telefono": 120,
+    }
 
     # Configurar los encabezados de las columnas
     self.tree.heading("ID", text="#", anchor="center")
@@ -363,9 +371,13 @@ def mostrar_opcion3(self):
     self.tree.tag_configure("row", font=("Poppins", 10))
 
     # Configurar el ancho de las columnas y la alineación
-    for col in self.tree["columns"]:
-        self.tree.column(col, minwidth=100, width=114, anchor="center")
+    for col, width in column_widths.items():
+        self.tree.column(col, minwidth=width, width=width, anchor="center")
 
+    # Crear la barra de desplazamiento
+    scrollbar_cover = tk.Frame(self.info_frame, bg="#DCEBFF")
+    scrollbar_cover.grid(row=0, column=1, sticky="ns")
+    
     # Crear la barra de desplazamiento
     scrollbar = ttk.Scrollbar(
         self.info_frame,
@@ -377,7 +389,7 @@ def mostrar_opcion3(self):
 
     # Colocar el Treeview y la barra de desplazamiento en el marco
     self.tree.grid(row=0, column=0, sticky="nsew")
-    scrollbar.grid(row=0, column=1, sticky="ns")
+    scrollbar.place(in_=scrollbar_cover, x=0, y=0, relheight=1)
 
     # Configurar el marco de información
     self.info_frame.grid_rowconfigure(0, weight=1)
@@ -427,3 +439,6 @@ def validate_document(new_value):
     if new_value.isdigit() or new_value == "":
         return True
     return False
+
+def actualizar_lista(self):
+    Obtener_Clientes(self, cargar_datos=True)

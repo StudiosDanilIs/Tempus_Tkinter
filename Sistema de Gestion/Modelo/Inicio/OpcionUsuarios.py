@@ -7,7 +7,7 @@ from tkinter import messagebox
 def Agregar_Usuarios(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",
@@ -73,7 +73,7 @@ def Agregar_Usuarios(self):
 def Modificar_Usuarios(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",
@@ -158,7 +158,7 @@ def Modificar_Usuarios(self):
 def Eliminar_Usuarios(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",

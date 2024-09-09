@@ -15,7 +15,6 @@ from Modelo.Inicio.OpcionUsuarios import (
 def mostrar_opcion1(self):
     # Limpiar el contenido del frame principal
     self.limpiar_contenido()
-    self.subventana_abierta = False
     self.root2.title("Inicio - Area de Cuentas")
 
     # Etiqueta de bienvenida
@@ -58,8 +57,8 @@ def mostrar_opcion1(self):
     self.imagen_agregar_boton = Button(
         self.label_info,
         image=self.imagen_agregar,
-        width=110,
-        height=110,
+        width=105,
+        height=105,
         bg="#FFFFFF",
         activebackground="#FFFFFF",
         bd=0,
@@ -73,8 +72,8 @@ def mostrar_opcion1(self):
     self.imagen_modificar_boton = Button(
         self.label_info,
         image=self.imagen_modificar,
-        width=110,
-        height=110,
+        width=105,
+        height=105,
         bg="#FFFFFF",
         activebackground="#FFFFFF",
         bd=0,
@@ -82,14 +81,14 @@ def mostrar_opcion1(self):
         fg="white",
         command=lambda: mostrar_informacion(self, "Modificar Usuario"),
     )
-    self.imagen_modificar_boton.place(x=0, y=111)
+    self.imagen_modificar_boton.place(x=0, y=105)
 
     self.imagen_eliminar = utl.leer_imagen("borrar.png", size=(49, 60))
     self.imagen_eliminar_boton = Button(
         self.label_info,
         image=self.imagen_eliminar,
-        width=110,
-        height=110,
+        width=105,
+        height=105,
         bg="#FFFFFF",
         activebackground="#FFFFFF",
         bd=0,
@@ -97,7 +96,7 @@ def mostrar_opcion1(self):
         fg="white",
         command=lambda: mostrar_informacion(self, "Eliminar Usuario"),
     )
-    self.imagen_eliminar_boton.place(x=0, y=222)
+    self.imagen_eliminar_boton.place(x=0, y=210)
 
     self.espacio_blanco = Label(
         self.label_info,
@@ -108,7 +107,7 @@ def mostrar_opcion1(self):
         bd=0,
         fg="white",
     )
-    self.espacio_blanco.place(x=0, y=333, width=112)
+    self.espacio_blanco.place(x=0, y=310, width=107)
 
     # Muestra un CALENDARIO en la ventana principal
     self.fecha_label = tk.Label(

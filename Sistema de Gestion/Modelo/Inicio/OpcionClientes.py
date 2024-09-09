@@ -7,7 +7,7 @@ from tkinter import messagebox
 def Agregar_Cliente(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",
@@ -73,7 +73,7 @@ def Agregar_Cliente(self):
 def Eliminar_Cliente(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",
@@ -122,7 +122,7 @@ def Eliminar_Cliente(self):
 def Buscar_Cliente(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",
@@ -182,7 +182,7 @@ def Buscar_Cliente(self):
 def Modificar_Cliente(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",
@@ -237,10 +237,10 @@ def Modificar_Cliente(self):
         connection.close()
 
 
-def Obtener_Clientes(self):
+def Obtener_Clientes(self, cargar_datos=False):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",
@@ -248,26 +248,34 @@ def Obtener_Clientes(self):
         )
         cursor = connection.cursor()
 
-        # Obtener todos los registros
-        cursor.execute(
-            "SELECT id_Cliente, Nombre, Apellido, Cedula, Telefono FROM datoscliente"
-        )
-        resultados = cursor.fetchall()
+        if cargar_datos:
+            # Limpiar el Treeview
+            for item in self.tree.get_children():
+                self.tree.delete(item)
 
-        # Limpiar el Treeview antes de agregar nuevos datos
-        for item in self.tree.get_children():
-            self.tree.delete(item)
+            # Obtener los datos y agregarlos al Treeview
+            cursor.execute(
+                "SELECT id_Cliente, Nombre, Apellido, Cedula, Telefono "
+                "FROM datoscliente "
+                "ORDER BY id_Cliente DESC "
+                "LIMIT 75"
+            )
+            resultados = cursor.fetchall()
 
-        # Agregar los datos al Treeview
-        for fila in resultados:
-            self.tree.insert("", "end", values=fila)
+            for fila in resultados:
+                self.tree.insert("", "end", values=fila)
 
     except mysql.connector.Error as err:
+        # Manejar errores
         messagebox.showerror(
             message=f"Error al obtener los clientes: {err}", title="Mensaje"
         )
     finally:
-        connection.close()
+        # Cerrar la conexión
+        try:
+            connection.close()
+        except NameError:
+            pass
 
 
 # Elimina los Datos en la Entrada de Texto de la Interfaz Gráfica

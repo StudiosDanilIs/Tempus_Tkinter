@@ -4,11 +4,11 @@ from tkinter.font import BOLD
 import util.PhotoImagenes as utl
 
 
-def InformacionTempus(self):
+def Reparaciones(self):
     if not self.subventana_abierta:
         miniVentana = tk.Toplevel()
         miniVentana.title("Detalles de la Version")
-        miniVentana.geometry("780x400")
+        miniVentana.geometry("830x450")
         miniVentana.resizable(0, 0)
         miniVentana.configure(bg="#f0f0f0")
         miniVentana.protocol("WM_DELETE_WINDOW", lambda: cerrar_sesion(self))
@@ -20,7 +20,7 @@ def InformacionTempus(self):
         # Título de la aplicación
         title_label = tk.Label(
             main_frame,
-            text="Tempus Software",
+            text="Tempus Software3",
             bg="#f0f0f0",
             fg="#1778FB",
             font=("Montserrat", 24, "bold"),

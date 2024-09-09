@@ -3,11 +3,12 @@ import mysql.connector
 from tkinter import messagebox
 from Visual.Inicio.InicioTempus import VentanaPrincipal
 
+
 # Verifica los datos para iniciar sesión en el programa
 def verificar_sesion(self):
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
+            host="localhost",
             user="root",
             passwd="210605",
             db="registro",

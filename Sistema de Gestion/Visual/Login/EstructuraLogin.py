@@ -79,7 +79,7 @@ class CreateLogin:
         self.usuario = utl.leer_imagen("usuario.png", size=(33, 33))
         self.imagen_user_boton = Button(
             self.lgn_frame,
-            width=30,
+            width=34,
             image=self.usuario,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
@@ -87,7 +87,7 @@ class CreateLogin:
             cursor="hand2",
             fg="white",
         )
-        self.imagen_user_boton.place(x=40, y=292)
+        self.imagen_user_boton.place(x=35, y=292)
 
         # Area de la Contraseña
         self.password_label = Label(
@@ -120,7 +120,7 @@ class CreateLogin:
         self.clave = utl.leer_imagen("clave.png", size=(33, 33))
         self.imagen_clave_boton = Button(
             self.lgn_frame,
-            width=30,
+            width=34,
             image=self.clave,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
@@ -129,7 +129,7 @@ class CreateLogin:
             fg="white",
             command=lambda: self.Revertir(self),
         )
-        self.imagen_clave_boton.place(x=40, y=362)
+        self.imagen_clave_boton.place(x=35, y=362)
 
         # Boton de Chetboc para guardar la cuenta
         estado_boton = tk.BooleanVar(value=False)
@@ -233,7 +233,7 @@ class CreateLogin:
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
             cursor="hand2",
-            command=lambda: Info(self=self),
+            command=lambda: Info(self),
         )
         self.version_boton.place(x=270, y=600)
 
