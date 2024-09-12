@@ -26,7 +26,7 @@ def ejecutar_consulta(consulta, valores):
 
 # Crear la ventana principal
 ventana = tk.Tk()
-ventana.title("Historial de Ventas y Reparaciones")
+ventana.title("Historial de Solicitudes")
 
 # Crear un campo de entrada para la cédula
 cedula_var = tk.StringVar()
@@ -34,7 +34,7 @@ cedula_entry = tk.Entry(ventana, textvariable=cedula_var)
 cedula_entry.pack()
 
 # Crear un botón para buscar
-buscar_btn = tk.Button(ventana, text="Buscar", command=lambda: buscar_ventas_y_reparaciones())
+buscar_btn = tk.Button(ventana, text="Buscar", command=lambda: buscar_solicitudes())
 buscar_btn.pack()
 
 # Crear un Treeview para mostrar los resultados
@@ -56,22 +56,18 @@ treeview.column("Cédula", width=100, anchor="center")
 
 treeview.pack()
 
-# Función para buscar las ventas y reparaciones
-def buscar_ventas_y_reparaciones():
+# Función para buscar las solicitudes
+def buscar_solicitudes():
     cedula = cedula_var.get()
     consulta = """
-    SELECT 'Venta' AS Tipo, vl.Fecha, vl.Descripcion, vl.Precio, CONCAT(dc.Nombre, ' ', dc.Apellido) AS Cliente, dc.Cedula
-    FROM ventaslocal vl
-    INNER JOIN datoscliente dc ON vl.id_Cliente = dc.id_Cliente
+    SELECT s.Tipo_Solicitud AS Tipo, s.Fecha_Solicitud AS Fecha, s.Descripcion, s.Precio, 
+           CONCAT(dc.Nombre, ' ', dc.Apellido) AS Cliente, dc.Cedula
+    FROM solicitudes s
+    INNER JOIN datoscliente dc ON s.Cedula_Cliente = dc.Cedula
     WHERE dc.Cedula = %s
-    UNION ALL
-    SELECT 'Reparación' AS Tipo, r.Fecha, r.Descripcion, r.Precio, CONCAT(dc.Nombre, ' ', dc.Apellido) AS Cliente, dc.Cedula
-    FROM reparaciones r
-    INNER JOIN datoscliente dc ON r.id_Cliente = dc.id_Cliente
-    WHERE dc.Cedula = %s
-    ORDER BY Fecha DESC
+    ORDER BY s.Fecha_Solicitud DESC
     """
-    valores = (cedula, cedula)
+    valores = (cedula,)
     resultados = ejecutar_consulta(consulta, valores)
 
     # Limpiar el Treeview antes de agregar nuevos datos
@@ -82,6 +78,6 @@ def buscar_ventas_y_reparaciones():
         for row in resultados:
             treeview.insert("", tk.END, values=row)
     else:
-        print("No se encontraron ventas ni reparaciones para el cliente:", cedula)
+        print("No se encontraron solicitudes para el cliente:", cedula)
 
 ventana.mainloop()

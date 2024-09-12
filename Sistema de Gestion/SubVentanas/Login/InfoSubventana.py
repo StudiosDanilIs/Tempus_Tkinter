@@ -30,7 +30,7 @@ def InformacionTempus(self):
         # Descripción con un separador visual
         description_label = tk.Label(
             main_frame,
-            text="Tempus App es un Software diseñado con el objetivo de mejorar la eficiencia y la productividad en el trabajo. Aunque no tiene fines de lucro, su enfoque es proporcionar soluciones prácticas y herramientas útiles para facilitar las tareas diarias.",
+            text="Tempus app es un software diseñado con el objetivo de mejorar la eficiencia y la productividad en el trabajo. Aunque no tiene fines de lucro, su enfoque es proporcionar soluciones prácticas y herramientas útiles para facilitar las tareas diarias.",
             font=("Arial", 12),
             wraplength=700,
             bg="#f0f0f0",
@@ -41,7 +41,7 @@ def InformacionTempus(self):
         # Sección de equipo de desarrollo con un estilo más organizado
         team_label = tk.Label(
             main_frame,
-            text="Equipo de Desarrollo",
+            text="Equipo de desarrollo",
             bg="#f0f0f0",
             fg="#1778FB",
             font=("Montserrat", 17),
@@ -69,9 +69,9 @@ def InformacionTempus(self):
             text_label.pack()
 
         # Agregar perfiles de equipo
-        crear_perfil("Daniel Hernandez", "Backend - Frontend - DBA", "2.png")
+        crear_perfil("Daniel Hernandez", "Backend - DBA - Frontend", "2.png")
         crear_perfil("Victor Ramirez", "Frontend - Diseñador", "1.png")
-        crear_perfil("Einner Zambrano", "Colaborador", "2.png")
+        crear_perfil("Einner Zambrano", "Ex Colaborador", "2.png")
         crear_perfil("Daniel Grimaldo", "Colaborador", "1.png")
 
         # permite que la subventana se abra solo si no está abierta

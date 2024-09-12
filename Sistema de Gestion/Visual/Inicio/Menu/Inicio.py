@@ -166,7 +166,7 @@ def mostrar_informacion(self, opcion):
     if opcion == "Agregar Usuario":
         titulo_label = Label(
             self.info_frame,
-            text="Agregar Usuario",
+            text="Agregar usuario",
             bg="#f0f0f0",
             fg="#1E90FF",
             font=("Montserrat", 17, "bold"),
@@ -289,7 +289,7 @@ def mostrar_informacion(self, opcion):
 
         self.clave_unica_label = Label(
             self.info_frame,
-            text="Clave Única",
+            text="Clave única",
             anchor="w",
             justify="left",
             bg="#f0f0f0",
@@ -317,7 +317,7 @@ def mostrar_informacion(self, opcion):
         if self.rol_programa == "Administrador":
             self.agregar_usuarios_boton = tk.Button(
                 self.info_frame,
-                text="Guardar Datos",
+                text="Guardar usuario",
                 font=("Poppins", 13, "bold"),
                 width=22,
                 bd=0,
@@ -332,7 +332,7 @@ def mostrar_informacion(self, opcion):
         else:
             self.agregar_usuarios_boton = tk.Button(
                 self.info_frame,
-                text="Guardar Datos",
+                text="Guardar usuario",
                 font=("Poppins", 13, "bold"),
                 width=22,
                 bd=0,
@@ -349,7 +349,7 @@ def mostrar_informacion(self, opcion):
     elif opcion == "Modificar Usuario":
         titulo_label = Label(
             self.info_frame,
-            text="Modificar Usuario",
+            text="Modificar usuario",
             bg="#f0f0f0",
             fg="#1E90FF",
             font=("Montserrat", 17, "bold"),
@@ -416,7 +416,7 @@ def mostrar_informacion(self, opcion):
 
         self.nuevo_usuario_modificar_label = Label(
             self.info_frame,
-            text="Nuevo Usuario",
+            text="Nuevo usuario",
             anchor="w",
             justify="left",
             bg="#f0f0f0",
@@ -445,7 +445,7 @@ def mostrar_informacion(self, opcion):
 
         self.nueva_clave_modificar_label = Label(
             self.info_frame,
-            text="Nueva Contraseña",
+            text="Nueva contraseña",
             anchor="w",
             justify="left",
             bg="#f0f0f0",
@@ -474,7 +474,7 @@ def mostrar_informacion(self, opcion):
 
         self.clave_unica_label = Label(
             self.info_frame,
-            text="Ingresa Clave Única",
+            text="Ingresa clave única",
             anchor="w",
             justify="left",
             bg="#f0f0f0",
@@ -501,7 +501,7 @@ def mostrar_informacion(self, opcion):
 
         self.modificar_usuarios_boton = tk.Button(
             self.info_frame,
-            text="Modificar Datos",
+            text="Actualizar usuario",
             font=("Poppins", 13, "bold"),
             width=22,
             bd=0,
@@ -516,7 +516,7 @@ def mostrar_informacion(self, opcion):
     elif opcion == "Eliminar Usuario":
         titulo_label = Label(
             self.info_frame,
-            text="Eliminar Usuario",
+            text="Eliminar usuario",
             bg="#f0f0f0",
             fg="#1E90FF",
             font=("Montserrat", 17, "bold"),
@@ -554,7 +554,7 @@ def mostrar_informacion(self, opcion):
 
         self.clave_unica_label = Label(
             self.info_frame,
-            text="Ingresa Clave Única",
+            text="Ingresa clave única",
             anchor="w",
             justify="left",
             bg="#f0f0f0",
@@ -582,7 +582,7 @@ def mostrar_informacion(self, opcion):
         if self.rol_programa == "Administrador":
             self.eliminar_usuarios_boton = tk.Button(
                 self.info_frame,
-                text="Eliminar Datos",
+                text="Eliminar usuario",
                 font=("Poppins", 13, "bold"),
                 width=22,
                 bd=0,
@@ -597,7 +597,7 @@ def mostrar_informacion(self, opcion):
         else:
             self.eliminar_usuarios_boton = tk.Button(
                 self.info_frame,
-                text="Eliminar Datos",
+                text="Eliminar usuario",
                 font=("Poppins", 13, "bold"),
                 width=22,
                 bd=0,
@@ -624,7 +624,7 @@ def mostrar_informacion(self, opcion):
 
         self.titulo2_label = Label(
             self.info_frame,
-            text="para opciones\nde Usuario",
+            text="para opciones\nde usuario",
             anchor="w",
             justify=LEFT,
             bg="#f0f0f0",

@@ -13,7 +13,7 @@ def mostrar_opcion5(self):
     self.root2.geometry("1170x635")
 
     self.info_frame = Frame(self.label_info, bg="#f0f0f0", colormap="new")
-    self.info_frame.place(x=125, y=15, width=865, height=585)
+    self.info_frame.place(x=125, y=15, width=865, height=600)
 
     # Botones para cambiar la información
     self.imagen_agregar = utl.leer_imagen("agregar.png", size=(51, 59))
@@ -266,7 +266,7 @@ def mostrar_informacion(self, opcion):
         )
 
         self.frame_lista = Frame(self.info_frame, bg="#f0f0f0", colormap="new")
-        self.frame_lista.place(x=0, y=55, width=865, height=585) 
+        self.frame_lista.place(x=0, y=55, width=865, height=600) 
         
         # Crear el Treeview con el estilo personalizado
         self.tree = ttk.Treeview(
@@ -329,7 +329,7 @@ def mostrar_informacion(self, opcion):
             text="Agregar fecha de entrega:",
             fg="#1778FB",
             bg="#f0f0f0",
-            font=("Poppins", 17, "bold"),
+            font=("Poppins", 14, "bold"),
         )
         titel_label.place(x=0, y=310)
         
@@ -341,7 +341,7 @@ def mostrar_informacion(self, opcion):
             bg="#f0f0f0",
             font=("Poppins", 13, "bold"),
         )
-        self.nombre_label.place(x=0, y=360)
+        self.nombre_label.place(x=0, y=352)
 
         self.nombre_entry = tk.Entry(
             self.frame_lista,
@@ -354,31 +354,7 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
         )
-        self.nombre_entry.place(x=0, y=390)
-        
-        
-        self.nombre_label = tk.Label(
-            self.frame_lista,
-            text="Cédula cliente",
-            fg="#1E90FF",
-            bg="#f0f0f0",
-            font=("Poppins", 13, "bold"),
-        )
-        self.nombre_label.place(x=235, y=360)
-
-        self.nombre_entry = tk.Entry(
-            self.frame_lista,
-            highlightthickness=2,
-            highlightbackground="#1778FB",
-            relief=tk.FLAT,
-            width=22,
-            fg="#0046A4",
-            background="#f0f0f0",
-            font=("Poppins", 12, "bold"),
-            insertbackground="#1E90FF",
-        )
-        self.nombre_entry.place(x=235, y=390)
-        
+        self.nombre_entry.place(x=0, y=382)       
         
         self.nombre_label = tk.Label(
             self.frame_lista,
@@ -387,7 +363,7 @@ def mostrar_informacion(self, opcion):
             bg="#f0f0f0",
             font=("Poppins", 13, "bold"),
         )
-        self.nombre_label.place(x=470, y=360)
+        self.nombre_label.place(x=235, y=352)
                 
         self.nombre_entry = DateEntry(
             self.frame_lista,
@@ -399,12 +375,12 @@ def mostrar_informacion(self, opcion):
             font=("Helvetica", 12),
             state="readonly",
         )
-        self.nombre_entry.place(x=470, y=390)
+        self.nombre_entry.place(x=235, y=382)
         
         
         self.modificar_clientes_button = tk.Button(
             self.frame_lista,
-            text="Enviar datos",
+            text="Actualizar fecha",
             font=("Poppins", 13, "bold"),
             width=20,
             bd=0,
@@ -413,4 +389,50 @@ def mostrar_informacion(self, opcion):
             activebackground="#1778FB",
             fg="white",
         )
-        self.modificar_clientes_button.place(x=0, y=440)
+        self.modificar_clientes_button.place(x=470, y=382)
+        
+        
+        titel_label = tk.Label(
+            self.frame_lista,
+            text="Descargar pdf por cliente:",
+            fg="#1778FB",
+            bg="#f0f0f0",
+            font=("Poppins", 14, "bold"),
+        )
+        titel_label.place(x=0, y=437)
+        
+        
+        self.nombre_label = tk.Label(
+            self.frame_lista,
+            text="N° de orden",
+            fg="#1E90FF",
+            bg="#f0f0f0",
+            font=("Poppins", 13, "bold"),
+        )
+        self.nombre_label.place(x=0, y=479)
+
+        self.nombre_entry = tk.Entry(
+            self.frame_lista,
+            highlightthickness=2,
+            highlightbackground="#1778FB",
+            relief=tk.FLAT,
+            width=22,
+            fg="#0046A4",
+            background="#f0f0f0",
+            font=("Poppins", 12, "bold"),
+            insertbackground="#1E90FF",
+        )
+        self.nombre_entry.place(x=0, y=509)       
+                
+        self.modificar_clientes_button = tk.Button(
+            self.frame_lista,
+            text="Descargar",
+            font=("Poppins", 13, "bold"),
+            width=17,
+            bd=0,
+            bg="#1E90FF",
+            cursor="hand2",
+            activebackground="#1778FB",
+            fg="white",
+        )
+        self.modificar_clientes_button.place(x=235, y=509)

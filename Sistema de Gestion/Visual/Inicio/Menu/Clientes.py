@@ -6,7 +6,6 @@ from tkinter import messagebox
 from Modelo.Inicio.OpcionClientes import (
     Agregar_Cliente,
     Modificar_Cliente,
-    Eliminar_Cliente,
     Buscar_Cliente,
     Obtener_Clientes,
 )
@@ -22,7 +21,7 @@ def mostrar_opcion3(self):
     # Titulo de la ventana
     titel_label = tk.Label(
         self.label_info,
-        text="Información del Cliente",
+        text="Información del cliente",
         fg="#1778FB",
         bg="#f0f0f0",
         font=("Poppins", 17, "bold"),
@@ -52,7 +51,7 @@ def mostrar_opcion3(self):
         validate="key",
         validatecommand=(self.root2.register(validate_name), "%P"),
     )
-    self.nombre_entry.place(x=25, y=105)
+    self.nombre_entry.place(x=25, y=108)
     self.nombre_entry.bind("<Return>", lambda event: self.apellido_entry.focus_set())
 
     # Area del Apellido del Cliente
@@ -63,7 +62,8 @@ def mostrar_opcion3(self):
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
-    self.apellido_label.place(x=25, y=145)
+    self.apellido_label.place(x=25, y=152)
+    
     self.apellido_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
@@ -77,7 +77,7 @@ def mostrar_opcion3(self):
         validate="key",
         validatecommand=(self.root2.register(validate_name), "%P"),
     )
-    self.apellido_entry.place(x=25, y=175)
+    self.apellido_entry.place(x=25, y=185)
     self.apellido_entry.bind(
         "<Return>", lambda event: self.tipo_cedula_entry.focus_set()
     )
@@ -90,7 +90,8 @@ def mostrar_opcion3(self):
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
-    self.cedula_label.place(x=25, y=215)
+    self.cedula_label.place(x=25, y=229)
+    
     self.tipo_cedula_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
@@ -104,7 +105,8 @@ def mostrar_opcion3(self):
         validate="key",
         validatecommand=(self.root2.register(validate_clientes), "%P"),
     )
-    self.tipo_cedula_entry.place(x=25, y=245)
+    self.tipo_cedula_entry.place(x=25, y=262)
+    
     self.tipo_cedula_entry.bind("<Return>", lambda event: self.cedula_entry.focus_set())
     self.cedula_entry = tk.Entry(
         self.label_info,
@@ -119,7 +121,7 @@ def mostrar_opcion3(self):
         validate="key",
         validatecommand=(self.root2.register(validate_document), "%P"),
     )
-    self.cedula_entry.place(x=67, y=245)
+    self.cedula_entry.place(x=67, y=262)
     self.cedula_entry.bind("<Return>", lambda event: self.telefono_entry.focus_set())
 
     # Area de Telefono del Cliente
@@ -130,7 +132,8 @@ def mostrar_opcion3(self):
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
-    self.telefono_label.place(x=25, y=285)
+    self.telefono_label.place(x=25, y=306)
+    
     self.telefono_entry = tk.Entry(
         self.label_info,
         highlightthickness=2,
@@ -144,7 +147,7 @@ def mostrar_opcion3(self):
         validate="key",
         validatecommand=(self.root2.register(validate_phone), "%P"),
     )
-    self.telefono_entry.place(x=25, y=315)
+    self.telefono_entry.place(x=25, y=339)
     self.telefono_entry.bind("<Return>", lambda event: self.direccion_text.focus_set())
 
     # Area de Direccion del Cliente
@@ -155,10 +158,11 @@ def mostrar_opcion3(self):
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
-    self.direccion_label.place(x=25, y=355)
+    self.direccion_label.place(x=25, y=383)
+    
     self.direccion_text = tk.Text(
         self.label_info,
-        height=2,
+        height=4,
         width=28,
         font=("Poppins", 12, "bold"),
         fg="#0046A4",
@@ -168,13 +172,13 @@ def mostrar_opcion3(self):
         highlightbackground="#1E90FF",
         relief=tk.FLAT,
     )
-    self.direccion_text.place(x=25, y=385)
+    self.direccion_text.place(x=25, y=416)
     self.direccion_text.bind("<Return>", lambda event: Agregar_Cliente(self))
 
     # Boton para añadir cliente
     self.guardar_clientes_button = tk.Button(
         self.label_info,
-        text="Añadir Cliente",
+        text="Agregar cliente",
         font=("Poppins", 13, "bold"),
         width=20,
         bd=0,
@@ -184,14 +188,14 @@ def mostrar_opcion3(self):
         fg="white",
         command=lambda: Agregar_Cliente(self),
     )
-    self.guardar_clientes_button.place(x=50, y=465)
+    self.guardar_clientes_button.place(x=50, y=513)
 
     # Validar que tipo de Cuenta es para usar diferentes funciones para cada una
     if self.rol_programa == "Administrador":
         # Boton para modificar cliente
         self.modificar_clientes_button = tk.Button(
             self.label_info,
-            text="Modificar Cliente",
+            text="Modificar cliente",
             font=("Poppins", 13, "bold"),
             width=20,
             bd=0,
@@ -201,28 +205,14 @@ def mostrar_opcion3(self):
             fg="white",
             command=lambda: Modificar_Cliente(self),
         )
-        self.modificar_clientes_button.place(x=50, y=515)
+        self.modificar_clientes_button.place(x=50, y=550)
 
-        # botón para eliminar cliente
-        self.eliminar_clientes_button = tk.Button(
-            self.label_info,
-            text="Eliminar Cliente",
-            font=("Poppins", 13, "bold"),
-            width=20,
-            bd=0,
-            bg="#1E90FF",
-            cursor="hand2",
-            activebackground="#1778FB",
-            fg="white",
-            command=lambda: Eliminar_Cliente(self),
-        )
-        self.eliminar_clientes_button.place(x=50, y=565)
     # Solo para Niveles Bajos de Cuenta
     else:
         # Boton para modificar cliente pero no Funciona solo esta ahi
         self.modificar_clientes_button = tk.Button(
             self.label_info,
-            text="Modificar Cliente",
+            text="Modificar cliente",
             font=("Poppins", 13, "bold"),
             width=20,
             bd=0,
@@ -234,24 +224,8 @@ def mostrar_opcion3(self):
                 "Error", "No Tienes los Permisos Necesarios"
             ),
         )
-        self.modificar_clientes_button.place(x=50, y=515)
-
-        # Boton para Eliminar cliente pero no Funciona solo esta ahi
-        self.eliminar_clientes_button = tk.Button(
-            self.label_info,
-            text="Eliminar Cliente",
-            font=("Poppins", 13, "bold"),
-            width=20,
-            bd=0,
-            bg="#1E90FF",
-            cursor="hand2",
-            activebackground="#1778FB",
-            fg="white",
-            command=lambda: messagebox.showerror(
-                "Error", "No Tienes los Permisos Necesarios"
-            ),
-        )
-        self.eliminar_clientes_button.place(x=50, y=565)
+        self.modificar_clientes_button.place(x=50, y=550)
+        
 
     # Area para buscar cliente por Documento
     self.buscar_cliente_entry = tk.Entry(
@@ -286,7 +260,7 @@ def mostrar_opcion3(self):
 
     self.descargar_datos_button = tk.Button(
         self.label_info,
-        text="Actualizar Lista",
+        text="Actualizar lista",
         font=("Poppins", 13, "bold"),
         width=20,
         bd=0,
@@ -296,7 +270,7 @@ def mostrar_opcion3(self):
         fg="white",
         command=lambda: actualizar_lista(self),
     )
-    self.descargar_datos_button.place(x=686, y=30)
+    self.descargar_datos_button.place(x=705, y=30)
 
     # Configuración del estilo
     style = ttk.Style()
@@ -330,18 +304,18 @@ def mostrar_opcion3(self):
     )
     style.configure(
         "Vertical.TScrollbar",
-        troughcolor="#1778FB",
-        background="#1778FB",
+        troughcolor="#f0f0f0",
+        background="#f0f0f0",
         relief="flat",
         borderwidth=1,
         width=10,
-        highlightcolor="#1778FB",
-        highlightbackground="#1778FB",
+        highlightcolor="#f0f0f0",
+        highlightbackground="#f0f0f0",
         highlightthickness=1
     )
 
     # Crear el marco de información
-    self.info_frame = tk.Frame(self.label_info, bg="#DCEBFF")
+    self.info_frame = tk.Frame(self.label_info, bg="#f0f0f0")
     self.info_frame.place(x=320, y=80, width=590, height=515)
 
     # Crear el Treeview con el estilo personalizado
@@ -376,8 +350,8 @@ def mostrar_opcion3(self):
         self.tree.column(col, minwidth=width, width=width, anchor="center")
 
     # Crear la barra de desplazamiento
-    scrollbar_cover = tk.Frame(self.info_frame, bg="#DCEBFF")
-    scrollbar_cover.grid(row=0, column=1, sticky="ns")
+    scrollbar_cover = tk.Frame(self.info_frame, bg="#f0f0f0")
+    scrollbar_cover.grid(row=0, column=1, sticky="ns", pady=(0, 15))
     
     # Crear la barra de desplazamiento
     scrollbar = ttk.Scrollbar(
@@ -389,7 +363,7 @@ def mostrar_opcion3(self):
     self.tree.configure(yscrollcommand=scrollbar.set)
 
     # Colocar el Treeview y la barra de desplazamiento en el marco
-    self.tree.grid(row=0, column=0, sticky="nsew")
+    self.tree.grid(row=0, column=0, sticky="nsew", pady=(0, 15))
     scrollbar.place(in_=scrollbar_cover, x=0, y=0, relheight=1)
 
     # Configurar el marco de información
@@ -407,7 +381,7 @@ def validate_clientes(new_value):
     if len(new_value) > 1:
         return False
     if new_value:
-        allowed_values = ["V", "C", "J", "P"]
+        allowed_values = ["V", "C", "J", "P", "E"]
         return new_value.upper() in allowed_values
     return True
 

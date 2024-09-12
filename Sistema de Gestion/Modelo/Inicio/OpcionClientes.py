@@ -69,55 +69,6 @@ def Agregar_Cliente(self):
         connection.close()
 
 
-# Permite Eliminar un Cliente de la Base de Datos
-def Eliminar_Cliente(self):
-    try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
-            port=3306,
-        )
-        cursor = connection.cursor()
-    except mysql.connector.Error as err:
-        return messagebox.showerror(
-            message=f"Error de conexión: {err}", title="Mensaje"
-        )
-
-    # Datos a Ingresar en la Base de Datos
-    cedula = self.cedula_entry.get()
-
-    # Verifica que los campos no estén vacíos
-    if len(cedula) < 7:
-        messagebox.showerror("Error", "Documento Invalido Intente otra Vez")
-        return
-
-    # Verifica si ya existe un Cliente con esos Mismos datos para Eliminarlo
-    try:
-        cursor.execute("SELECT * FROM datoscliente WHERE Cedula = %s", (cedula,))
-        resultado = cursor.fetchone()
-
-        if resultado:
-            # Si se encuentra el Cliente debe eliminarlo
-            cursor.execute("DELETE FROM datoscliente WHERE Cedula = %s", (cedula,))
-            connection.commit()
-            messagebox.showinfo(
-                message="Cliente Borrado Exitosamente.", title="Eliminación"
-            )
-            limpiar_campos(self)  # Limpia los campos después de eliminar el cliente
-        else:
-            # Si no se encuentra el Cliente mostrar un mensaje de error
-            messagebox.showerror(
-                message="No se encontró un Cliente con ese Documento.",
-                title="Error de Eliminación",
-            )
-    except mysql.connector.Error as err:
-        messagebox.showerror(message=f"Error en la consulta: {err}", title="Mensaje")
-    finally:
-        connection.close()
-
-
 # Permite Buscar un Cliente en la Base de Datos
 def Buscar_Cliente(self):
     try:
@@ -204,7 +155,7 @@ def Modificar_Cliente(self):
 
     # Verifica que los campos no estén vacíos
     if len(cedula) < 8:
-        messagebox.showerror("Error", "Documento Invalido Intente otra Vez")
+        messagebox.showerror("Error", "Documento Invalido, Intente otra Vez")
         return
 
     # Verifica si ya existe un Cliente con esos Mismos datos para Modificarlo

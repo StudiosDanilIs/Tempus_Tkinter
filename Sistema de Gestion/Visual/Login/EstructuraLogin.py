@@ -139,7 +139,7 @@ class CreateLogin:
             bg="#f0f0f0",
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
-            text="Guardar Cuenta",
+            text="Guardar cuenta",
             variable=estado_boton,
         )
         self.marcar_boton.place(x=75, y=405)
@@ -147,7 +147,7 @@ class CreateLogin:
         # botón para restaurar la Cuenta
         self.recuperar_button = Label(
             self.lgn_frame,
-            text="Recuperar Cuenta?",
+            text="Recuperar cuenta?",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
@@ -224,7 +224,7 @@ class CreateLogin:
         # Version del Programa
         self.version_boton = Button(
             self.lgn_frame,
-            text="Versión PreAlpha 5",
+            text="Versión beta 2.5",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
