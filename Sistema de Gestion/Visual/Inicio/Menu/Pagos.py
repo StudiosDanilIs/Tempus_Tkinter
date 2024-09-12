@@ -9,6 +9,7 @@ def mostrar_opcion4(self):
     # Limpiar el contenido del frame principal
     self.limpiar_contenido()
     self.root2.title("Verificar Pagos")
+    self.root2.geometry("1100x635")
 
     # Informacion de la ventana
     logo = utl.leer_imagen("menu/salir2.png", size=(200, 200))

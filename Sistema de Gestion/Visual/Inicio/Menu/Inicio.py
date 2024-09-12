@@ -16,6 +16,7 @@ def mostrar_opcion1(self):
     # Limpiar el contenido del frame principal
     self.limpiar_contenido()
     self.root2.title("Inicio - Area de Cuentas")
+    self.root2.geometry("1100x635")
 
     # Etiqueta de bienvenida
     self.imagen_perfil = utl.leer_imagen("usuario_inicio.png", size=(33, 33))

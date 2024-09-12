@@ -17,6 +17,7 @@ def mostrar_opcion3(self):
     self.limpiar_contenido()
     self.subventana_abierta = False
     self.root2.title("Area de Clientes")
+    self.root2.geometry("1100x635")
 
     # Titulo de la ventana
     titel_label = tk.Label(

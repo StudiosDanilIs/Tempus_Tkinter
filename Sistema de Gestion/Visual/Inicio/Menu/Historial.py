@@ -10,9 +10,10 @@ import tkinter.messagebox as messagebox
 def mostrar_opcion5(self):
     self.limpiar_contenido()
     self.root2.title("Historial de Solicitudes")
+    self.root2.geometry("1170x635")
 
     self.info_frame = Frame(self.label_info, bg="#f0f0f0", colormap="new")
-    self.info_frame.place(x=125, y=15, width=805, height=900)
+    self.info_frame.place(x=125, y=15, width=865, height=585)
 
     # Botones para cambiar la información
     self.imagen_agregar = utl.leer_imagen("agregar.png", size=(51, 59))
@@ -66,12 +67,12 @@ def mostrar_informacion(self, opcion):
 
     if opcion == "Agregar Usuario":
 
-        self.frame_lista = Frame(self.info_frame, bg="#DCEBFF", colormap="new")
-        self.frame_lista.place(x=0, y=55, width=805, height=535)
+        self.frame_lista = Frame(self.info_frame, bg="#f0f0f0", colormap="new")
+        self.frame_lista.place(x=0, y=55, width=865, height=585)
 
         titel_label = tk.Label(
             self.info_frame,
-            text="Historial de Pedidos",
+            text="Historial de solicitudes",
             fg="#1778FB",
             bg="#f0f0f0",
             font=("Poppins", 19, "bold"),
@@ -154,7 +155,7 @@ def mostrar_informacion(self, opcion):
             self.tree.column(col, minwidth=width, width=width, anchor="center")
 
         scrollbar_cover = tk.Frame(self.frame_lista, bg="#DCEBFF")
-        scrollbar_cover.grid(row=0, column=1, sticky="ns")
+        scrollbar_cover.grid(row=0, column=1, sticky="ns", pady=(0, 80))
 
         # Crear la barra de desplazamiento
         scrollbar = ttk.Scrollbar(
@@ -166,13 +167,14 @@ def mostrar_informacion(self, opcion):
         self.tree.configure(yscrollcommand=scrollbar.set)
 
         # Colocar el Treeview y la barra de desplazamiento en el marco
-        self.tree.grid(row=0, column=0, sticky="nsew")
+        self.tree.grid(row=0, column=0, sticky="nsew", pady=(0, 80))
         scrollbar.place(in_=scrollbar_cover, x=0, y=0, relheight=1)
-
+        
         # Configurar el marco de información
         self.frame_lista.grid_rowconfigure(0, weight=1)
         self.frame_lista.grid_columnconfigure(0, weight=1)
         self.frame_lista.grid_columnconfigure(1, weight=0)
+
 
     elif opcion == "Modificar Usuario":
         titel_label = tk.Label(
@@ -192,7 +194,7 @@ def mostrar_informacion(self, opcion):
             bg="#f0f0f0",
             font=("Poppins", 13, "bold"),
         )
-        self.cedula_buscar_label.place(x=440, y=10)
+        self.cedula_buscar_label.place(x=500, y=10)
 
         self.cedula_buscar_entry = tk.Entry(
             self.info_frame,
@@ -205,7 +207,7 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
         )
-        self.cedula_buscar_entry.place(x=595, y=10)
+        self.cedula_buscar_entry.place(x=655, y=10)
         
         self.lupa = utl.leer_imagen("lupa.png", size=(27, 27))
         self.buscar = tk.Button(
@@ -218,11 +220,9 @@ def mostrar_informacion(self, opcion):
             cursor="hand2",
             fg="white",
         )
-        self.buscar.place(x=774, y=10)    
+        self.buscar.place(x=834, y=10)
 
-        
-        self.frame_lista = Frame(self.info_frame, bg="#f0f0f0", colormap="new")
-        self.frame_lista.place(x=0, y=55, width=805, height=600)    
+   
         # Configuración del estilo
         style = ttk.Style()
         style.theme_use("default")
@@ -265,6 +265,9 @@ def mostrar_informacion(self, opcion):
             highlightthickness=1,
         )
 
+        self.frame_lista = Frame(self.info_frame, bg="#f0f0f0", colormap="new")
+        self.frame_lista.place(x=0, y=55, width=865, height=585) 
+        
         # Crear el Treeview con el estilo personalizado
         self.tree = ttk.Treeview(
             self.frame_lista,
@@ -299,7 +302,7 @@ def mostrar_informacion(self, opcion):
             self.tree.column(col, minwidth=width, width=width, anchor="center")
 
         scrollbar_cover = tk.Frame(self.frame_lista, bg="#f0f0f0")
-        scrollbar_cover.grid(row=0, column=1, sticky="ns", pady=(0, 240))
+        scrollbar_cover.grid(row=0, column=1, sticky="ns", pady=(0, 295))
         
 
         # Crear la barra de desplazamiento
@@ -312,7 +315,7 @@ def mostrar_informacion(self, opcion):
         self.tree.configure(yscrollcommand=scrollbar.set)
 
         # Colocar el Treeview y la barra de desplazamiento en el marco
-        self.tree.grid(row=0, column=0, sticky="nsew", pady=(0, 240))
+        self.tree.grid(row=0, column=0, sticky="nsew", pady=(0, 295))
         scrollbar.place(in_=scrollbar_cover, x=0, y=0, relheight=1)
 
         # Configurar el marco de información
@@ -328,7 +331,7 @@ def mostrar_informacion(self, opcion):
             bg="#f0f0f0",
             font=("Poppins", 17, "bold"),
         )
-        titel_label.place(x=0, y=375)
+        titel_label.place(x=0, y=310)
         
         
         self.nombre_label = tk.Label(
@@ -338,7 +341,7 @@ def mostrar_informacion(self, opcion):
             bg="#f0f0f0",
             font=("Poppins", 13, "bold"),
         )
-        self.nombre_label.place(x=0, y=425)
+        self.nombre_label.place(x=0, y=360)
 
         self.nombre_entry = tk.Entry(
             self.frame_lista,
@@ -351,7 +354,7 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
         )
-        self.nombre_entry.place(x=0, y=455)
+        self.nombre_entry.place(x=0, y=390)
         
         
         self.nombre_label = tk.Label(
@@ -361,7 +364,7 @@ def mostrar_informacion(self, opcion):
             bg="#f0f0f0",
             font=("Poppins", 13, "bold"),
         )
-        self.nombre_label.place(x=235, y=425)
+        self.nombre_label.place(x=235, y=360)
 
         self.nombre_entry = tk.Entry(
             self.frame_lista,
@@ -374,7 +377,7 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
         )
-        self.nombre_entry.place(x=235, y=455)
+        self.nombre_entry.place(x=235, y=390)
         
         
         self.nombre_label = tk.Label(
@@ -384,7 +387,7 @@ def mostrar_informacion(self, opcion):
             bg="#f0f0f0",
             font=("Poppins", 13, "bold"),
         )
-        self.nombre_label.place(x=470, y=425)
+        self.nombre_label.place(x=470, y=360)
                 
         self.nombre_entry = DateEntry(
             self.frame_lista,
@@ -393,10 +396,10 @@ def mostrar_informacion(self, opcion):
             foreground="#1778FB",
             year=2024,
             date_pattern="dd /MM /yyyy",
-            font=("Helvetica", 13),
+            font=("Helvetica", 12),
             state="readonly",
         )
-        self.nombre_entry.place(x=470, y=455)
+        self.nombre_entry.place(x=470, y=390)
         
         
         self.modificar_clientes_button = tk.Button(
@@ -410,4 +413,4 @@ def mostrar_informacion(self, opcion):
             activebackground="#1778FB",
             fg="white",
         )
-        self.modificar_clientes_button.place(x=0, y=505)
+        self.modificar_clientes_button.place(x=0, y=440)
