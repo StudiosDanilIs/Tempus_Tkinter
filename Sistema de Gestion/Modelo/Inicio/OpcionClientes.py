@@ -139,7 +139,7 @@ def Modificar_Cliente(self):
             db="registro",
             port=3306,
         )
-        cursor = connection.cursor()
+        cursor = connection.cursor(buffered=True)
     except mysql.connector.Error as err:
         return messagebox.showerror(
             message=f"Error de conexión: {err}", title="Mensaje"
@@ -186,6 +186,7 @@ def Modificar_Cliente(self):
         messagebox.showerror(message=f"Error en la consulta: {err}", title="Mensaje")
     finally:
         connection.close()
+
 
 
 def Obtener_Clientes(self, cargar_datos=False):

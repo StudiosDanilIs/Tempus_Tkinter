@@ -474,7 +474,7 @@ def mostrar_informacion(self, opcion):
 
         self.clave_unica_label = Label(
             self.info_frame,
-            text="Ingresa clave única",
+            text="Ingresa tú clave única",
             anchor="w",
             justify="left",
             bg="#f0f0f0",
@@ -554,7 +554,7 @@ def mostrar_informacion(self, opcion):
 
         self.clave_unica_label = Label(
             self.info_frame,
-            text="Ingresa clave única",
+            text="Ingresa tú clave única",
             anchor="w",
             justify="left",
             bg="#f0f0f0",

@@ -1,5 +1,4 @@
 import re
-import webbrowser
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -193,24 +192,9 @@ class CreateLogin:
         )
         self.registrarse_boton.place(x=240, y=460)
 
-        # Actualizar el Programa
-        self.imagen_update = utl.leer_imagen("git.png", size=(35, 35))
-        self.update_boton = Button(
-            self.lgn_frame,
-            image=self.imagen_update,
-            width=50,
-            bg="#f0f0f0",
-            activebackground="#f0f0f0",
-            bd=0,
-            cursor="hand2",
-            fg="white",
-            command=lambda: self.abrir_perfil_github(),
-        )
-        self.update_boton.place(x=40, y=595)
-
         self.update_label = Label(
             self.lgn_frame,
-            text="Actualizar",
+            text="©Tempus2024",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
@@ -219,7 +203,7 @@ class CreateLogin:
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
         )
-        self.update_label.place(x=82, y=604)
+        self.update_label.place(x=270, y=604)
 
         # Version del Programa
         self.version_boton = Button(
@@ -235,7 +219,7 @@ class CreateLogin:
             cursor="hand2",
             command=lambda: Info(self),
         )
-        self.version_boton.place(x=270, y=600)
+        self.version_boton.place(x=35, y=600)
 
         # Fondo de la Ventana de Login
         self.imagen_fondo_login = utl.leer_imagen("fondo2.jpg", size=(500, 645))
@@ -286,13 +270,6 @@ class CreateLogin:
             self.password_entry.config(show="*")  # Mostrar asteriscos
         else:
             self.password_entry.config(show="")  # Mostrar texto normal
-
-    # Abrir el Perfil de GitHub para Actualizar el Programa
-    def abrir_perfil_github(self):
-        # Abre el perfil de Instagram en el navegador
-        perfil_github = "https://github.com/StudiosDanilIs/Tempus_Tkinter"  # Reemplaza con el perfil deseado
-        webbrowser.open(perfil_github)
-
 
 if __name__ == "__main__":
     CreateLogin()

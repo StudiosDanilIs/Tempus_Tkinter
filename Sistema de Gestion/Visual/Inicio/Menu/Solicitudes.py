@@ -10,9 +10,3 @@ def mostrar_opcion2(self):
     self.limpiar_contenido()
     self.root2.title("Agregar Solicitudes")
     self.root2.geometry("1100x635")
-
-    # Informacion de la ventana
-    logo = utl.leer_imagen("menu/historial2.png", size=(200, 200))
-    self.logo_inicio_label = tk.Label(self.label_info, image=logo, bg="#FFFFFF")
-    self.logo_inicio_label.image = logo
-    self.logo_inicio_label.place(relx=0.5, rely=0.36, anchor=tk.CENTER)

@@ -71,8 +71,8 @@ def InformacionTempus(self):
         # Agregar perfiles de equipo
         crear_perfil("Daniel Hernandez", "Backend - DBA - Frontend", "2.png")
         crear_perfil("Victor Ramirez", "Frontend - Diseñador", "1.png")
-        crear_perfil("Einner Zambrano", "Ex Colaborador", "2.png")
-        crear_perfil("Daniel Grimaldo", "Colaborador", "1.png")
+        crear_perfil("Daniel Grimaldo", "Colaborador", "2.png")
+        crear_perfil("Einner Zambrano", "Ex Colaborador", "1.png")
 
         # permite que la subventana se abra solo si no está abierta
         self.subventana_abierta = True
