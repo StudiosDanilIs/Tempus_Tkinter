@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import Frame
 import util.PhotoImagenes as utl
 import tkinter.messagebox as messagebox
-from util.Funciones import actualizar_reloj
+from util.Reloj import actualizar_reloj
 from Modelo.Inicio.OpcionUsuarios import (
     Agregar_Usuarios,
     Modificar_Usuarios,

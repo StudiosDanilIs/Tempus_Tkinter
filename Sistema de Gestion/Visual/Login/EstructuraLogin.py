@@ -5,7 +5,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from tkinter.font import BOLD
 import util.PhotoImagenes as utl
-from SubVentanas.Login.InfoSubventana import InformacionTempus as Info
+from SubVentanas.InformacionVersion import InformacionTempus as Info
 from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
 
 
@@ -208,7 +208,7 @@ class CreateLogin:
         # Version del Programa
         self.version_boton = Button(
             self.lgn_frame,
-            text="Versión beta 2.5",
+            text="Versión beta 3.1",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",

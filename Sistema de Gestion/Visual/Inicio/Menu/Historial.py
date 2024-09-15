@@ -10,6 +10,7 @@ from Modelo.Inicio.OpcionesHistorial import (
     Cargar_Solicitudes,
     Agregar_Fecha_Entrega
 )
+from util.CreateExcel import obtener_datos_solicitud, guardar_datos_en_excel
 
 
 def mostrar_opcion5(self):
@@ -406,6 +407,7 @@ def mostrar_informacion(self, opcion):
             cursor="hand2",
             activebackground="#1778FB",
             fg="white",
+            command=lambda: descargar_datos(self),
         )
         self.descargar_pdf_boton.place(x=235, y=509)
         #self.descargar_pdf_boton.bind("<Return>", lambda event: Descargar_Archivo(self))
@@ -546,3 +548,16 @@ def Historial(self):
     self.frame_lista.grid_rowconfigure(0, weight=1)
     self.frame_lista.grid_columnconfigure(0, weight=1)
     self.frame_lista.grid_columnconfigure(1, weight=0)
+    
+    
+ 
+def descargar_datos(self):
+    numero_solicitud = self.numero_orden_entry2.get()
+    if len(numero_solicitud) < 1:
+        messagebox.showerror("Error", "Ingrese un numero por favor")
+        return
+    
+    datos_solicitud = obtener_datos_solicitud(numero_solicitud)
+    if datos_solicitud is not None:
+        guardar_datos_en_excel(datos_solicitud) 
+    
