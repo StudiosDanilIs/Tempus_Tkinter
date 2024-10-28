@@ -1,13 +1,11 @@
 import re
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-from tkinter.font import BOLD
 import util.PhotoImagenes as utl
-from SubVentanas.InformacionVersion import InformacionTempus as Info
+from Visual.Extras.InformacionVersion import InformacionTempus as Info
+from Visual.Extras.CrearCuenta import CrearUsuario
+from Visual.Extras.LoginRecuperar import LoginRecuperar
 from Modelo.Login.VerificarCuenta import verificar_sesion as Verificar
-
 
 class CreateLogin:
     def __init__(self):
@@ -129,22 +127,24 @@ class CreateLogin:
             command=lambda: self.Revertir(self),
         )
         self.imagen_clave_boton.place(x=35, y=362)
-
-        # Boton de Chetboc para guardar la cuenta
-        estado_boton = tk.BooleanVar(value=False)
-        self.marcar_boton = tk.Checkbutton(
+        
+        # botón advertencia
+        self.recuperar_button = Label(
             self.lgn_frame,
+            text="Sistema protegido",
+            relief=FLAT,
+            borderwidth=0,
+            background="#f0f0f0",
             fg="#232323",
             bg="#f0f0f0",
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
-            text="Guardar cuenta",
-            variable=estado_boton,
-        )
-        self.marcar_boton.place(x=75, y=405)
+            cursor="hand2",
+        )        
+        self.recuperar_button.place(x=80, y=415)
 
         # botón para restaurar la Cuenta
-        self.recuperar_button = Label(
+        self.recuperar_button = Button(
             self.lgn_frame,
             text="Recuperar cuenta?",
             relief=FLAT,
@@ -155,14 +155,15 @@ class CreateLogin:
             font=("Poppins", 12, "bold"),
             activebackground="#f0f0f0",
             cursor="hand2",
-        )
+            command=lambda: LoginRecuperar(self.root),
+        )        
         self.recuperar_button.place(x=255, y=410)
 
         # botón para iniciar sesión
         self.imagen_iniciar_sesion = utl.leer_imagen(
             "boton_iniciar_sesion.png", size=(170, 55)
         )
-        self.login_boton = Button(
+        self.login_boton = tk.Button(
             self.lgn_frame,
             image=self.imagen_iniciar_sesion,
             width=170,
@@ -189,6 +190,7 @@ class CreateLogin:
             bd=0,
             cursor="hand2",
             fg="white",
+            command=lambda: CrearUsuario(self.root),
         )
         self.registrarse_boton.place(x=240, y=460)
 
@@ -208,7 +210,7 @@ class CreateLogin:
         # Version del Programa
         self.version_boton = Button(
             self.lgn_frame,
-            text="Versión beta 3.1",
+            text="Versión 1.6.14",
             relief=FLAT,
             borderwidth=0,
             background="#f0f0f0",
@@ -226,7 +228,7 @@ class CreateLogin:
         self.fondo_label = Label(
             self.lgn_frame,
             image=self.imagen_fondo_login,
-            width=501,
+            width=505,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
             bd=0,

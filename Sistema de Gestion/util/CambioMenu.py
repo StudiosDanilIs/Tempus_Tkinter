@@ -12,17 +12,17 @@ def resaltar1(self, event):
 
 def resaltar2(self, event):
     if not self.presionado:
-        logo_cambio2 = utl.leer_imagen("menu/solicitudes2.png", size=(59, 61))
+        logo_cambio2 = utl.leer_imagen("menu/clientes2.png", size=(44, 59))
         self.boton_opcion2.config(image=logo_cambio2, bg="#f0f0f0")
         self.boton_opcion2.image = logo_cambio2
 
 
 def resaltar3(self, event):
     if not self.presionado:
-        logo_cambio3 = utl.leer_imagen("menu/clientes2.png", size=(44, 59))
+        logo_cambio3 = utl.leer_imagen("menu/solicitudes2.png", size=(59, 61))
         self.boton_opcion3.config(image=logo_cambio3, bg="#f0f0f0")
         self.boton_opcion3.image = logo_cambio3
-
+        
 
 def resaltar4(self, event):
     if not self.presionado:
@@ -54,7 +54,7 @@ def restaurar1(self, event):
 def restaurar2(self, event):
     if not self.presionado:
         self.boton_opcion2.config(image=self.logo2, bg="#1778FB")
-
+        
 
 def restaurar3(self, event):
     if not self.presionado:

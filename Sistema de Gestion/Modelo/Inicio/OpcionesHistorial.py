@@ -7,10 +7,10 @@ from tkinter import messagebox
 def Cargar_Solicitudes(self, opcion):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor()
@@ -81,10 +81,10 @@ def Solicitudes_Clientes(self):
             return
 
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor()
@@ -123,10 +123,10 @@ def Solicitudes_Clientes(self):
 def Agregar_Fecha_Entrega(self):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor()

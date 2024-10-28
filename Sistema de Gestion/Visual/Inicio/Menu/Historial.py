@@ -8,7 +8,7 @@ import tkinter.messagebox as messagebox
 from Modelo.Inicio.OpcionesHistorial import (
     Solicitudes_Clientes,
     Cargar_Solicitudes,
-    Agregar_Fecha_Entrega
+    Agregar_Fecha_Entrega,
 )
 from util.CreateExcel import obtener_datos_solicitud, guardar_datos_en_excel
 
@@ -22,10 +22,12 @@ def mostrar_opcion5(self):
     self.info_frame.place(x=125, y=15, width=865, height=600)
 
     # Botones para cambiar la información
-    self.imagen_historial_completo = utl.leer_imagen("agregar.png", size=(51, 59))
+    self.imagen_historial_pedido = utl.leer_imagen(
+        "opciones/historialpedidos.png", size=(44, 65)
+    )
     self.boton_historial_completo = Button(
         self.label_info,
-        image=self.imagen_historial_completo,
+        image=self.imagen_historial_pedido,
         width=105,
         height=105,
         bg="#FFFFFF",
@@ -37,10 +39,12 @@ def mostrar_opcion5(self):
     )
     self.boton_historial_completo.place(x=0, y=0)
 
-    self.imagen_historial_cliente = utl.leer_imagen("editar.png", size=(51, 60))
+    self.imagen_historial_venta = utl.leer_imagen(
+        "opciones/historialventas.png", size=(44, 65)
+    )
     self.boton_historial_cliente = Button(
         self.label_info,
-        image=self.imagen_historial_cliente,
+        image=self.imagen_historial_venta,
         width=105,
         height=105,
         bg="#FFFFFF",
@@ -51,11 +55,13 @@ def mostrar_opcion5(self):
         command=lambda: mostrar_informacion(self, "Historial Venta"),
     )
     self.boton_historial_cliente.place(x=0, y=105)
-    
-    self.imagen_hist2orial_cliente = utl.leer_imagen("editar.png", size=(51, 60))
+
+    self.imagen_historial_reparacion = utl.leer_imagen(
+        "opciones/historialreparaciones.png", size=(75, 68)
+    )
     self.boton_historial_cliente = Button(
         self.label_info,
-        image=self.imagen_hist2orial_cliente,
+        image=self.imagen_historial_reparacion,
         width=105,
         height=105,
         bg="#FFFFFF",
@@ -66,11 +72,13 @@ def mostrar_opcion5(self):
         command=lambda: mostrar_informacion(self, "Historial Reparacion"),
     )
     self.boton_historial_cliente.place(x=0, y=210)
-    
-    self.imagen_historia3l_cliente = utl.leer_imagen("editar.png", size=(51, 60))
+
+    self.imagen_historial_cliente = utl.leer_imagen(
+        "opciones/historialbuscar.png", size=(44, 65)
+    )
     self.boton_historial_cliente = Button(
         self.label_info,
-        image=self.imagen_historia3l_cliente,
+        image=self.imagen_historial_cliente,
         width=105,
         height=105,
         bg="#FFFFFF",
@@ -110,11 +118,11 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 19, "bold"),
         )
         titel_label.place(x=0, y=0)
-        
+
         Historial(self)
         Cargar_Solicitudes(self, "Pedido")
-        
-    elif opcion == "Historial Venta":   
+
+    elif opcion == "Historial Venta":
         titel_label = tk.Label(
             self.info_frame,
             text="Historial de Ventas",
@@ -123,11 +131,11 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 19, "bold"),
         )
         titel_label.place(x=0, y=0)
-        
+
         Historial(self)
         Cargar_Solicitudes(self, "Venta")
-         
-    elif opcion == "Historial Reparacion": 
+
+    elif opcion == "Historial Reparacion":
         titel_label = tk.Label(
             self.info_frame,
             text="Historial de Reparaciones",
@@ -136,10 +144,10 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 19, "bold"),
         )
         titel_label.place(x=0, y=0)
-        
+
         Historial(self)
         Cargar_Solicitudes(self, "Reparacion")
-    
+
     elif opcion == "Historial x Cliente":
         titel_label = tk.Label(
             self.info_frame,
@@ -170,9 +178,13 @@ def mostrar_informacion(self, opcion):
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
+            validate="key",
+            validatecommand=(self.root2.register(validate_cedula), "%P"),
         )
         self.cedula_buscar_entry.place(x=655, y=10)
-        self.cedula_buscar_entry.bind("<Return>", lambda event: Solicitudes_Clientes(self))
+        self.cedula_buscar_entry.bind(
+            "<Return>", lambda event: Solicitudes_Clientes(self)
+        )
 
         self.lupa = utl.leer_imagen("lupa.png", size=(27, 27))
         self.buscar = tk.Button(
@@ -286,8 +298,8 @@ def mostrar_informacion(self, opcion):
         self.frame_lista.grid_rowconfigure(0, weight=1)
         self.frame_lista.grid_columnconfigure(0, weight=1)
         self.frame_lista.grid_columnconfigure(1, weight=0)
-        
-        #Demás informacion 
+
+        # Demás informacion
         titel_label = tk.Label(
             self.frame_lista,
             text="Agregar fecha de entrega:",
@@ -316,6 +328,8 @@ def mostrar_informacion(self, opcion):
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
+            validate="key",
+            validatecommand=(self.root2.register(validate_numeros), "%P"),
         )
         self.numero_orden_entry1.place(x=0, y=382)
 
@@ -330,23 +344,25 @@ def mostrar_informacion(self, opcion):
 
         if self.rol_programa != "System":
             style = ttk.Style()
-            style.configure('Custom.DateEntry',
-                            fieldbackground='#f0f0f0',
-                            background='#f0f0f0',
-                            foreground='#1778FB',
-                            bordercolor='#f0f0f0',
-                            relief='solid',
-                            borderwidth=1,
-                            arrowcolor='#1778FB')
+            style.configure(
+                "Custom.DateEntry",
+                fieldbackground="#f0f0f0",
+                background="#f0f0f0",
+                foreground="#1778FB",
+                bordercolor="#f0f0f0",
+                relief="solid",
+                borderwidth=1,
+                arrowcolor="#1778FB",
+            )
 
             self.fecha_entrega_entry = DateEntry(
                 self.frame_lista,
                 width=17,
                 year=2024,
-                date_pattern="yyyy/MM/dd",
+                date_pattern="YYYY/MM/DD",
                 font=("Helvetica", 14),
                 state="readonly",
-                style='Custom.DateEntry'  # Aplicar el estilo personalizado
+                style="Custom.DateEntry",  # Aplicar el estilo personalizado
             )
             self.fecha_entrega_entry.place(x=235, y=382)
             self.fecha_entrega_entry.config(justify="center")
@@ -365,7 +381,7 @@ def mostrar_informacion(self, opcion):
         )
         self.modificar_fecha_boton.place(x=470, y=382)
 
-        #Informacion mas abajo
+        # Informacion mas abajo
         self.titel_label = tk.Label(
             self.frame_lista,
             text="Descargar pdf por cliente:",
@@ -394,8 +410,11 @@ def mostrar_informacion(self, opcion):
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
             insertbackground="#1E90FF",
+            validate="key",
+            validatecommand=(self.root2.register(validate_numeros), "%P"),
         )
         self.numero_orden_entry2.place(x=0, y=509)
+        self.numero_orden_entry2.bind("<Return>", lambda event: descargar_datos(self))
 
         self.descargar_pdf_boton = tk.Button(
             self.frame_lista,
@@ -410,7 +429,6 @@ def mostrar_informacion(self, opcion):
             command=lambda: descargar_datos(self),
         )
         self.descargar_pdf_boton.place(x=235, y=509)
-        #self.descargar_pdf_boton.bind("<Return>", lambda event: Descargar_Archivo(self))
 
     elif opcion == "Inicio Historial":
         self.titulo_label = Label(
@@ -433,7 +451,6 @@ def mostrar_informacion(self, opcion):
             font=("Montserrat", 36, "bold"),
         )
         self.titulo2_label.place(x=200, y=182)
-
 
 
 def Historial(self):
@@ -548,16 +565,34 @@ def Historial(self):
     self.frame_lista.grid_rowconfigure(0, weight=1)
     self.frame_lista.grid_columnconfigure(0, weight=1)
     self.frame_lista.grid_columnconfigure(1, weight=0)
-    
-    
- 
+
+
 def descargar_datos(self):
     numero_solicitud = self.numero_orden_entry2.get()
     if len(numero_solicitud) < 1:
         messagebox.showerror("Error", "Ingrese un numero por favor")
         return
-    
+
     datos_solicitud = obtener_datos_solicitud(numero_solicitud)
     if datos_solicitud is not None:
-        guardar_datos_en_excel(datos_solicitud) 
-    
+        guardar_datos_en_excel(datos_solicitud)
+
+
+def validate_cedula(new_value):
+    if " " in new_value:
+        return False
+    if len(new_value) > 10:
+        return False
+    if new_value.isdigit() or new_value == "":
+        return True
+    return False
+
+
+def validate_numeros(new_value):
+    if " " in new_value:
+        return False
+    if len(new_value) > 10:
+        return False
+    if new_value.isdigit() or new_value == "":
+        return True
+    return False

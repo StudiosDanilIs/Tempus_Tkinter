@@ -5,8 +5,8 @@ import util.CambioMenu as status
 import util.PhotoImagenes as utl
 import tkinter.messagebox as messagebox
 from Visual.Inicio.Menu.Inicio import mostrar_opcion1
-from Visual.Inicio.Menu.Solicitudes import mostrar_opcion2
-from Visual.Inicio.Menu.Clientes import mostrar_opcion3
+from Visual.Inicio.Menu.Clientes import mostrar_opcion2
+from Visual.Inicio.Menu.Solicitudes import mostrar_opcion3
 from Visual.Inicio.Menu.Pagos import mostrar_opcion4
 from Visual.Inicio.Menu.Historial import mostrar_opcion5
 
@@ -20,7 +20,7 @@ class VentanaPrincipal:
         self.presionado = False
         self.nombre_cuenta = nombre
         self.rol_programa = nombre_rol
-
+        
         # Crear el frame del menú lateral
         self.menu_lateral = tk.Frame(self.root2, width=200)
         self.menu_lateral.pack(side="left", fill="y")
@@ -34,9 +34,9 @@ class VentanaPrincipal:
         self.boton_opcion1.place(relx=0.5, rely=0.36, anchor=tk.CENTER)
         self.boton_opcion1.bind("<Enter>", lambda event: status.resaltar1(self, event))
         self.boton_opcion1.bind("<Leave>", lambda event: status.restaurar1(self, event))
-
-        # Boton 2 Solicitudes
-        self.logo2 = utl.leer_imagen("menu/solicitudes.png", size=(59, 61))
+        
+        # Boton 2 Clientes
+        self.logo2 = utl.leer_imagen("menu/clientes.png", size=(44, 59))
         self.boton_opcion2 = self.crear_boton(
             image=self.logo2, command=lambda: mostrar_opcion2(self)
         )
@@ -44,8 +44,8 @@ class VentanaPrincipal:
         self.boton_opcion2.bind("<Enter>", lambda event: status.resaltar2(self, event))
         self.boton_opcion2.bind("<Leave>", lambda event: status.restaurar2(self, event))
 
-        # Boton 3 Clientes
-        self.logo3 = utl.leer_imagen("menu/clientes.png", size=(44, 59))
+        # Boton 3 Solicitudes
+        self.logo3 = utl.leer_imagen("menu/solicitudes.png", size=(59, 61))
         self.boton_opcion3 = self.crear_boton(
             image=self.logo3, command=lambda: mostrar_opcion3(self)
         )
@@ -126,7 +126,7 @@ class VentanaPrincipal:
         # Elimina cualquier widget o contenido previo
         for widget in self.label_info.winfo_children():
             widget.destroy()
-
+        
     def cerrar(self):
         self.root2.destroy()
 

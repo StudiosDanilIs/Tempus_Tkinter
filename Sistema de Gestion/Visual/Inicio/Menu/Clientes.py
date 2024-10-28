@@ -11,11 +11,11 @@ from Modelo.Inicio.OpcionClientes import (
 )
 
 
-def mostrar_opcion3(self):
+def mostrar_opcion2(self):
     # Limpiar el contenido del frame principal
     self.limpiar_contenido()
     self.subventana_abierta = False
-    self.root2.title("Area de Clientes")
+    self.root2.title("Agregar Clientes")
     self.root2.geometry("1100x635")
 
     # Titulo de la ventana
@@ -173,7 +173,6 @@ def mostrar_opcion3(self):
         relief=tk.FLAT,
     )
     self.direccion_text.place(x=25, y=416)
-    self.direccion_text.bind("<Return>", lambda event: Agregar_Cliente(self))
 
     # Boton para añadir cliente
     self.guardar_clientes_button = tk.Button(
@@ -203,6 +202,7 @@ def mostrar_opcion3(self):
             cursor="hand2",
             activebackground="#1778FB",
             fg="white",
+            state="disabled",
             command=lambda: Modificar_Cliente(self),
         )
         self.modificar_clientes_button.place(x=50, y=550)
@@ -220,12 +220,22 @@ def mostrar_opcion3(self):
             cursor="hand2",
             activebackground="#1778FB",
             fg="white",
+            state="disabled",
             command=lambda: messagebox.showerror(
                 "Error", "No Tienes los Permisos Necesarios"
             ),
         )
         self.modificar_clientes_button.place(x=50, y=550)
         
+    
+    self.titel_label = tk.Label(
+        self.label_info,
+        text="Documento",
+        fg="#1E90FF",
+        bg="#f0f0f0",
+        font=("Poppins", 13, "bold"),
+    )
+    self.titel_label.place(x=324, y=35)    
 
     # Area para buscar cliente por Documento
     self.buscar_cliente_entry = tk.Entry(
@@ -233,7 +243,7 @@ def mostrar_opcion3(self):
         highlightthickness=2,
         highlightbackground="#1778FB",
         relief=tk.FLAT,
-        width=28,
+        width=16,
         fg="#0046A4",
         background="#f0f0f0",
         font=("Poppins", 12, "bold"),
@@ -241,7 +251,7 @@ def mostrar_opcion3(self):
         validate="key",
         validatecommand=(self.root2.register(validate_document), "%P"),
     )
-    self.buscar_cliente_entry.place(x=320, y=30)
+    self.buscar_cliente_entry.place(x=430, y=30)
     self.buscar_cliente_entry.bind("<Return>", lambda event: Buscar_Cliente(self))
 
     self.lupa = utl.leer_imagen("lupa.png", size=(27, 27))

@@ -8,10 +8,10 @@ from Visual.Inicio.InicioTempus import VentanaPrincipal
 def verificar_sesion(self):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor()
@@ -47,7 +47,7 @@ def verificar_sesion(self):
                 nombre_rol = nombre_rol_result[0]
 
                 # Verificar si el rol es "System"
-                if nombre_rol == "System":
+                if nombre_rol == "SistemLoad":
                     # Mostrar un mensaje de error y no permitir el inicio de sesión
                     messagebox.showerror(
                         message="Lo Siento pero esta Cuenta no tiene Permiso", title="Error"
@@ -61,7 +61,7 @@ def verificar_sesion(self):
                     ventana_principal = VentanaPrincipal(nombre, nombre_rol)
                     # Establecer un temporizador para cerrar la sesión después de 15 minutos
                     ventana_principal.root2.after(
-                        12 * 60 * 1000, lambda: cerrar_sesion(ventana_principal)
+                        13 * 60 * 1000, lambda: cerrar_sesion(ventana_principal)
                     )
             else:
                 messagebox.showerror(

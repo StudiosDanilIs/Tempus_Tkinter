@@ -2,15 +2,14 @@ from tkinter import *
 import mysql.connector
 from tkinter import messagebox
 
-
 # Permite Agregar un Cliente a la Base de Datos
 def Agregar_Cliente(self):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor()
@@ -18,34 +17,47 @@ def Agregar_Cliente(self):
         return messagebox.showerror(
             message=f"Error de conexión: {err}", title="Mensaje"
         )
-
+    
     # Datos a Ingresar en la Base de Datos
     name = self.nombre_entry.get().capitalize()
     apellido = self.apellido_entry.get().capitalize()
     documento = self.tipo_cedula_entry.get().capitalize()
-    cedula = self.cedula_entry.get()
-    telefono = self.telefono_entry.get()
+    cedula_agregar = self.cedula_entry.get().lstrip('0')  # Remover ceros al principio
+    telefono_agregar = self.telefono_entry.get()
     direccion = self.direccion_text.get("1.0", "end-1c").capitalize()
 
-    # Verifica que los campos no estén vacíos
+    # Validar cédula
+    if not cedula_agregar.isdigit() or int(cedula_agregar) < 1000 or cedula_agregar != self.cedula_entry.get():
+        messagebox.showerror(
+            "Error", "Documento inválido ya que el ingresado no debe tener ceros por delante."
+        )
+        return
+
+    # Validar teléfono
+    if not telefono_agregar.isdigit() or telefono_agregar.count('0') > 1 or len(telefono_agregar) < 10:
+        messagebox.showerror(
+            "Error", "Número de teléfono inválido. Debe contener solo un cero y al menos 10 dígitos."
+        )
+        return
+
+    # Verificar que los campos no estén vacíos
     if (
         len(name) < 3
         or len(apellido) < 3
-        or len(cedula) < 7
-        or len(telefono) < 10
+        or len(cedula_agregar) < 5
+        or len(telefono_agregar) < 10
         or len(direccion) < 10
     ):
         messagebox.showerror("Error", "Datos Incorrectos")
         return
 
-    # Verifica si ya existe un Cliente con esos Mismos datos
+    # Verificar si ya existe un Cliente con esos mismos datos
     try:
         cursor.execute(
             "SELECT * FROM datoscliente WHERE Cedula = %s OR Telefono = %s",
-            (cedula, telefono),
+            (cedula_agregar, telefono_agregar),
         )
         resultado = cursor.fetchone()
-
         if resultado:
             # Si se encuentra un registro duplicado, mostrar un mensaje de error
             messagebox.showerror(
@@ -56,7 +68,7 @@ def Agregar_Cliente(self):
             # Si no se encuentra ningún duplicado, registra los datos
             cursor.execute(
                 "INSERT INTO datoscliente (Nombre, Apellido, Documento, Cedula, Telefono, Direccion) VALUES (%s, %s, %s, %s, %s, %s)",
-                (name, apellido, documento, cedula, telefono, direccion),
+                (name, apellido, documento, cedula_agregar, telefono_agregar, direccion),
             )
             connection.commit()
             messagebox.showinfo(
@@ -69,14 +81,15 @@ def Agregar_Cliente(self):
         connection.close()
 
 
+
 # Permite Buscar un Cliente en la Base de Datos
 def Buscar_Cliente(self):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor()
@@ -118,6 +131,11 @@ def Buscar_Cliente(self):
 
             # Borra el contenido del campo de búsqueda
             self.buscar_cliente_entry.delete(0, END)
+            
+            self.modificando = True
+            self.guardar_clientes_button.config(state="disabled")
+            self.modificar_clientes_button.config(state="normal")
+            
         else:
             messagebox.showerror(
                 message="No se encontró un cliente con ese Documento.",
@@ -133,10 +151,10 @@ def Buscar_Cliente(self):
 def Modificar_Cliente(self):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor(buffered=True)
@@ -177,6 +195,9 @@ def Modificar_Cliente(self):
                 message="Datos Actualizados Exitosamente.", title="Actualización"
             )
             limpiar_campos(self)  # Limpia los campos después de actualizar
+            self.guardar_clientes_button.config(state="normal")
+            self.modificar_clientes_button.config(state="disabled")
+            self.modificando = False
         else:
             messagebox.showerror(
                 message="No se encontró un cliente con ese Documento.",
@@ -192,10 +213,10 @@ def Modificar_Cliente(self):
 def Obtener_Clientes(self, cargar_datos=False):
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="210605",
-            db="registro",
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
             port=3306,
         )
         cursor = connection.cursor()
