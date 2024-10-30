@@ -8,9 +8,9 @@ from Modelo.Extras.VerificarSesion import verificar_sesion
 
 class LoginRecuperar:
     def __init__(self, root):
-        root = root
-        root.destroy()
-
+        self.root = root
+        self.root.destroy()
+        
         self.miniVentana = tk.Tk()
         self.miniVentana.resizable(0, 0)
         self.miniVentana.geometry("1000x645")
@@ -47,10 +47,10 @@ class LoginRecuperar:
         # Area del Usuario
         self.username_label = Label(
             self.lgn_frame,
-            text="Usuario sistema",
+            text="Usuario del sistema",
             anchor="w",
+            fg="#1E90FF",
             bg="#f0f0f0",
-            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
         self.username_label.place(x=590, y=236)
@@ -58,13 +58,13 @@ class LoginRecuperar:
         self.username_entry = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#232323",
+            highlightbackground="#1778FB",
             relief=tk.FLAT,
-            fg="#232323",
+            width=35,
+            fg="#0046A4",
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#232323",
-            width=35,
+            insertbackground="#1E90FF",
             validate="key",
             validatecommand=(self.miniVentana.register(self.validate_tab), "%P"),
         )
@@ -76,10 +76,10 @@ class LoginRecuperar:
         # Area de la Contraseña
         self.password_label = Label(
             self.lgn_frame,
-            text="Clave sistema",
+            text="Clave del sistema",
             anchor="w",
+            fg="#1E90FF",
             bg="#f0f0f0",
-            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
         self.password_label.place(x=590, y=310)
@@ -87,13 +87,13 @@ class LoginRecuperar:
         self.password_entry = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#232323",
+            highlightbackground="#1778FB",
             relief=tk.FLAT,
-            fg="#232323",
+            width=35,
+            fg="#0046A4",
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#232323",
-            width=35,
+            insertbackground="#1E90FF",
             show="*",
             validate="key",
             validatecommand=(self.miniVentana.register(self.validate_tab), "%P"),
@@ -112,12 +112,12 @@ class LoginRecuperar:
         self.title3_label.place(x=555, y=480)
 
         # botón para iniciar sesión
-        self.imagen_iniciar_sesion = utl.leer_imagen(
+        self.imagen_recuperar_iniciar = utl.leer_imagen(
             "boton_iniciar_sesion.png", size=(170, 55)
         )
         self.login_boton = Button(
             self.lgn_frame,
-            image=self.imagen_iniciar_sesion,
+            image=self.imagen_recuperar_iniciar,
             width=170,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
@@ -130,10 +130,10 @@ class LoginRecuperar:
         self.login_boton.bind("<Return>", (lambda event: verificar_sesion(self)))
 
         # botón para registrarse
-        self.imagen_registrarse = utl.leer_imagen("salir.png", size=(170, 55))
+        self.imagen_salir_recuperar = utl.leer_imagen("salir.png", size=(170, 55))
         self.registrarse_boton = Button(
             self.lgn_frame,
-            image=self.imagen_registrarse,
+            image=self.imagen_salir_recuperar,
             width=170,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
@@ -145,10 +145,10 @@ class LoginRecuperar:
         self.registrarse_boton.place(x=755, y=395)
 
         # Fondo de la Ventana de Login
-        self.imagen_fondo_login = utl.leer_imagen("fondo3.jpg", size=(500, 645))
+        self.imagen_fondo_recuperar = utl.leer_imagen("fondo3.jpg", size=(500, 645))
         self.fondo_label = Label(
             self.lgn_frame,
-            image=self.imagen_fondo_login,
+            image=self.imagen_fondo_recuperar,
             width=501,
             bg="#f0f0f0",
             activebackground="#f0f0f0",

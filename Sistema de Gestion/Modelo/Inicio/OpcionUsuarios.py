@@ -4,7 +4,8 @@ from tkinter import messagebox
 
 
 # Permite Agregar un Cliente a la Base de Datos
-def Agregar_Usuarios(self):
+def Agregar_Usuarios(self, miniVentana):
+    self.miniVentana = miniVentana
     try:
         connection = mysql.connector.connect(
             host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
@@ -23,8 +24,10 @@ def Agregar_Usuarios(self):
     cursor.execute("SELECT COUNT(*) FROM usuarios WHERE id_RolUsuario = 3")
     numero_empleados = cursor.fetchone()[0]
 
-    if numero_empleados >= 7:
-        messagebox.showerror("Error", "No se pueden crear más de 7 cuentas de tipo empleado.")
+    if numero_empleados >= 6:
+        messagebox.showerror(
+            "Error", "No se pueden crear más de 6 cuentas de tipo empleado."
+        )
         connection.close()
         return
 
@@ -62,12 +65,11 @@ def Agregar_Usuarios(self):
             messagebox.showinfo(
                 message="Usuario Guardado Exitosamente.", title="Registro"
             )
-            limpiar_campos(self, "Agregar")  # Limpia los campos después de guardar el cliente
+            self.miniVentana.destroy()
     except mysql.connector.Error as err:
         messagebox.showerror(message=f"Error en la consulta: {err}", title="Mensaje")
     finally:
         connection.close()
-
 
 
 # Permite Eliminar un Cliente de la Base de Datos
@@ -127,6 +129,72 @@ def Eliminar_Usuarios(self):
         messagebox.showerror(message=f"Error en la consulta: {err}", title="Mensaje")
     finally:
         connection.close()
+
+
+def Cargar_Usuarios(self):
+    try:
+        # Conectar a la base de datos
+        connection = mysql.connector.connect(
+            host="bimtfzdinglabpw1yzd0-mysql.services.clever-cloud.com",
+            user="u0ioaiitne1nh02w",
+            passwd="svvGffwj1FHbLpuwy3UL",
+            db="bimtfzdinglabpw1yzd0",
+            port=3306,
+        )
+
+        cursor = connection.cursor()
+
+        # Consulta para obtener los usuarios
+        query_usuarios = """
+        SELECT u.id_Usuario, u.Nombre, u.Cedula, r.NombreRol
+        FROM usuarios u
+        INNER JOIN rolusuario r ON u.id_RolUsuario = r.id_RolUsuario
+        """
+        cursor.execute(query_usuarios)
+        resultados = cursor.fetchall()
+
+        # Limpiar el Treeview
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+
+        # Insertar los usuarios en el Treeview
+        for fila in resultados:
+            self.tree.insert("", "end", values=(fila[0], fila[1], fila[2], fila[3]))
+
+        # Consulta para contar los usuarios por rol
+        query_count = """
+        SELECT r.NombreRol, COUNT(*)
+        FROM usuarios u
+        INNER JOIN rolusuario r ON u.id_RolUsuario = r.id_RolUsuario
+        GROUP BY r.NombreRol
+        """
+        cursor.execute(query_count)
+        conteos = cursor.fetchall()
+
+        # Inicializar contadores
+        total_admin = 0
+        total_empleado = 0
+
+        # Actualizar los contadores según el rol
+        for rol, count in conteos:
+            if (
+                rol == "Administrador"
+            ):  # Asegúrate que el nombre del rol coincide exactamente
+                total_admin = count
+            elif rol == "Empleado":
+                total_empleado = count
+
+        # Actualizar las etiquetas
+        self.total_admin.config(text=f"Cuentas Admin: {total_admin}")
+        self.total_empleado.config(text=f"Cuentas Empleado: {total_empleado}")
+
+    except mysql.connector.Error as err:
+        messagebox.showerror(
+            message=f"Error al obtener los usuarios: {err}", title="Mensaje"
+        )
+    finally:
+        if "connection" in locals():
+            connection.close()
 
 
 # Elimina los Datos en la Entrada de Texto de la Interfaz Gráfica

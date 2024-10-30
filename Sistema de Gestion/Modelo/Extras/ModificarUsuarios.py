@@ -45,12 +45,12 @@ def ModificarUsuarios(self, root2):
         cursor.execute("SELECT COUNT(*) FROM usuarios WHERE id_RolUsuario = '3'")
         num_empleados = cursor.fetchone()[0]
 
-        if tipo_cuenta == "2" and num_admins >= 3:
-            messagebox.showerror("Error", "No se pueden registrar más de 3 administradores.")
+        if tipo_cuenta == "2" and num_admins >= 2:
+            messagebox.showerror("Error", "No se pueden registrar más de 2 administradores.")
             return
 
-        if tipo_cuenta == "3" and num_empleados >= 7:
-            messagebox.showerror("Error", "No se pueden registrar más de 7 empleados.")
+        if tipo_cuenta == "3" and num_empleados >= 6:
+            messagebox.showerror("Error", "No se pueden registrar más de 6 empleados.")
             return
 
         messagebox.showinfo(

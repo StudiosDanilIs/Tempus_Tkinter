@@ -235,7 +235,7 @@ def mostrar_opcion2(self):
         bg="#f0f0f0",
         font=("Poppins", 13, "bold"),
     )
-    self.titel_label.place(x=324, y=35)    
+    self.titel_label.place(x=324, y=45)    
 
     # Area para buscar cliente por Documento
     self.buscar_cliente_entry = tk.Entry(
@@ -251,7 +251,7 @@ def mostrar_opcion2(self):
         validate="key",
         validatecommand=(self.root2.register(validate_document), "%P"),
     )
-    self.buscar_cliente_entry.place(x=430, y=30)
+    self.buscar_cliente_entry.place(x=430, y=40)
     self.buscar_cliente_entry.bind("<Return>", lambda event: Buscar_Cliente(self))
 
     self.lupa = utl.leer_imagen("lupa.png", size=(27, 27))
@@ -266,23 +266,25 @@ def mostrar_opcion2(self):
         fg="white",
         command=lambda: Buscar_Cliente(self),
     )
-    self.buscar.place(x=590, y=30)
-
-    self.descargar_datos_button = tk.Button(
+    self.buscar.place(x=590, y=40)
+    
+    
+    self.actualizar = utl.leer_imagen("actualizar.png", size=(27, 27))
+    self.buscar = tk.Button(
         self.label_info,
-        text="Actualizar lista",
-        font=("Poppins", 13, "bold"),
-        width=20,
+        width=30,
+        image=self.actualizar,
+        bg="#f0f0f0",
+        activebackground="#f0f0f0",
         bd=0,
-        bg="#1E90FF",
         cursor="hand2",
-        activebackground="#1778FB",
         fg="white",
         command=lambda: actualizar_lista(self),
     )
-    self.descargar_datos_button.place(x=705, y=30)
-
-    # Configuración del estilo
+    self.buscar.place(x=875, y=40)
+    Historial(self)    
+    
+def Historial(self):
     style = ttk.Style()
     style.theme_use("default")
     style.configure(

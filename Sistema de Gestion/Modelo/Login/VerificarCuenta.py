@@ -61,7 +61,7 @@ def verificar_sesion(self):
                     ventana_principal = VentanaPrincipal(nombre, nombre_rol)
                     # Establecer un temporizador para cerrar la sesión después de 15 minutos
                     ventana_principal.root2.after(
-                        13 * 60 * 1000, lambda: cerrar_sesion(ventana_principal)
+                        18 * 60 * 1000, lambda: cerrar_sesion(ventana_principal)
                     )
             else:
                 messagebox.showerror(

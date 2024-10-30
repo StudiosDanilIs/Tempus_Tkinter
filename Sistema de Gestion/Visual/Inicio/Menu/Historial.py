@@ -118,6 +118,20 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 19, "bold"),
         )
         titel_label.place(x=0, y=0)
+        
+        self.actualizar = utl.leer_imagen("actualizar.png", size=(27, 27))
+        self.buscar = tk.Button(
+            self.info_frame,
+            width=30,
+            image=self.actualizar,
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
+            bd=0,
+            cursor="hand2",
+            fg="white",
+            command=lambda: Cargar_Solicitudes(self, "Pedido"),
+        )
+        self.buscar.place(x=830, y=20)
 
         Historial(self)
         Cargar_Solicitudes(self, "Pedido")
@@ -131,6 +145,20 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 19, "bold"),
         )
         titel_label.place(x=0, y=0)
+        
+        self.actualizar = utl.leer_imagen("actualizar.png", size=(27, 27))
+        self.buscar = tk.Button(
+            self.info_frame,
+            width=30,
+            image=self.actualizar,
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
+            bd=0,
+            cursor="hand2",
+            fg="white",
+            command=lambda: Cargar_Solicitudes(self, "Venta"),
+        )
+        self.buscar.place(x=830, y=20)
 
         Historial(self)
         Cargar_Solicitudes(self, "Venta")
@@ -144,6 +172,20 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 19, "bold"),
         )
         titel_label.place(x=0, y=0)
+        
+        self.actualizar = utl.leer_imagen("actualizar.png", size=(27, 27))
+        self.buscar = tk.Button(
+            self.info_frame,
+            width=30,
+            image=self.actualizar,
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
+            bd=0,
+            cursor="hand2",
+            fg="white",
+            command=lambda: Cargar_Solicitudes(self, "Reparacion"),
+        )
+        self.buscar.place(x=830, y=20)
 
         Historial(self)
         Cargar_Solicitudes(self, "Reparacion")
@@ -308,6 +350,20 @@ def mostrar_informacion(self, opcion):
             font=("Poppins", 14, "bold"),
         )
         titel_label.place(x=0, y=310)
+        
+        self.actualizar = utl.leer_imagen("actualizar.png", size=(27, 27))
+        self.buscar = tk.Button(
+            self.frame_lista,
+            width=30,
+            image=self.actualizar,
+            bg="#f0f0f0",
+            activebackground="#f0f0f0",
+            bd=0,
+            cursor="hand2",
+            fg="white",
+            command=lambda: Solicitudes_Clientes(self),
+        )
+        self.buscar.place(x=830, y=310)
 
         self.numero_orden_label1 = tk.Label(
             self.frame_lista,

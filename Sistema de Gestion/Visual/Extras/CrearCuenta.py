@@ -8,9 +8,9 @@ from Modelo.Inicio.OpcionUsuarios import Agregar_Usuarios
 
 class CrearUsuario:
     def __init__(self, root):
-        root = root
-        root.destroy()
-
+        self.root = root
+        self.root.destroy()
+        
         self.miniVentana = tk.Tk()
         self.miniVentana.resizable(0, 0)
         self.miniVentana.geometry("1000x645")
@@ -49,8 +49,8 @@ class CrearUsuario:
             self.lgn_frame,
             text="Nombre",
             anchor="w",
+            fg="#1E90FF",
             bg="#f0f0f0",
-            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
         self.nombre_agregar_label.place(x=590, y=236)
@@ -58,13 +58,13 @@ class CrearUsuario:
         self.nombre_agregar = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#232323",
+            highlightbackground="#1778FB",
             relief=tk.FLAT,
-            fg="#232323",
+            width=35,
+            fg="#0046A4",
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#232323",
-            width=35,
+            insertbackground="#1E90FF",
             validate="key",
             validatecommand=(self.miniVentana.register(self.validate_name), "%P"),
         )
@@ -78,8 +78,8 @@ class CrearUsuario:
             self.lgn_frame,
             text="Cedula",
             anchor="w",
+            fg="#1E90FF",
             bg="#f0f0f0",
-            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
         self.cedula_agregar_label.place(x=590, y=310)
@@ -87,13 +87,13 @@ class CrearUsuario:
         self.cedula_agregar = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#232323",
+            highlightbackground="#1778FB",
             relief=tk.FLAT,
-            fg="#232323",
+            width=35,
+            fg="#0046A4",
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#232323",
-            width=35,
+            insertbackground="#1E90FF",
             validate="key",
             validatecommand=(self.miniVentana.register(self.validate_document), "%P"),
         )
@@ -106,8 +106,8 @@ class CrearUsuario:
             self.lgn_frame,
             text="Usuario",
             anchor="w",
+            fg="#1E90FF",
             bg="#f0f0f0",
-            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
         self.usuario_agregar_label.place(x=590, y=384)
@@ -115,13 +115,13 @@ class CrearUsuario:
         self.usuario_agregar = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#232323",
+            highlightbackground="#1778FB",
             relief=tk.FLAT,
-            fg="#232323",
+            width=35,
+            fg="#0046A4",
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#232323",
-            width=35,
+            insertbackground="#1E90FF",
             validate="key",
             validatecommand=(self.miniVentana.register(self.validate_tab), "%P"),
         )
@@ -134,8 +134,8 @@ class CrearUsuario:
             self.lgn_frame,
             text="Contraseña",
             anchor="w",
+            fg="#1E90FF",
             bg="#f0f0f0",
-            fg="#232323",
             font=("Poppins", 13, "bold"),
         )
         self.clave_agregar_label.place(x=590, y=458)
@@ -143,41 +143,41 @@ class CrearUsuario:
         self.clave_agregar = Entry(
             self.lgn_frame,
             highlightthickness=2,
-            highlightbackground="#232323",
+            highlightbackground="#1778FB",
             relief=tk.FLAT,
-            fg="#232323",
+            width=35,
+            fg="#0046A4",
             background="#f0f0f0",
             font=("Poppins", 12, "bold"),
-            insertbackground="#232323",
-            width=35,
+            insertbackground="#1E90FF",
             show="*",
             validate="key",
             validatecommand=(self.miniVentana.register(self.validate_tab), "%P"),
         )
         self.clave_agregar.place(x=590, y=485, height=40)
-        self.clave_agregar.bind("<Return>", lambda event: Agregar_Usuarios(self))
+        self.clave_agregar.bind("<Return>", lambda event: Agregar_Usuarios(self, self.miniVentana))
 
         # botón para iniciar sesión
-        self.imagen_iniciar_sesion = utl.leer_imagen("crear_usuario.png", size=(170, 55))
+        self.imagen_agregar_usuario = utl.leer_imagen("crear_usuario.png", size=(170, 55))
         self.login_boton = Button(
             self.lgn_frame,
-            image=self.imagen_iniciar_sesion,
+            image=self.imagen_agregar_usuario,
             width=170,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
             bd=0,
             cursor="hand2",
             fg="white",
-            command=lambda: Agregar_Usuarios(self),
+            command=lambda: Agregar_Usuarios(self, self.miniVentana),
         )
         self.login_boton.place(x=585, y=540)
-        self.login_boton.bind("<Return>", (lambda event: Agregar_Usuarios(self)))
+        self.login_boton.bind("<Return>", (lambda event: Agregar_Usuarios(self, self.miniVentana)))
 
         # botón para registrarse
-        self.imagen_registrarse = utl.leer_imagen("salir.png", size=(170, 55))
+        self.imagen_salir = utl.leer_imagen("salir.png", size=(170, 55))
         self.registrarse_boton = Button(
             self.lgn_frame,
-            image=self.imagen_registrarse,
+            image=self.imagen_salir,
             width=170,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
@@ -189,10 +189,10 @@ class CrearUsuario:
         self.registrarse_boton.place(x=755, y=540)
 
         # Fondo de la Ventana de Login
-        self.imagen_fondo_login = utl.leer_imagen("fondo1.jpg", size=(500, 645))
+        self.imagen_fondo_registrar= utl.leer_imagen("fondo1.jpg", size=(500, 645))
         self.fondo_label = Label(
             self.lgn_frame,
-            image=self.imagen_fondo_login,
+            image=self.imagen_fondo_registrar,
             width=501,
             bg="#f0f0f0",
             activebackground="#f0f0f0",
